@@ -1,9 +1,9 @@
 <!doctype html>
 <html>
    <head>
-    <title>Ermis Cherry-Pellat</title>
-    <!-- <link rel="stylesheet" href="style1.css" type="text/css" media="screen" title="default" charset="utf-8" /> -->
-    <meta charset="utf-8" />
+        <title>Ermis Cherry-Pellat</title>
+        <!-- <link rel="stylesheet" href="style1.css" type="text/css" media="screen" title="default" charset="utf-8" /> -->
+        <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Bootstrap icons-->

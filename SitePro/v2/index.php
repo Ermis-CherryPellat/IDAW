@@ -1,30 +1,15 @@
         <?php
         require_once('template_header.php');
-        ?>
+        
+        require_once('template_menu.php');
+        renderMenuToHTML('index');
+        ?>        
 
-        <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm" id="mainNav">
-            <div class="container px-5">
-                <a class="navbar-brand fw-bold" href="index.php">TP1 IDAW</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                    Menu
-                    <i class="bi-list"></i>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
-                        <li class="nav-item" id="currentpage"><a class="nav-link me-lg-3" href="index.php">Accueil</a></li>
-                        <li class="nav-item"><a class="nav-link me-lg-3" href="cv.php">CV</a></li>
-                        <li class="nav-item"><a class="nav-link me-lg-3" href="projets.php">Projets</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
         <!-- Mashead header-->
         <header class="masthead">
             <div class="container px-5">
                 <div class="row gx-5 align-items-center">
                     <div class="col-lg-12">
-                        <!-- Mashead text and app badges-->
                         <div class="mb-5 mb-lg-0 text-center text-lg-start">
                             <h1 class="display-1 lh-1 mb-3">Bonjour</h1>
                             <p class="lead fw-normal text-muted mb-5">Je suis un professionnel</p>
