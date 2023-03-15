@@ -5,22 +5,22 @@
     if(isset($_GET['page'])) {
     $currentPageId = $_GET['page'];
     } 
+    if(isset($_GET['lang'])) {
+        $currentLang = $_GET['lang'];
+        } 
+    else{
+        $currentLang = 'fr';
+    }
 ?>
 
-<!-- <header class="bandeau_haut">
-
-<h1 class="titre">Ermis Cherry-Pellat</h1>
-
-</header> -->
-
 <?php
-    renderMenuToHTML($currentPageId);
+    renderMenuToHTML($currentPageId,$currentLang);
 ?>
 
 <section class="corps">
-
+<!-- $currentLang . "/" .  -->
 <?php
-    $pageToInclude = $currentPageId . ".php";
+    $pageToInclude = $currentLang . "/" . $currentPageId . ".php";
     if(is_readable($pageToInclude))
     require_once($pageToInclude);
     else
