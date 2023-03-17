@@ -37,7 +37,6 @@
 <h1>Formulaire</h1> </body>
 <?php
     require_once("login.php");
-    // require_once("connected.php");
 
 ?>
 

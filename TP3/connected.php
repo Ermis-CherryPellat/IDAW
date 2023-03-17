@@ -28,6 +28,7 @@
         echo "<h1>Bienvenu ".$login."</h1>";
     }
 
+    echo '<p><a href="pageTest.php">Page 2</a></p>';
     
     
 ?>
