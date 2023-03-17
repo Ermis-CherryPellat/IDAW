@@ -1,18 +1,4 @@
 <?php
-
-    // if(isset($_GET['login'])) {
-    //     $currentLogin = $_GET['login'];
-    //     echo '<p>Login = '.$currentLogin.' and password = ';
-    //     }   
-
-    // if(isset($_GET['password'])) {
-        // $currentPassword = $_GET['password'];
-        // echo $currentPassword.'</p>';
-        // } 
-    
-    ?>
-
-<?php
     // on simule une base de données
     $users = array(
     // login => password
@@ -37,4 +23,7 @@
     } else {
         echo "<h1>Bienvenu ".$login."</h1>";
     }
+
+    
+    
 ?>
