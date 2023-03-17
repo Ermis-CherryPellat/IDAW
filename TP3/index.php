@@ -28,6 +28,12 @@
 
 ?>
 </head> <body>
+
+<?php
+    if(isset($login)){
+        echo "<h1>Bienvenu ".$login."</h1>";
+    }
+?>
 <h1>Formulaire</h1> </body>
 <?php
     require_once("login.php");

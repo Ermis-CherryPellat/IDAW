@@ -21,6 +21,10 @@
     if(!$successfullyLogged) {
         echo $errorText;
     } else {
+        session_start();
+        $_SESSION['login'] = $_POST['login'];
+        $_SESSION['password']  = $_POST['password'];
+        print_r($_SESSION);
         echo "<h1>Bienvenu ".$login."</h1>";
     }
 
