@@ -67,9 +67,7 @@
     //             </div>
     //         </div>	
     //     </div>
-    // </div>
-    // <p>Bonjourin</p>';
-   
+    // </div>;   
     
 
     $pdo = null;
