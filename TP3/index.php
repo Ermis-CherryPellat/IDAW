@@ -37,7 +37,6 @@
 <h1>Formulaire</h1> </body>
 <?php
     require_once("login.php");
-
 ?>
 
 <form id="style_form" action="index.php" method="GET">
