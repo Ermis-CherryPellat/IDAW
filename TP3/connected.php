@@ -30,5 +30,18 @@
 
     echo '<p><a href="pageTest.php">Page 2</a></p>';
     
+    if(array_key_exists('button1', $_POST)) {
+        button1();
+    }
+    
+    function button1() {
+        session_unset();
+        session_destroy();
+    }
+ 
+    echo '<form method="post">
+        <input type="submit" name="button1"
+                class="button" value="deconnexion" />
+    </form>';
     
 ?>
