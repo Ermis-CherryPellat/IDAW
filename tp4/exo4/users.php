@@ -21,7 +21,7 @@
         echo 'Erreur : '.$erreur->getMessage();
     }
 
-    if(isset($_POST['new_nom']) && $_POST['new_nom'] != NULL && isset($_POST['new_email']) && $_POST['new_email'] != NULL && $_POST['submit']== 'Ajouter'){
+if(isset($_POST['new_nom']) && $_POST['new_nom'] != NULL && isset($_POST['new_email']) && $_POST['new_email'] != NULL && isset($_POST['submit']) && $_POST['submit'] == 'Ajouter'){
       $nouveau_nom = $_POST['new_nom'];
       $nouveau_email = $_POST['new_email'];
       $ajout = $pdo->prepare("INSERT INTO USERS (id_user,nom,email) VALUES (NULL,:nom,:email)");
@@ -37,13 +37,18 @@
       echo 'Élement supprimé';
     }
 
-    if(isset($_POST['change']) && ($_POST['submit'] == 'Modifier') && isset($_POST['new_nom']) && isset($_POST['new_email'])){
+    if(isset($_POST['new_nom']) && $_POST['new_nom'] != NULL && isset($_POST['new_email']) && $_POST['new_email'] != NULL && isset($_POST['submit']) && $_POST['submit'] == 'Modifier'){
       $id_to_change = $_POST['id_to_change'];
       $nouveau_nom = $_POST['new_nom'];
       $nouveau_email = $_POST['new_email'];
-      $pdo->exec("UPDATE USERS SET nom = '$nouveau_nom', email = '$nouveau_email' WHERE id_user = $id_to_change;");
-      echo 'Élement changé';
+      $requete_modification = $pdo->prepare("UPDATE USERS SET nom = :nom, email = :email WHERE id_user = :id_to_change");
+      $requete_modification->bindParam(':nom', $nouveau_nom);
+      $requete_modification->bindParam(':email', $nouveau_email);
+      $requete_modification->bindParam(':id_to_change', $id_to_change);
+      $requete_modification->execute();
+      echo 'Élément modifié';
     }
+
 
     // requête SQL pour récupérer les utilisateurs
     $request = $pdo->prepare("select * from USERS");
@@ -62,8 +67,8 @@
         echo '<td>'.$us->id_user.'</td>';
         echo '<td>'.$us->nom.'</td>';
         echo '<td>'.$us->email.'</td>';
-        echo '<td><form action="" method="post"><button type="button hidden">Modifier</button><input type="hidden" name="change" value="'.$us->id_user.'"></form></td>';
-        echo '<td><form action="" method="post"><button type="button hidden">Supprimer</button><input type="hidden" name="delete" value="'.$us->id_user.'"></form></td>';
+        echo '<td><form action="" method="post"><button type="submit">Modifier</button><input type="hidden" name="change" value="'.$us->id_user.'"></form></td>';
+        echo '<td><form action="" method="post"><button type="submit hidden">Supprimer</button><input type="hidden" name="delete" value="'.$us->id_user.'"></form></td>';
         echo "</tr>";
       }
       echo "</table>";
