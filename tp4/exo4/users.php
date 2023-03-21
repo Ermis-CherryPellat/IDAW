@@ -1,8 +1,5 @@
 <?php
-    require_once('db_init.php');   
-    
-    
-
+    require_once('db_init.php');
     require_once('config.php');
     $connectionString = "mysql:host=". _MYSQL_HOST;
     
@@ -21,7 +18,8 @@
         echo 'Erreur : '.$erreur->getMessage();
     }
 
-if(isset($_POST['new_nom']) && $_POST['new_nom'] != NULL && isset($_POST['new_email']) && $_POST['new_email'] != NULL && isset($_POST['submit']) && $_POST['submit'] == 'Ajouter'){
+    // Ajouter une entrée dans la table
+    if(isset($_POST['new_nom']) && $_POST['new_nom'] != NULL && isset($_POST['new_email']) && $_POST['new_email'] != NULL && isset($_POST['submit']) && $_POST['submit'] == 'Ajouter'){
       $nouveau_nom = $_POST['new_nom'];
       $nouveau_email = $_POST['new_email'];
       $ajout = $pdo->prepare("INSERT INTO USERS (id_user,nom,email) VALUES (NULL,:nom,:email)");
@@ -31,12 +29,14 @@ if(isset($_POST['new_nom']) && $_POST['new_nom'] != NULL && isset($_POST['new_em
       echo 'Entrée ajoutée dans la table';
     }
 
+    // Ajouter une entrée dans la table
     if(isset($_POST['delete']) ){
       $id_to_delete = $_POST['delete'];
       $pdo->exec("DELETE FROM USERS WHERE id_user = $id_to_delete;");
       echo 'Élement supprimé';
     }
 
+    // Modifier une entrée dans la table
     if(isset($_POST['new_nom']) && $_POST['new_nom'] != NULL && isset($_POST['new_email']) && $_POST['new_email'] != NULL && isset($_POST['submit']) && $_POST['submit'] == 'Modifier'){
       $id_to_change = $_POST['id_to_change'];
       $nouveau_nom = $_POST['new_nom'];
@@ -56,9 +56,8 @@ if(isset($_POST['new_nom']) && $_POST['new_nom'] != NULL && isset($_POST['new_em
     $users = $request->fetchAll(PDO::FETCH_OBJ);
 
     
-
-    function renderTableToHTML($user) {
     // affichage des utilisateurs dans un tableau HTML
+    function renderTableToHTML($user) {
     if (count($user) > 0) {
       echo '<table>';
       echo '<tr><th>ID</th><th>Nom</th><th>Adresse email</th><th></th><th></th></tr>';
