@@ -23,7 +23,7 @@ try {
 
 // Requête GET pour récupérer tous les utilisateurs de la base
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    $sql = "SELECT * FROM users";
+    $sql = "SELECT * FROM USERS";
     try {
         // requête SQL pour récupérer les utilisateurs
         $request = $pdo->prepare("select * from USERS");
@@ -34,14 +34,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         $pdo = NULL;
 
         // renvoyer la réponse en format JSON
-        header('Content-Type: application/json');
+        header('Content-Type: application/json;  charset=UTF-8');
         echo json_encode($users);
 
-        // $conn = new PDO($dsn, $db_user, $db_pass, $options);
-        // $stmt = $conn->query($sql);
-        // $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        // header("Content-Type: application/json; charset=UTF-8");
-        // echo json_encode($users);
     } catch (PDOException $e) {
         header("HTTP/1.1 500 Internal Server Error");
         echo "Erreur de connexion à la base de données : " . $e->getMessage();
@@ -53,11 +48,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     $array = json_decode(file_get_contents("php://input"),true); 
 
-    $name = $array['name'];
+    $name = $array['nom'];
     $email = $array['email'];
-    $sql = "INSERT INTO users (name, email) VALUES (?, ?)";
+    $sql = "INSERT INTO USERS (nom, email) VALUES (?, ?)";
     try {
-        $conn = new PDO($dsn, $db_user, $db_pass, $options);
+        $conn = new PDO($connectionString,_MYSQL_USER,_MYSQL_PASSWORD, $options);
         $stmt = $conn->prepare($sql);
         $stmt->execute([$name, $email]);
         $id = $conn->lastInsertId();
@@ -69,5 +64,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } catch (PDOException $e) {
         header("HTTP/1.1 400 Bad Request");
         echo "Erreur lors de la création de l'utilisateur : " . $e->getMessage();
+    }
+}
+
+// Requête PUT pour mettre à jour les informations d'un utilisateur
+if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
+    
+    $array = json_decode(file_get_contents("php://input"), true);
+    
+    $id = $array['id'];
+    $name = $array['nom'];
+    $email = $array['email'];
+    
+    $sql = "UPDATE USERS SET nom = ?, email = ? WHERE id = ?";
+    try {
+        $conn = new PDO($connectionString, _MYSQL_USER, _MYSQL_PASSWORD, $options);
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$name, $email, $id]);
+        header("HTTP/1.1 200 OK");
+        $user = array('id' => $id, 'name' => $name, 'email' => $email);
+        header("Content-Type: application/json; charset=UTF-8");
+        echo json_encode($user);
+    } catch (PDOException $e) {
+        header("HTTP/1.1 400 Bad Request");
+        echo "Erreur lors de la mise à jour de l'utilisateur : " . $e->getMessage();
     }
 }
