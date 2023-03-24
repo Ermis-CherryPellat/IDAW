@@ -31,7 +31,7 @@ try {
     // $sql_data = file_get_contents('dbtest.sql');
     // $pdo->exec($sql_data);
 
-    echo "Base de données créée et initialisée avec succès !";
+    // echo "Base de données créée et initialisée avec succès !";
 } catch(PDOException $e) {
     echo "Erreur : " . $e->getMessage();
 }
