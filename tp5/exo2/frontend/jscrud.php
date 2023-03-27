@@ -6,6 +6,8 @@
         <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
         <title>API Ajax test</title>
         <link href="style.css" rel="stylesheet" />
+        <link href="https://cdn.datatables.net/v/dt/dt-1.13.4/datatables.min.css" rel="stylesheet"/>
+        <script src="https://cdn.datatables.net/v/dt/dt-1.13.4/datatables.min.js"></script>
     </head>
     <body>
         <table class="table">
@@ -22,14 +24,7 @@
         </table>
 
         <form id="addUserForm" action="" onsubmit="onFormSubmit();">
-            
-            <div class="form-group row">
-                <label for="inputId" class="col-sm-2 col-form-label">Id</label>
-                <div class="col-sm-3">
-                <input type="text" class="form-control" id="inputId" >
-                </div>
-            </div> 
-
+          
             <div class="form-group row">
                 <label for="inputNom" class="col-sm-2 col-form-label">Nom*</label>
                 <div class="col-sm-3">
@@ -58,7 +53,6 @@
                 echo URL_API;
             ?>";
 
-            // affichage des utilisateurs dans un tableau HTML
             <?php function renderTableToHTML($user) {
              if (count($user) > 0) {
                 echo '<table>';
@@ -93,30 +87,26 @@
                 };
             }
 
-            function editButton(){
-                $(document).on('click', '.editBtn', function() {
-                    // récupérer les données de la ligne
-                    let row = $(this).closest('tr');
-                    let id = row.find('td:eq(0)').text();
-                    let nom = row.find('td:eq(1)').text();
-                    let email = row.find('td:eq(2)').text();
+            function editButton(e){
+                // récupérer les données de la ligne
+                let row = $(e).closest('tr');
+                let id = row.find('td:eq(0)').text();
+                let nom = row.find('td:eq(1)').text();
+                let email = row.find('td:eq(2)').text();
 
-                    // remplir le formulaire avec les données
-                    $('#inputId').val(id);
-                    $('#inputNom').val(nom);
-                    $('#inputEmail').val(email);
+                // remplir le formulaire avec les données
+                $('#inputId').val(id);
+                $('#inputNom').val(nom);
+                $('#inputEmail').val(email);
 
-                    // supprimer la ligne
-                    row.remove();
-                });
+                // supprimer la ligne
+                row.remove();
             }
 
-            function deleteButton(e){
-                // let row = $(event.target).closest("tr");
-                // $(document).on('click', '.deleteBtn', function() {
-                   let row = $(e).closest('tr');
-                   row.remove();
-                // });
+            function deleteButton(e) {
+                let id = $(e).closest('tr').data('id');
+                ajaxDELETEUser(id);
+                $(e).closest('tr').remove();
             }
 
             function onFormSubmit() {
@@ -124,103 +114,103 @@
                 event.preventDefault();
 
                 let nom = $("#inputNom").val();
-                let id = $("#inputId").val();
+                // let id = $("#inputId").val();
                 let email = $("#inputEmail").val();
 
                 if(verifierNom(nom)){
                     return;
                 }
 
-
-                $("#usersTableBody").append(`
-                    <tr>
-                        <td>${id}</td>
-                        <td>${nom}</td>
-                        <td>${email}</td>
-                        <td>
-                            <button class="btn btn-primary editBtn" on-click="editButton(this)">Edit</button>
-                        </td>
-                        <td>
-                            <button class="btn btn-danger deleteBtn" on-click="deleteButton(this)" >Delete</button>
-                        </td>
-                    </tr>
-                `);
-                
-                // editButton();
-                // deleteButton();
+                ajaxPOSTUser(nom,email);
 
                 //supprime les inputs
                 document.getElementById("addUserForm").reset();
-
             }
 
             function ajaxGETUsers(){
-                $.ajax(
-                    {   url: RESTAPI_URL + "/users.php",
+                return new Promise(function(resolve, reject) {
+                    $.ajax({
+                        url: RESTAPI_URL + "/users.php",
                         method: "GET",
                         dataType: "json"
-                    }
-                ).done(function(response){
-                    let data = JSON.stringify(response);
-                    // console.log(data);
-                    return data;
+                    }).done(function(response){
+                        resolve(response);
+                    }).fail(function(error){
+                        reject(error);
+                    });
+                });
+            }
 
-                }).fail(function(error){
+            function ajaxDELETEUser(id) {
+                $.ajax({
+                    url: RESTAPI_URL + "/users.php?id=" + id,
+                    method: "DELETE",
+                    dataType: "json"
+                })
+                .done(function(response) {
+                    // Supprime la ligne du tableau correspondant à l'utilisateur supprimé
+                    $("#usersTableBody").find(`tr[data-id="${id}"]`).remove();
+                })
+                .fail(function(error) {
                     console.log("La requête s'est terminée en échec. Infos : " + JSON.stringify(error));
                 });
             }
 
-            function ajaxPOSTUsers(){
-
-                // let nom = $("#inputNom").val();
-                // let id = $("#inputId").val();
-                // let email = $("#inputEmail").val();
-
+            function ajaxPOSTUser(nom1,email1){
                 $.ajax(
                     {   url: RESTAPI_URL + "/users.php",
                         method: "POST",
-                        // data: {
-                        //     id_user: id,
-                        //     nom: nom,
-                        //     email: email
-                        // }
+                        data: JSON.stringify({
+                            nom: nom1,
+                            email: email1
+                        }),
                         dataType: "json"
                     }
                 ).done(function(response){
-                    let data = JSON.stringify(response);
-                    // console.log(data);
-                    // return data;
+                    let id1 = response.id;
+                    $("#usersTableBody").append(`
+                        <tr>
+                            <td>${id1}</td>
+                            <td>${nom1}</td>
+                            <td>${email1}</td>
+                            <td>
+                                <button class="btn btn-primary editBtn" onclick="editButton(this)">Edit</button>
+                            </td>
+                            <td>
+                                <button class="btn btn-danger deleteBtn" onclick="deleteButton(this)" >Delete</button>
+                            </td>
+                        </tr>
+                    `);
                 }).fail(function(error){
                     console.log("La requête s'est terminée en échec. Infos : " + JSON.stringify(error));
                 });
             }
 
-            $(document).ready(function(){
 
-                // let nom = $("#inputNom").val();
-                // let id = $("#inputId").val();
-                // let email = $("#inputEmail").val();
-
-                let data = ajaxGETUsers();
-                // data => data.json();
-
-                // Parcours des données pour les afficher dans le tableau
-                data.forEach(user => {
-                    // $("#usersTableBody").append(`
-                    // <tr>
-                    //     <td>${user.id_user}</td>
-                    //     <td>${user.nom}</td>
-                    //     <td>${user.email}</td>
-                    //     <td>
-                    //         <button class="btn btn-primary editBtn">Edit</button>
-                    //     </td>
-                    //     <td>
-                    //         <button class="btn btn-danger deleteBtn">Delete</button>
-                    //     </td>
-                    // </tr>
-                    // `);
-                    console.log("1");
-                });
+            $(document).ready(async function(){
+                
+                try {
+                    let data = await ajaxGETUsers();
+                    // Parcours des données pour les afficher dans le tableau
+                    data.forEach(user => {
+                    $("#usersTableBody").append(`
+                    <tr>
+                        <td>${user.id_user}</td>
+                        <td>${user.nom}</td>
+                        <td>${user.email}</td>
+                        <td>
+                            <button class="btn btn-primary editBtn" onclick="editButton(this)">Edit</button>
+                        </td>
+                        <td>
+                            <button class="btn btn-danger deleteBtn" onclick="deleteButton(this)" >Delete</button>
+                        </td>
+                    </tr>
+                    `);
+                    });
+                } catch (error) {
+                    console.log("La requête s'est terminée en échec. Infos : " + JSON.stringify(error));
+                }
+            
             });
 
         </script>
