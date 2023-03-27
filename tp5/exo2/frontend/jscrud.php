@@ -104,8 +104,13 @@
             }
 
             function deleteButton(e) {
-                let id = $(e).closest('tr').data('id');
+                let row = $(e).closest('tr');
+                let id = row.find('td:eq(0)').text();
+
+                // Supprime le user de la bdd
                 ajaxDELETEUser(id);
+
+                // Supprime la ligne du tableau correspondant à l'utilisateur supprimé
                 $(e).closest('tr').remove();
             }
 
@@ -114,7 +119,6 @@
                 event.preventDefault();
 
                 let nom = $("#inputNom").val();
-                // let id = $("#inputId").val();
                 let email = $("#inputEmail").val();
 
                 if(verifierNom(nom)){
@@ -127,7 +131,7 @@
                 document.getElementById("addUserForm").reset();
             }
 
-            function ajaxGETUsers(){
+            function ajaxGETUsers(e){
                 return new Promise(function(resolve, reject) {
                     $.ajax({
                         url: RESTAPI_URL + "/users.php",
@@ -138,21 +142,6 @@
                     }).fail(function(error){
                         reject(error);
                     });
-                });
-            }
-
-            function ajaxDELETEUser(id) {
-                $.ajax({
-                    url: RESTAPI_URL + "/users.php?id=" + id,
-                    method: "DELETE",
-                    dataType: "json"
-                })
-                .done(function(response) {
-                    // Supprime la ligne du tableau correspondant à l'utilisateur supprimé
-                    $("#usersTableBody").find(`tr[data-id="${id}"]`).remove();
-                })
-                .fail(function(error) {
-                    console.log("La requête s'est terminée en échec. Infos : " + JSON.stringify(error));
                 });
             }
 
@@ -186,6 +175,22 @@
                 });
             }
 
+            function ajaxDELETEUser(id) {
+                $.ajax({
+                    url: RESTAPI_URL + "/users.php",
+                    method: "DELETE",
+                    data: JSON.stringify({
+                            id_user: id,
+                        }),
+                    dataType: "json"
+                })
+                .done(function(response) {
+                    console.log("ok")
+                })
+                .fail(function(error) {
+                    console.log("La requête s'est terminée en échec. Infos : " + JSON.stringify(error));
+                });
+            }
 
             $(document).ready(async function(){
                 
