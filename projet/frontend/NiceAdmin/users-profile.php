@@ -87,6 +87,22 @@
                 <div class="tab-pane fade show active profile-overview" id="profile-overview">
                 
                   <h5 class="card-title">Profile Details</h5>
+                  
+                  <script>
+                    function ajaxGETUsers(e){
+                      return new Promise(function(resolve, reject) {
+                              $.ajax({
+                                  url: RESTAPI_URL + "/backend/users.php",
+                                  method: "GET",
+                                  dataType: "json"
+                              }).done(function(response){
+                                  resolve(response);
+                              }).fail(function(error){
+                                  reject(error);
+                              });
+                          });
+                    } 
+                  </script>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label ">Nom Prénom</div>
