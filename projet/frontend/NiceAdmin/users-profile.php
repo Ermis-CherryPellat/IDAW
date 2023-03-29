@@ -102,6 +102,29 @@
                               });
                           });
                     } 
+
+                    try {
+                    let data = await ajaxGETUsers();
+                    
+                    // Parcours des données pour les afficher dans le tableau
+                    data.forEach(user => {
+                    $("#usersTableBody").append(`
+                    <tr>
+                        <td>${user.id_user}</td>
+                        <td>${user.nom}</td>
+                        <td>${user.email}</td>
+                        <td>
+                            <button class="btn btn-primary editBtn" onclick="editButton(this)">Edit</button>
+                        </td>
+                        <td>
+                            <button class="btn btn-danger deleteBtn" onclick="deleteButton(this)" >Delete</button>
+                        </td>
+                    </tr>
+                    `);
+                    });
+                } catch (error) {
+                    console.log("La requête s'est terminée en échec. Infos : " + JSON.stringify(error));
+                }
                   </script>
 
                   <div class="row">
