@@ -1,10 +1,10 @@
-<<<<<<< HEAD
+
 <!DOCTYPE html>
 <html lang="en">
 
 
 
-   <? require_once("head.html");
+   <?php require_once("head.html");
     require_once("header.html");
     require_once("sidebar.html"); 
     
