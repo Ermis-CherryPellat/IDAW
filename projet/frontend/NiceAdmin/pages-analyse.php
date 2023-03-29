@@ -51,7 +51,7 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Repas</h1>
+      <h1>Analyse</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
@@ -67,8 +67,8 @@
 
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Veuillez entrer le repas actuel</h5>
-              <p>Form pour entrer le repas avec date,aliments, ect...</p>
+              <h5 class="card-title">Graphs</h5>
+              <p>Graphs</p>
             </div>
           </div>
 
@@ -78,8 +78,8 @@
 
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Dernier repas</h5>
-              <p>Montre le dernier repas consommé</p>
+              <h5 class="card-title">Graphs/h5>
+              <p>Graphes</p>
             </div>
           </div>
 
@@ -91,7 +91,7 @@
     <div class="col-lg-12">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">Historique des repas consommés</h5>
+          <h5 class="card-title">Analyse</h5>
           <p>Ceci est une section qui prend toute la place en dessous des deux premières sections.</p>
           <p>Ici on ajoutera untableau avec la liste des repas consommés précédents</p>
         </div>
