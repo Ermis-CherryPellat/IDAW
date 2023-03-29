@@ -1,7 +1,8 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 
-  <?php 
+
 
     require_once("head.html");
     require_once("header.html");
@@ -52,4 +53,3 @@
   <script src="assets/js/main.js"></script>
 
 </body>
-</html>

@@ -1,7 +1,7 @@
   <!-- ======= Footer ======= -->  
   <footer id="footer" class="footer">
     <div class="copyright">
-      &copy;  <strong><span>Ermis Cherry_Pellat & Rodolphe Ianboukhtine </span></strong>
+      &copy; Sité créé par  <strong><span>Ermis CherryPellat & Rodolphe Ianboukhtine </span></strong>
     </div>
     <div class="credits">
       <!-- All the links in the footer should remain intact. -->
