@@ -38,12 +38,10 @@
   ======================================================== -->
 </head>
 
+<?php require_once("header.html");
+    require_once("sidebar.html"); ?>
+
 <body>
-
-<?php require_once("header.html");?>
-<?php require_once("sidebar.html");?>
-
-  
 
   <main id="main" class="main">
 
