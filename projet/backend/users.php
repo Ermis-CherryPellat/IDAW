@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         $users = $request->fetchAll(PDO::FETCH_ASSOC);
 
         //------format de la réponse------
-        //id
+        // id_utilisateur
         // nom
         // prenom
         // email

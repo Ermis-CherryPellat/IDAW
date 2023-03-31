@@ -52,31 +52,31 @@
                     </div>
 
                     <div class="col-md-6">
-    <label for="gender" class="form-label">Sexe</label>
-    <select class="form-select" name="gender" id="gender" required>
-      <option value="">Choisissez votre sexe</option>
-      <option value="male">Homme</option>
-      <option value="female">Femme</option>
-    </select>
-    <div class="invalid-feedback">Veuillez choisir votre sexe</div>
-  </div>
+                      <label for="gender" class="form-label">Sexe</label>
+                      <select class="form-select" name="gender" id="gender" required>
+                        <option value="">Choisissez votre sexe</option>
+                        <option value="male">Homme</option>
+                        <option value="female">Femme</option>
+                      </select>
+                      <div class="invalid-feedback">Veuillez choisir votre sexe</div>
+                    </div>
 
-  <div class="col-md-6">
-    <label for="weight" class="form-label">Tranche de poids</label>
-    <select class="form-select" name="weight" id="weight" required>
-      <option value="">Choisissez votre tranche de poids</option>
-      <option value="0-49">Moins de 49 kg</option>
-      <option value="50-60">50 - 60 kg</option>
-      <option value="61-70">61 - 70 kg</option>
-      <option value="71-80">71 - 80 kg</option>
-      <option value="81 -90">81 - 90 kg</option>
-      <option value="91 - 100">91 - 100 kg</option>
-      <option value="111 - 120">111 - 120kg</option>
-      <option value="121 - 130">121 - 130kg</option>
-      
-    </select>
-    <div class="invalid-feedback">Veuillez choisir votre tranche d'âge</div>
-  </div>
+                    <div class="col-md-6">
+                      <label for="weight" class="form-label">Tranche de poids</label>
+                      <select class="form-select" name="weight" id="weight" required>
+                        <option value="">Choisissez votre tranche de poids</option>
+                        <option value="0-49">Moins de 49 kg</option>
+                        <option value="50-60">50 - 60 kg</option>
+                        <option value="61-70">61 - 70 kg</option>
+                        <option value="71-80">71 - 80 kg</option>
+                        <option value="81 -90">81 - 90 kg</option>
+                        <option value="91 - 100">91 - 100 kg</option>
+                        <option value="111 - 120">111 - 120kg</option>
+                        <option value="121 - 130">121 - 130kg</option>
+                        
+                      </select>
+                      <div class="invalid-feedback">Veuillez choisir votre tranche d'âge</div>
+                    </div>
 
 
 
@@ -190,18 +190,7 @@
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/chart.js/chart.umd.js"></script>
-  <script src="assets/vendor/echarts/echarts.min.js"></script>
-  <script src="assets/vendor/quill/quill.min.js"></script>
-  <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
-  <script src="assets/vendor/tinymce/tinymce.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-
-  <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
+  <?php require_once("js_files.html"); ?>
 
 </body>
 
