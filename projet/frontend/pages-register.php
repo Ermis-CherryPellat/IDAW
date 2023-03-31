@@ -51,6 +51,28 @@
                       <div class="invalid-feedback">Please enter a valid Email adddress!</div>
                     </div>
 
+                    <div class="col-md-6">
+    <label for="gender" class="form-label">Sexe</label>
+    <select class="form-select" name="gender" id="gender" required>
+      <option value="">Choisissez votre sexe</option>
+      <option value="male">Homme</option>
+      <option value="female">Femme</option>
+    </select>
+    <div class="invalid-feedback">Veuillez choisir votre sexe</div>
+  </div>
+
+  <div class="col-md-6">
+    <label for="age" class="form-label">Tranche d'âge</label>
+    <select class="form-select" name="age" id="age" required>
+      <option value="">Choisissez votre tranche d'âge</option>
+      <option value="18-25">18-25 ans</option>
+      <option value="26-35">26-35 ans</option>
+      <option value="36-50">36-50 ans</option>
+      <option value="50+">Plus de 50 ans</option>
+    </select>
+    <div class="invalid-feedback">Veuillez choisir votre tranche d'âge</div>
+  </div>
+
                     
 
                     
@@ -77,27 +99,7 @@
                     </div>
 
                     <form class="row g-3 needs-validation" novalidate>
-  <div class="col-md-6">
-    <label for="gender" class="form-label">Sexe</label>
-    <select class="form-select" name="gender" id="gender" required>
-      <option value="">Choisissez votre sexe</option>
-      <option value="male">Homme</option>
-      <option value="female">Femme</option>
-    </select>
-    <div class="invalid-feedback">Veuillez choisir votre sexe</div>
-  </div>
-
-  <div class="col-md-6">
-    <label for="age" class="form-label">Tranche d'âge</label>
-    <select class="form-select" name="age" id="age" required>
-      <option value="">Choisissez votre tranche d'âge</option>
-      <option value="18-25">18-25 ans</option>
-      <option value="26-35">26-35 ans</option>
-      <option value="36-50">36-50 ans</option>
-      <option value="50+">Plus de 50 ans</option>
-    </select>
-    <div class="invalid-feedback">Veuillez choisir votre tranche d'âge</div>
-  </div>
+  
                   </form>
 
                 </div>
