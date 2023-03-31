@@ -3,32 +3,36 @@
 require_once('db_init.php');   
 require_once('config.php');
 
-$connectionString = "mysql:host=". _MYSQL_HOST;
-
-if(defined('_MYSQL_PORT'))
-    $connectionString .= ";port=". _MYSQL_PORT;
-
-$connectionString .= ";dbname=" . _MYSQL_DBNAME;
-
-$options = array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8' );
-
-$pdo = NULL;
-
-try {
-    $pdo = new PDO($connectionString,_MYSQL_USER,_MYSQL_PASSWORD,$options);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $erreur) {
-    echo 'Erreur : '.$erreur->getMessage();
-}
-
 // Requête GET pour récupérer tous les utilisateurs de la base
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    $sql = "SELECT * FROM USERS";
+    $sql = "SELECT * FROM UTILISATEUR";
     try {
         // requête SQL pour récupérer les utilisateurs
-        $request = $pdo->prepare("select * from USERS");
+        $request = $pdo->prepare("SELECT u.nom, u.prenom, s.nom_sexe, tp.tranche_min AS poids_min, tp.tranche_max AS poids_max, tt.tranche_min AS taille_min, tt.tranche_max AS taille_max, o.nom_objectif, ps.frequence_pratique_sportive, ta.tranche_min AS age_min, ta.tranche_max AS age_max
+        FROM UTILISATEUR u
+        JOIN SEXE s ON s.id_sexe = u.id_sexe
+        JOIN TRANCHE_POIDS tp ON tp.id_tranche_poids = u.id_poids
+        JOIN TRANCHES_TAILLE tt ON tt.id_tranche_taille = u.id_taille
+        JOIN OBJECTIF o ON o.id_objectif = u.id_objectif
+        JOIN PRATIQUE_SPORTIVE ps ON ps.id_pratique_sportive = u.id_pratique_sportive
+        JOIN TRANCHE_AGE ta ON ta.id_tranche_age = u.id_tranche_age
+        WHERE u.id_utilisateur = 72;
+        ");
         $request->execute();
         $users = $request->fetchAll(PDO::FETCH_ASSOC);
+
+        //------format de la réponse------
+        // nom
+        // prenom
+        // nom_sexe
+        // poids_min
+        // poids_max
+        // taille_min
+        // taille_max
+        // nom_objectif
+        // frequence_pratique_sportive
+        // age_min
+        // age_max
 
         // fermer la connexion à la base de données
         $pdo = NULL;
@@ -42,6 +46,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         echo "Erreur de connexion à la base de données : " . $e->getMessage();
     }
 }
+
+///// A PARTIR D'ICI IL FAUT MODIFIER /////////
 
 // Requête POST pour ajouter un utilisateur à la base
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
