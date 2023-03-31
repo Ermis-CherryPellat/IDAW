@@ -18,7 +18,7 @@
               <div class="d-flex justify-content-center py-4">
                 <a href="index.php" class="logo d-flex align-items-center w-auto">
                   <img src="assets/img/logo.png" alt="">
-                  <span class="d-none d-lg-block">NiceAdmin</span>
+                  <span class="d-none d-lg-block">I Manger Mieux</span>
                 </a>
               </div><!-- End Logo -->
 
@@ -62,15 +62,81 @@
   </div>
 
   <div class="col-md-6">
+    <label for="weight" class="form-label">Tranche de poids</label>
+    <select class="form-select" name="weight" id="weight" required>
+      <option value="">Choisissez votre tranche de poids</option>
+      <option value="0-49">Moins de 49 kg</option>
+      <option value="50-60">50 - 60 kg</option>
+      <option value="61-70">61 - 70 kg</option>
+      <option value="71-80">71 - 80 kg</option>
+      <option value="81 -90">81 - 90 kg</option>
+      <option value="91 - 100">91 - 100 kg</option>
+      <option value="111 - 120">111 - 120kg</option>
+      <option value="121 - 130">121 - 130kg</option>
+      
+    </select>
+    <div class="invalid-feedback">Veuillez choisir votre tranche d'âge</div>
+  </div>
+
+
+
+
+ 
+
+  <div class="col-md-6">
     <label for="age" class="form-label">Tranche d'âge</label>
     <select class="form-select" name="age" id="age" required>
       <option value="">Choisissez votre tranche d'âge</option>
-      <option value="18-25">18-25 ans</option>
-      <option value="26-35">26-35 ans</option>
-      <option value="36-50">36-50 ans</option>
-      <option value="50+">Plus de 50 ans</option>
+      <option value="0-11">Moins de 11 ans</option>
+      <option value="12-18">12-18 ans</option>
+      <option value="19-25">19-25 ans</option>
+      <option value="26-40">26-40 ans</option>
+      <option value="41-60">41-60ans</option>
+      <option value="61-75">61-75 ans</option>
+      <option value="Plusde 76">Plus de 76 ans</option>
+      
     </select>
     <div class="invalid-feedback">Veuillez choisir votre tranche d'âge</div>
+  </div>
+
+
+  <div class="col-md-6">
+    <label for="height" class="form-label">Taille</label>
+    <select class="form-select" name="height" id="height" required>
+      <option value="">Choisissez votre taille</option>
+      <option value="150-160">1m50 - 1m60</option>
+      <option value="161-170">1m61 - 1m70</option>
+      <option value="171-180">1m71 - 1m80</option>
+      <option value="181-190">1m81 - 1m90</option>
+      <option value="191-200">1m91-2m00</option>
+      <option value="201-210">Plus de 2m00</option>
+      
+      
+    </select>
+    <div class="invalid-feedback">Veuillez choisir votre tranche de taille</div>
+  </div>
+
+
+  <div class="col-md-6">
+    <label for="pratique sportive" class="form-label">Pratique sprtive</label>
+    <select class="form-select" name="pratiquesportive" id="pratiquesportive" required>
+      <option value="">Quelle est votre pratique sportive ? </option>
+      <option value="souvent">Souvent</option>
+      <option value="régulièrement">Régulièremet</option>
+      <option value="jamais">Jamais</option>
+    </select>
+    <div class="invalid-feedback">Veuillez choisir votre pratique sportive</div>
+  </div>
+
+  <div class="col-md-6">
+    <label for="objectifsportif" class="form-label">Pratique sprtive</label>
+    <select class="form-select" name="objectifsportif" id="objectifsportif" required>
+      <option value="">Quelle est votre objectif ? </option>
+      <option value="perte">Perte de poids</option>
+      <option value="prise">Prise de masse</option>
+      <option value="maintien">Maintien de la formes</option>
+    </select>
+    <div class="invalid-feedback">Veuillez choisir votre pratique sportive</div>
   </div>
 
                     
@@ -79,7 +145,7 @@
                     </div>
 
                     <div class="col-12">
-                      <label for="yourPassword" class="form-label">Password</label>
+                      <label for="yourPassword" class="form-label">Mot de passe</label>
                       <input type="password" name="password" class="form-control" id="yourPassword" required>
                       <div class="invalid-feedback">Please enter your password!</div>
                     </div>
