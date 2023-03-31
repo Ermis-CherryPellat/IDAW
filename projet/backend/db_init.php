@@ -16,7 +16,7 @@ try {
     echo 'Erreur : '.$erreur->getMessage();
 }
 try {
-    // // Connexion à la base de données
+    // Connexion à la base de données
     // $pdo = new PDO($connectionString,_MYSQL_USER,_MYSQL_PASSWORD,$options);
     // $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
