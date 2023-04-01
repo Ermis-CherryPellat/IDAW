@@ -29,41 +29,39 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Ajouter un aliment</h5>
-              <form method="POST" action="ajouter_aliment.php">
+              <form id="addAlimentForm" method="POST" action="" onsubmit="onFormSubmit();">
                 <div class="form-group">
                   <label for="nom_aliment">Nom de l'aliment :</label>
-                  <input type="text" class="form-control" id="nom_aliment" name="nom_aliment">
+                  <input type="text" class="form-control" id="inputNom" name="inputNom">
                 </div>
                 <div class="form-group">
                   <label for="type_aliment">Type d'aliment :</label>
-                  <select class="form-control" id="type_aliment" name="type_aliment">
-                  
-                
+                  <select class="form-control" id="inputType" name="inputType">
                   </select>
                 </div>
                 <div class="form-group">
                   <label for="glucides">Taux de glucides :</label>
-                  <input type="text" class="form-control" id="glucides" name="glucides">
+                  <input type="text" class="form-control" id="inputGlucides" name="inputGlucides">
                 </div>
                 <div class="form-group">
                   <label for="lipides">Taux de lipides :</label>
-                  <input type="text" class="form-control" id="lipides" name="lipides">
+                  <input type="text" class="form-control" id="inputLipides" name="inputLipides">
                 </div>
                 <div class="form-group">
                   <label for="sucres">Taux de sucres :</label>
-                  <input type="text" class="form-control" id="sucres" name="sucres">
+                  <input type="text" class="form-control" id="inputSucres" name="inputSucres">
                 </div>
                 <div class="form-group">
                   <label for="proteines">Taux de protéines :</label>
-                  <input type="text" class="form-control" id="proteines" name="proteines">
+                  <input type="text" class="form-control" id="inputProteines" name="inputProteines">
                 </div>
                 <div class="form-group">
                   <label for="fibres">Taux de fibres :</label>
-                  <input type="text" class="form-control" id="fibres" name="fibres">
+                  <input type="text" class="form-control" id="inputFibres" name="inputFibres">
                 </div>
                 <div class="form-group">
                   <label for="energie">Taux d'énergie :</label>
-                  <input type="text" class="form-control" id="energie" name="energie">
+                  <input type="text" class="form-control" id="inputEnergie" name="inputEnergie">
                 </div>
                 <div class="col-12">
                 <button type="submit" class="btn btn-primary">Ajouter</button>
@@ -125,6 +123,43 @@
           echo URL_API;
       ?>";
 
+      function verifierNom(nom){
+        // supprimer le message d'erreur s'il existe déjà
+        $('#inputNom').siblings('.text-danger').remove();
+        // vérifier si le champ nom est vide
+        if (nom.trim() === '') {
+            // vérifier si le message d'erreur existe déjà
+            if ($('#inputNom').siblings('.text-danger').length == 0) {
+                // afficher le message d'erreur à côté du champ nom
+                $('#inputNom').parent().append('<div class="text-danger">This field is required</div>');
+            }
+            return true;
+        };
+      }
+      function onFormSubmit() {
+        // prevent the form to be sent to the server
+        event.preventDefault();
+
+        let nom = $("#inputNom").val();
+        let type = $("#inputType").val();
+        let glucides = $("#inputGlucides").val();
+        let lipides = $("#inputLipides").val();
+        let sucres = $("#inputSucre").val();
+        let proteines = $("#inputProteine").val();
+        let fibres = $("#inputFibres").val();
+        let energie = $("#inputEnergie").val();
+
+        if(verifierNom(nom)){
+            return;
+        }
+
+        ajaxPOSTAliment(nom, type, glucides, lipides, sucres, proteines, fibres, energie);
+
+        //supprime les inputs
+        document.getElementById("addAlimentForm").reset();
+      }
+
+
       function ajaxGETTypeAliment(){
           return new Promise(function(resolve, reject) {
               $.ajax({
@@ -154,6 +189,14 @@
       }
 
       function ajaxPOSTAliment(nom, type, glucides, lipides, sucres, proteines, fibres, energie) {
+        // convertit les valeurs en entiers
+        glucides = parseInt(glucides) || 0;
+        lipides = parseInt(lipides) || 0;
+        sucres = parseInt(sucres) || 0;
+        proteines = parseInt(proteines) || 0;
+        fibres = parseInt(fibres) || 0;
+        energie = parseInt(energie) || 0;
+        
         $.ajax({
             url: RESTAPI_URL + "/aliments.php",
             method: "POST",
@@ -208,7 +251,7 @@
           let data = await ajaxGETTypeAliment();
           // Parcours des données pour les afficher dans le tableau
           data.forEach(user => {
-            $("#type_aliment").append(`<option value="${user.id_type_aliment}">${user.nom_type_aliment}</option>`);
+            $("#inputType").append(`<option value="${user.id_type_aliment}">${user.nom_type_aliment}</option>`);
           });
         } catch (error) {
             console.log("La requête pour les types d'aliments s'est terminée en échec. Infos : " + JSON.stringify(error));

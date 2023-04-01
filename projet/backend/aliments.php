@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         JOIN TYPE_ALIMENT t ON t.id_type_aliment = a.id_type_aliment;
         ");
         $request->execute();
-        $users = $request->fetchAll(PDO::FETCH_ASSOC);
+        $aliment = $request->fetchAll(PDO::FETCH_ASSOC);
 
         //------format de la réponse------
         // nom_aliment	
@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
         // renvoyer la réponse en format JSON
         header('Content-Type: application/json;  charset=UTF-8');
-        echo json_encode($users);
+        echo json_encode($aliment);
 
     } catch (PDOException $e) {
         header("HTTP/1.1 500 Internal Server Error");
