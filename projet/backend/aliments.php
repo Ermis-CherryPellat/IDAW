@@ -5,12 +5,12 @@ require_once('config.php');
 
 // Requête GET pour récupérer tous les aliments de la base
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    $sql = "SELECT * FROM ALIMENTS";
+    $sql = "SELECT * FROM aliment";
     try {
         // requête SQL pour récupérer les aliments
         $request = $pdo->prepare("SELECT a.id_aliment, a.nom_aliment, t.nom_type_aliment, a.glucides, a.lipides, a.sucres, a.proteines, a.fibres, a.energie
-        FROM ALIMENT a
-        JOIN TYPE_ALIMENT t ON t.id_type_aliment = a.id_type_aliment;
+        FROM aliment a
+        JOIN type_aliment t ON t.id_type_aliment = a.id_type_aliment;
         ");
         $request->execute();
         $aliment = $request->fetchAll(PDO::FETCH_ASSOC);
@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $proteines = $array['proteines'];
     $fibres = $array['fibres'];
     $energie = $array['energie'];
-    $sql = "INSERT INTO ALIMENT (nom_aliment, id_type_aliment, glucides, lipides, sucres, proteines, fibres, energie) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO aliment (nom_aliment, id_type_aliment, glucides, lipides, sucres, proteines, fibres, energie) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     try {
         $conn = new PDO($connectionString,_MYSQL_USER,_MYSQL_PASSWORD, $options);
         $stmt = $conn->prepare($sql);
@@ -84,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
     $fibres = $array['fibres'];
     $energie = $array['energie'];
     
-    $sql = "UPDATE ALIMENT SET nom_aliment = ?, id_type_aliment = ?, glucides = ?, lipides = ?, sucres = ?, proteines = ?, fibres = ?, energie = ? WHERE id_aliment = ?";
+    $sql = "UPDATE aliment SET nom_aliment = ?, id_type_aliment = ?, glucides = ?, lipides = ?, sucres = ?, proteines = ?, fibres = ?, energie = ? WHERE id_aliment = ?";
     try {
         $conn = new PDO($connectionString, _MYSQL_USER, _MYSQL_PASSWORD, $options);
         $stmt = $conn->prepare($sql);
@@ -157,7 +157,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'PATCH') {
         $values[] = $energie;
     }
     
-    $sql = "UPDATE ALIMENT SET " . implode(", ", $setClauses) . " WHERE id_aliment = ?";
+    $sql = "UPDATE aliment SET " . implode(", ", $setClauses) . " WHERE id_aliment = ?";
     
     try {
         $conn = new PDO($connectionString, _MYSQL_USER, _MYSQL_PASSWORD, $options);
@@ -181,7 +181,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
 
     $id = $array['id_aliment'];
     
-    $sql = "DELETE FROM ALIMENT WHERE id_aliment = ?";
+    $sql = "DELETE FROM aliment WHERE id_aliment = ?";
     try {
         $conn = new PDO($connectionString, _MYSQL_USER, _MYSQL_PASSWORD, $options);
         $stmt = $conn->prepare($sql);
