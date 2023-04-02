@@ -256,15 +256,21 @@
                 energie: energie
             }),
             dataType: "json"
-        }).done(function(response) {
-          // var table = $('#alimentsTable').DataTable();
-          var table = $('#alimentsTable').DataTable();
-          var settings = table.settings();
-          console.log(settings);
-          // table.ajax.reload();
+        }).done(async function(response) {
+          
+          // On n'a pas trouvé d'autre manière d'actualiser le tableau, on a essayé des methodes avec .ajax.reload() ou encore .draw() mais sans succès
+          // Récupérer les nouvelles données
+          let newData = await ajaxGETAliment();
 
-          // to reload
-          // console.log(table);
+          // Vider la table existante
+          $('#alimentsTable').DataTable().clear();
+
+          // Ajouter les nouvelles données
+          $('#alimentsTable').DataTable().rows.add(newData);
+
+          // Redessiner la table
+          $('#alimentsTable').DataTable().draw();
+
 
         }).fail(function(error) {
             console.log("La requête s'est terminée en échec. Infos : " + JSON.stringify(error));
@@ -296,7 +302,19 @@
               energie: energie
             }),
             dataType: "json"
-        }).done(function(response) {
+        }).done(async function(response) {
+          // On n'a pas trouvé d'autre manière d'actualiser le tableau, on a essayé des methodes avec .ajax.reload() ou encore .draw() mais sans succès
+          // Récupérer les nouvelles données
+          let newData = await ajaxGETAliment();
+
+          // Vider la table existante
+          $('#alimentsTable').DataTable().clear();
+
+          // Ajouter les nouvelles données
+          $('#alimentsTable').DataTable().rows.add(newData);
+
+          // Redessiner la table
+          $('#alimentsTable').DataTable().draw();
         }).fail(function(error) {
             console.log("La requête s'est terminée en échec. Infos : " + JSON.stringify(error));
         });
@@ -387,11 +405,23 @@
                 }),
             dataType: "json"
         })
-        .done(function(response) {
+        .done(async function(response) {
           // Supprimer la ligne correspondante dans la table
           let table = $('#alimentsTable').DataTable();
           let row = table.row('#' + id);
           row.remove().draw(false);
+          // On n'a pas trouvé d'autre manière d'actualiser le tableau, on a essayé des methodes avec .ajax.reload() ou encore .draw() mais sans succès
+          // Récupérer les nouvelles données
+          let newData = await ajaxGETAliment();
+
+          // Vider la table existante
+          $('#alimentsTable').DataTable().clear();
+
+          // Ajouter les nouvelles données
+          $('#alimentsTable').DataTable().rows.add(newData);
+
+          // Redessiner la table
+          $('#alimentsTable').DataTable().draw();
         })
         .fail(function(error) {
             console.log("La requête s'est terminée en échec. Infos : " + JSON.stringify(error));
@@ -412,10 +442,9 @@
         }
     
         try {
-
           let data = await ajaxGETAliment();
 
-          $('#alimentsTable').DataTable({
+          let alimentsTable = $('#alimentsTable').DataTable({
               // Nombre d'éléments par page
               pageLength: 25,
               // Activer la pagination
