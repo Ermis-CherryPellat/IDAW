@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $sql = "SELECT * FROM ALIMENTS";
     try {
         // requête SQL pour récupérer les aliments
-        $request = $pdo->prepare("SELECT a.nom_aliment, t.nom_type_aliment, a.glucides, a.lipides, a.sucres, a.proteines, a.fibres, a.energie
+        $request = $pdo->prepare("SELECT a.id_aliment, a.nom_aliment, t.nom_type_aliment, a.glucides, a.lipides, a.sucres, a.proteines, a.fibres, a.energie
         FROM ALIMENT a
         JOIN TYPE_ALIMENT t ON t.id_type_aliment = a.id_type_aliment;
         ");
@@ -16,6 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         $aliment = $request->fetchAll(PDO::FETCH_ASSOC);
 
         //------format de la réponse------
+        // id_aliment	
         // nom_aliment	
         // nom_type_aliment	
         // glucides	
