@@ -50,6 +50,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     }
 }
 
+if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
+    $id = $_GET['id_utilisateur'];
+    $sql = "DELETE FROM UTILISATEUR WHERE id_utilisateur = ?";
+    try {
+        $request = $pdo->prepare($sql);
+        $request->execute([$id]);
+        $pdo = NULL;
+        header("HTTP/1.1 204 No Content");
+    } catch (PDOException $e) {
+        header("HTTP/1.1 500 Internal Server Error");
+        echo "Erreur de connexion à la base de données : " . $e->getMessage();
+    }
+}
 
 
 // Requête POST pour ajouter un utilisateur à la base
@@ -121,45 +134,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
     }
 }
 
-///// A PARTIR D'ICI IL FAUT MODIFIER /////////
-// Requête PATCH pour mettre à jour partiellement les informations d'un utilisateur
-if ($_SERVER['REQUEST_METHOD'] === 'PATCH') {
-    
-    $array = json_decode(file_get_contents("php://input"), true);
-    
-    $id = $array['id_user'];
-    $name = $array['nom'] ?? null;
-    $email = $array['email'] ?? null;
-    
-    $setClauses = array();
-    $values = array();
-    
-    if (!empty($name)) {
-        $setClauses[] = "nom = ?";
-        $values[] = $name;
-    }
-    
-    if (!empty($email)) {
-        $setClauses[] = "email = ?";
-        $values[] = $email;
-    }
-    
-    $sql = "UPDATE USERS SET " . implode(", ", $setClauses) . " WHERE id_user = ?";
-    
-    try {
-        $conn = new PDO($connectionString, _MYSQL_USER, _MYSQL_PASSWORD, $options);
-        $stmt = $conn->prepare($sql);
-        $values[] = $id;
-        $stmt->execute($values);
-        header("HTTP/1.1 200 OK");
-        $user = array('id' => $id, 'name' => $name ?? '', 'email' => $email ?? '');
-        header("Content-Type: application/json; charset=UTF-8");
-        echo json_encode($user);
-    } catch (PDOException $e) {
-        header("HTTP/1.1 400 Bad Request");
-        echo "Erreur lors de la mise à jour de l'utilisateur : " . $e->getMessage();
-    }
-}
+
 
 // Requête DELETE pour supprimer un utilisateur
 if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
@@ -178,6 +153,95 @@ if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
         echo json_encode(['message' => 'Une erreur est survenue lors de la suppression de l\'utilisateur.']);
     }
     }
+
+    if ($_SERVER['REQUEST_METHOD'] === 'PATCH') {
+        // Récupérer l'ID de l'utilisateur à mettre à jour
+        $id = intval($_GET['id']);
+    
+        // Récupérer les données à mettre à jour
+        $data = json_decode(file_get_contents('php://input'), true);
+    
+        // Préparer la requête SQL pour mettre à jour les informations de l'utilisateur
+        $sql = "UPDATE UTILISATEUR SET ";
+        $params = array();
+        
+        // Vérifier les propriétés à mettre à jour et les ajouter à la requête SQL
+        if (isset($data['nom'])) {
+            $sql .= "nom=?, ";
+            $params[] = $data['nom'];
+        }
+        
+        if (isset($data['prenom'])) {
+            $sql .= "prenom=?, ";
+            $params[] = $data['prenom'];
+        }
+        
+        if (isset($data['email'])) {
+            $sql .= "email=?, ";
+            $params[] = $data['email'];
+        }
+        
+        if (isset($data['mot_de_passe'])) {
+            $sql .= "mot_de_passe=?, ";
+            $params[] = $data['mot_de_passe'];
+        }
+        
+        if (isset($data['id_sexe'])) {
+            $sql .= "id_sexe=?, ";
+            $params[] = $data['id_sexe'];
+        }
+        
+        if (isset($data['id_poids'])) {
+            $sql .= "id_poids=?, ";
+            $params[] = $data['id_poids'];
+        }
+        
+        if (isset($data['id_taille'])) {
+            $sql .= "id_taille=?, ";
+            $params[] = $data['id_taille'];
+        }
+        
+        if (isset($data['id_objectif'])) {
+            $sql .= "id_objectif=?, ";
+            $params[] = $data['id_objectif'];
+        }
+        
+        if (isset($data['id_pratique_sportive'])) {
+            $sql .= "id_pratique_sportive=?, ";
+            $params[] = $data['id_pratique_sportive'];
+        }
+        
+        if (isset($data['id_tranche_age'])) {
+            $sql .= "id_tranche_age=?, ";
+            $params[] = $data['id_tranche_age'];
+        }
+        
+        // Supprimer la virgule et l'espace en trop à la fin de la requête SQL
+        $sql = rtrim($sql, ", ");
+    
+        // Ajouter la condition WHERE pour identifier l'utilisateur à mettre à jour
+        $sql .= " WHERE id_utilisateur=?";
+    
+        // Ajouter l'ID de l'utilisateur à mettre à jour dans les paramètres de la requête SQL
+        $params[] = $id;
+    
+        try {
+            // Exécuter la requête SQL pour mettre à jour les informations de l'utilisateur
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute($params);
+    
+            // Fermer la connexion à la base de données
+            $pdo = NULL;
+    
+            // Envoyer une réponse avec un code de succès
+            http_response_code(204);
+        } catch (PDOException $e) {
+            // Envoyer une réponse avec un code d'erreur
+            header("HTTP/1.1 500 Internal Server Error");
+            echo "Erreur de connexion à la base de données : " . $e->getMessage();
+        }
+    }
+  
 
 
     
