@@ -15,9 +15,8 @@
       <h1>Liste des aliments</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item">Pages</li>
-          <li class="breadcrumb-item active">Blank</li>
+          <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+          <li class="breadcrumb-item active">Aliment</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -64,51 +63,57 @@
                   <input type="number" class="form-control" id="inputEnergie" name="inputEnergie" min="0">
                 </div>
                 <div class="col-12">
-                <button type="submit" class="btn btn-primary">Ajouter</button>
+                <button type="submit" class="btn btn-primary bouton_form">Ajouter</button>
                 </div>
               </form>
             </div>
           </div>
 
-          <form id="editForm" style="display:none;">
-            <input type="hidden" id="idAliment">
-            <div class="form-group">
-                <label for="editNomAliment">Nom de l'aliment :</label>
-                <input type="text" class="form-control" id="editNomAliment">
+          <div id="editCard" style="display:none;">
+            <div class="card" >
+              <div class="card-body">
+                <h5 class="card-title">Modifier l'aliment</h5>
+                <form id="editForm">
+                  <input type="hidden" id="idAliment">
+                  <div class="form-group">
+                      <label for="editNomAliment">Nom de l'aliment :</label>
+                      <input type="text" class="form-control" id="editNomAliment">
+                  </div>
+                  <div class="form-group">
+                      <label for="editIdTypeAliment">Type d'aliment :</label>
+                      <select class="form-control" id="editIdTypeAliment">
+                          <!-- Options du select -->
+                      </select>
+                  </div>
+                  <div class="form-group">
+                      <label for="editGlucides">Glucides :</label>
+                      <input type="number" class="form-control" id="editGlucides" min="0">
+                  </div>
+                  <div class="form-group">
+                      <label for="editLipides">Lipides :</label>
+                      <input type="number" class="form-control" id="editLipides" min="0">
+                  </div>
+                  <div class="form-group">
+                      <label for="editSucres">Sucres :</label>
+                      <input type="number" class="form-control" id="editSucres" min="0">
+                  </div>
+                  <div class="form-group">
+                      <label for="editProteines">Protéines :</label>
+                      <input type="number" class="form-control" id="editProteines" min="0">
+                  </div>
+                  <div class="form-group">
+                      <label for="editFibres">Fibres :</label>
+                      <input type="number" class="form-control" id="editFibres" min="0">
+                  </div>
+                  <div class="form-group">
+                      <label for="editEnergie">Énergie :</label>
+                      <input type="number" class="form-control" id="editEnergie" min="0">
+                  </div>
+                  <button type="button" class="btn btn-success bouton_form" onclick="submitEditForm()">Modifier</button>
+                </form>
+              </div>
             </div>
-            <div class="form-group">
-                <label for="editIdTypeAliment">Type d'aliment :</label>
-                <select class="form-control" id="editIdTypeAliment">
-                    <!-- Options du select -->
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="editGlucides">Glucides :</label>
-                <input type="number" class="form-control" id="editGlucides" min="0">
-            </div>
-            <div class="form-group">
-                <label for="editLipides">Lipides :</label>
-                <input type="number" class="form-control" id="editLipides" min="0">
-            </div>
-            <div class="form-group">
-                <label for="editSucres">Sucres :</label>
-                <input type="number" class="form-control" id="editSucres" min="0">
-            </div>
-            <div class="form-group">
-                <label for="editProteines">Protéines :</label>
-                <input type="number" class="form-control" id="editProteines" min="0">
-            </div>
-            <div class="form-group">
-                <label for="editFibres">Fibres :</label>
-                <input type="number" class="form-control" id="editFibres" min="0">
-            </div>
-            <div class="form-group">
-                <label for="editEnergie">Énergie :</label>
-                <input type="number" class="form-control" id="editEnergie" min="0">
-            </div>
-            <button type="button" class="btn btn-success" onclick="submitEditForm()">Modifier</button>
-          </form>
-
+          </div>
 
 
         </div>
@@ -252,32 +257,15 @@
             }),
             dataType: "json"
         }).done(function(response) {
-            let nom_aliment = response.nom_aliment;
-            let id_type_aliment = response.id_type_aliment;
-            let glucides = response.glucides;
-            let lipides = response.lipides;
-            let sucres = response.sucres;
-            let proteines = response.proteines;
-            let fibres = response.fibres;
-            let energie = response.energie;
-            $("#alimentsTableBody").append(`
-                <tr>
-                    <td>${nom_aliment}</td>
-                    <td>${id_type_aliment}</td>
-                    <td>${glucides}</td>
-                    <td>${lipides}</td>
-                    <td>${sucres}</td>
-                    <td>${proteines}</td>
-                    <td>${fibres}</td>
-                    <td>${energie}</td>
-                    <td>
-                        <button class="btn btn-primary editBtn" onclick="editButton(this)">Edit</button>
-                    </td>
-                    <td>
-                        <button class="btn btn-danger deleteBtn" onclick="deleteButton(this)" >Delete</button>
-                    </td>
-                </tr>
-            `);
+          // var table = $('#alimentsTable').DataTable();
+          var table = $('#alimentsTable').DataTable();
+          var settings = table.settings();
+          console.log(settings);
+          // table.ajax.reload();
+
+          // to reload
+          // console.log(table);
+
         }).fail(function(error) {
             console.log("La requête s'est terminée en échec. Infos : " + JSON.stringify(error));
         });
@@ -294,7 +282,7 @@
         energie = parseInt(energie) || 0;
         
         $.ajax({
-            url: RESTAPI_URL + "/aliments.php?id=" + id,
+            url: RESTAPI_URL + "/aliments.php",
             method: "PUT",
             data: JSON.stringify({
               id_aliment: id,
@@ -309,36 +297,6 @@
             }),
             dataType: "json"
         }).done(function(response) {
-          // let id_aliment = response.id_aliment;
-          // let nom_aliment = response.nom_aliment;
-          // let id_type_aliment = response.id_type_aliment;
-          // let glucides = response.glucides;
-          // let lipides = response.lipides;
-          // let sucres = response.sucres;
-          // let proteines = response.proteines;
-          // let fibres = response.fibres;
-          // let energie = response.energie;
-          
-          // // Met à jour la ligne du tableau correspondant à l'aliment modifié
-          // // let table = $('#alimentsTable').DataTable();
-          // // let row = table.row('#' + id);
-          // // row.data([
-          // //   id_aliment,
-          // //   nom_aliment,
-          // //   id_type_aliment,
-          // //   glucides,
-          // //   lipides,
-          // //   sucres,
-          // //   proteines,
-          // //   fibres,
-          // //   energie,
-          // //   '<button class="btn btn-primary editBtn" onclick="editButton(this)">Edit</button>',
-          // //   '<button class="btn btn-danger deleteBtn" onclick="deleteButton(this)" >Delete</button>'
-          // // ]).draw();
-
-          $('#alimentsTable').DataTable().ajax.reload();
-
-          
         }).fail(function(error) {
             console.log("La requête s'est terminée en échec. Infos : " + JSON.stringify(error));
         });
@@ -366,8 +324,9 @@
         openEditForm(data);
       }
 
-      function openEditForm(aliment) {
+      async function openEditForm(aliment) {
         // Afficher le formulaire de modification
+        $('#editCard').show();
         $('#editForm').show();
 
         // Pré-remplir le formulaire avec les données de l'aliment
@@ -381,7 +340,7 @@
         $('#editEnergie').val(aliment.energie);
       }
 
-      function submitEditForm() {
+      async function submitEditForm() {
         // prevent the form to be sent to the server
         event.preventDefault();
 
@@ -404,19 +363,39 @@
         // Supprimer les inputs
         document.getElementById("editForm").reset();
 
+        $('#alimentsTable').DataTable().draw();
+
+
         // Cacher le form
-        $("#editForm").hide();
+        $("#editCard").hide();
       }
 
-      function deleteButton(e) {
-          let row = $(e).closest('tr');
-          let id = row.find('td:eq(0)').text();
+      function deleteButton(button) {
+        let table = $('#alimentsTable').DataTable();
+        let row = table.row($(button).parents('tr'));
+        let id = row.data().id_aliment;
+        
+        ajaxDELETEAliment(id)
+      }
 
-          // Supprime le user de la bdd
-          ajaxDELETEUser(id);
-
-          // Supprime la ligne du tableau correspondant à l'utilisateur supprimé
-          $(e).closest('tr').remove();
+      function ajaxDELETEAliment(id) {
+        $.ajax({
+            url: RESTAPI_URL + "/aliments.php",
+            method: "DELETE",
+            data: JSON.stringify({
+                    id_aliment: id,
+                }),
+            dataType: "json"
+        })
+        .done(function(response) {
+          // Supprimer la ligne correspondante dans la table
+          let table = $('#alimentsTable').DataTable();
+          let row = table.row('#' + id);
+          row.remove().draw(false);
+        })
+        .fail(function(error) {
+            console.log("La requête s'est terminée en échec. Infos : " + JSON.stringify(error));
+        });
       }
 
       $(document).ready(async function(){
@@ -435,7 +414,6 @@
         try {
 
           let data = await ajaxGETAliment();
-
 
           $('#alimentsTable').DataTable({
               // Nombre d'éléments par page
@@ -460,8 +438,9 @@
                 { data: null, render: function (data, type, row, meta) {
                     return '<button class="btn btn-danger deleteBtn" onclick="deleteButton(this)">Delete</button>';
                 } },
-                { data: 'id_aliment', visible : false}
-
+                { data: 'id_aliment', visible : false, render: function(data, type, row, meta) {
+                  return '<div id="' + data + '">' + data + '</div>';
+                }}
               ]
           });
         } catch (error) {

@@ -53,9 +53,11 @@ h6 {
   }
 }
 
-#editForm {
-  display: none;
+.bouton_form  {
+  margin: 10px !important; 
+  /* padding-top: 20px !important; */
 }
+
 
 
 /*--------------------------------------------------------------
