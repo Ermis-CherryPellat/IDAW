@@ -5,11 +5,11 @@ require_once('config.php');
 
 // Requête GET pour récupérer tous les aliments de la base
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    $sql = "SELECT * FROM TYPE_ALIMENT";
+    $sql = "SELECT * FROM type_aliment";
     try {
         // requête SQL pour récupérer les aliments
         $request = $pdo->prepare("SELECT t.id_type_aliment, t.nom_type_aliment
-        FROM TYPE_ALIMENT t
+        FROM type_aliment t
         ");
         $request->execute();
         $type_aliment = $request->fetchAll(PDO::FETCH_ASSOC);
@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $nom_type_aliment = $array['nom_type_aliment'];
    
-    $sql = "INSERT INTO TYPE_ALIMENT (nom_type_aliment) VALUES (?)";
+    $sql = "INSERT INTO type_aliment (nom_type_aliment) VALUES (?)";
     try {
         $conn = new PDO($connectionString,_MYSQL_USER,_MYSQL_PASSWORD, $options);
         $stmt = $conn->prepare($sql);
@@ -71,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
     $fibres = $array['fibres'];
     $energie = $array['energie'];
     
-    $sql = "UPDATE ALIMENT SET nom_aliment = ?, id_type_aliment = ?, glucides = ?, lipides = ?, sucres = ?, proteines = ?, fibres = ?, energie = ? WHERE id_aliment = ?";
+    $sql = "UPDATE aliment SET nom_aliment = ?, id_type_aliment = ?, glucides = ?, lipides = ?, sucres = ?, proteines = ?, fibres = ?, energie = ? WHERE id_aliment = ?";
     try {
         $conn = new PDO($connectionString, _MYSQL_USER, _MYSQL_PASSWORD, $options);
         $stmt = $conn->prepare($sql);
@@ -144,7 +144,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'PATCH') {
         $values[] = $energie;
     }
     
-    $sql = "UPDATE ALIMENT SET " . implode(", ", $setClauses) . " WHERE id_aliment = ?";
+    $sql = "UPDATE aliment SET " . implode(", ", $setClauses) . " WHERE id_aliment = ?";
     
     try {
         $conn = new PDO($connectionString, _MYSQL_USER, _MYSQL_PASSWORD, $options);
@@ -168,7 +168,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
 
     $id = $array['id_type_aliment'];
    
-    $sql = "DELETE FROM TYPE_ALIMENT WHERE id_type_aliment = ?";
+    $sql = "DELETE FROM type_aliment WHERE id_type_aliment = ?";
     
     try {
         $conn = new PDO($connectionString,_MYSQL_USER,_MYSQL_PASSWORD, $options);

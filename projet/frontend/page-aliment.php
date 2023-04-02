@@ -24,78 +24,124 @@
 
     <section class="section">
       <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-12">
 
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Ajouter un aliment</h5>
-            <form method="POST" action="ajouter_aliment.php">
-              <div class="form-group">
-                <label for="nom_aliment">Nom de l'aliment :</label>
-                <input type="text" class="form-control" id="nom_aliment" name="nom_aliment">
-              </div>
-              <div class="form-group">
-                <label for="type_aliment">Type d'aliment :</label>
-                <select class="form-control" id="type_aliment" name="type_aliment">
-                
-                 <?php
-                  // Connexion à la base de données
-                  $db = new PDO('mysql:host=localhost;dbname=ma_base_de_donnees;charset=utf8', 'utilisateur', 'mot_de_passe');
-
-                  // Requête SQL pour récupérer les types d'aliments
-                  $query = "SELECT id_type_aliment, nom_type_aliment FROM TYPE_ALIMENT";
-
-                  // Exécution de la requête
-                  $result = $db->query($query);
-
-                  // Parcours des résultats pour afficher les options du menu déroulant
-                  while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                    echo '<option value="'.$row['id_type_aliment'].'">'.$row['nom_type_aliment'].'</option>';
-                  }
-
-                  // Fermeture de la connexion à la base de données
-                  $db = null;
-                  ?>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="glucides">Taux de glucides :</label>
-                <input type="text" class="form-control" id="glucides" name="glucides">
-              </div>
-              <div class="form-group">
-                <label for="lipides">Taux de lipides :</label>
-                <input type="text" class="form-control" id="lipides" name="lipides">
-              </div>
-              <div class="form-group">
-                <label for="sucres">Taux de sucres :</label>
-                <input type="text" class="form-control" id="sucres" name="sucres">
-              </div>
-              <div class="form-group">
-                <label for="proteines">Taux de protéines :</label>
-                <input type="text" class="form-control" id="proteines" name="proteines">
-              </div>
-              <div class="form-group">
-                <label for="fibres">Taux de fibres :</label>
-                <input type="text" class="form-control" id="fibres" name="fibres">
-              </div>
-              <div class="form-group">
-                <label for="energie">Taux d'énergie :</label>
-                <input type="text" class="form-control" id="energie" name="energie">
-              </div>
-              <button type="submit" class="btn btn-primary">Ajouter</button>
-            </form>
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Ajouter un aliment</h5>
+              <form id="addAlimentForm" method="POST" action="" onsubmit="onFormSubmit();">
+                <div class="form-group">
+                  <label for="nom_aliment">Nom de l'aliment :</label>
+                  <input type="text" class="form-control" id="inputNom" name="inputNom">
+                </div>
+                <div class="form-group">
+                  <label for="type_aliment">Type d'aliment :</label>
+                  <select class="form-control" id="inputType" name="inputType">
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="glucides">Taux de glucides :</label>
+                  <input type="number" class="form-control" id="inputGlucides" name="inputGlucides" min="0">
+                </div>
+                <div class="form-group">
+                  <label for="lipides">Taux de lipides :</label>
+                  <input type="number" class="form-control" id="inputLipides" name="inputLipides" min="0">
+                </div>
+                <div class="form-group">
+                  <label for="sucres">Taux de sucres :</label>
+                  <input type="number" class="form-control" id="inputSucres" name="inputSucres" min="0">
+                </div>
+                <div class="form-group">
+                  <label for="proteines">Taux de protéines :</label>
+                  <input type="number" class="form-control" id="inputProteines" name="inputProteines" min="0">
+                </div>
+                <div class="form-group">
+                  <label for="fibres">Taux de fibres :</label>
+                  <input type="number" class="form-control" id="inputFibres" name="inputFibres" min="0">
+                </div>
+                <div class="form-group">
+                  <label for="energie">Taux d'énergie :</label>
+                  <input type="number" class="form-control" id="inputEnergie" name="inputEnergie" min="0">
+                </div>
+                <div class="col-12">
+                <button type="submit" class="btn btn-primary">Ajouter</button>
+                </div>
+              </form>
+            </div>
           </div>
+
+          <form id="editForm" style="display:none;">
+            <input type="hidden" id="idAliment">
+            <div class="form-group">
+                <label for="editNomAliment">Nom de l'aliment :</label>
+                <input type="text" class="form-control" id="editNomAliment">
+            </div>
+            <div class="form-group">
+                <label for="editIdTypeAliment">Type d'aliment :</label>
+                <select class="form-control" id="editIdTypeAliment">
+                    <!-- Options du select -->
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="editGlucides">Glucides :</label>
+                <input type="number" class="form-control" id="editGlucides" min="0">
+            </div>
+            <div class="form-group">
+                <label for="editLipides">Lipides :</label>
+                <input type="number" class="form-control" id="editLipides" min="0">
+            </div>
+            <div class="form-group">
+                <label for="editSucres">Sucres :</label>
+                <input type="number" class="form-control" id="editSucres" min="0">
+            </div>
+            <div class="form-group">
+                <label for="editProteines">Protéines :</label>
+                <input type="number" class="form-control" id="editProteines" min="0">
+            </div>
+            <div class="form-group">
+                <label for="editFibres">Fibres :</label>
+                <input type="number" class="form-control" id="editFibres" min="0">
+            </div>
+            <div class="form-group">
+                <label for="editEnergie">Énergie :</label>
+                <input type="number" class="form-control" id="editEnergie" min="0">
+            </div>
+            <button type="button" class="btn btn-success" onclick="submitEditForm()">Modifier</button>
+          </form>
+
+
+
         </div>
+      </div>
 
+      <div class="row">
 
-        </div>
-
-        <div class="col-lg-6">
+        <div class="col-lg-12">
 
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Liste des aliments enregistrés</h5>
-              <p>Voici la liste des aliments qui en mémoire qui vous permettent de composer des repas.</p>
+              <p>Voici la liste des aliments en enregistrés qui vous permettent de composer des repas.</p>
+
+              <table id="alimentsTable" class="display">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Type</th>
+                        <th>Glucides</th>
+                        <th>Lipides</th>
+                        <th>Sucres</th>
+                        <th>Protéines</th>
+                        <th>Fibres</th>
+                        <th>Énergie</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+
             </div>
           </div>
 
@@ -112,40 +158,318 @@
   <?php require_once("js_files.html"); ?>
 
   <script>
-            let RESTAPI_URL = "<?php 
-                require_once('config.php'); 
-                echo URL_API;
-            ?>";
+      let RESTAPI_URL = "<?php 
+          require_once('config.php'); 
+          echo URL_API;
+      ?>";
 
-            function ajaxGETTypeAliment(){
-                return new Promise(function(resolve, reject) {
-                    $.ajax({
-                        url: RESTAPI_URL + "/type_aliment.php",
-                        method: "GET",
-                        dataType: "json"
-                    }).done(function(response){
-                        resolve(response);
-                    }).fail(function(error){
-                        reject(error);
-                    });
-                });
+      function verifierNom(nom){
+        // supprimer le message d'erreur s'il existe déjà
+        $('#inputNom').siblings('.text-danger').remove();
+        // vérifier si le champ nom est vide
+        if (nom.trim() === '') {
+            // vérifier si le message d'erreur existe déjà
+            if ($('#inputNom').siblings('.text-danger').length == 0) {
+                // afficher le message d'erreur à côté du champ nom
+                $('#inputNom').parent().append('<div class="text-danger">This field is required</div>');
             }
+            return true;
+        };
+      }
 
-            $(document).ready(async function(){
-                
-                try {
-                    let data = await ajaxGETTypeAliment();
-                    // Parcours des données pour les afficher dans le tableau
-                    data.forEach(user => {
-                      $("#type_aliment").append(`<option value="'.${user.id_type_aliment}.'">'.${user.nom_type_aliment}.'</option>'`);
-                    });
-                } catch (error) {
-                    console.log("La requête s'est terminée en échec. Infos : " + JSON.stringify(error));
-                }
-            
+      function onFormSubmit() {
+        // prevent the form to be sent to the server
+        event.preventDefault();
+
+        let nom = $("#inputNom").val();
+        let type = $("#inputType").val();
+        let glucides = $("#inputGlucides").val();
+        let lipides = $("#inputLipides").val();
+        let sucres = $("#inputSucres").val();
+        let proteines = $("#inputProteines").val();
+        let fibres = $("#inputFibres").val();
+        let energie = $("#inputEnergie").val();
+
+        if(verifierNom(nom)){
+            return;
+        }
+
+        ajaxPOSTAliment(nom, type, glucides, lipides, sucres, proteines, fibres, energie);
+
+        //supprime les inputs
+        document.getElementById("addAlimentForm").reset();
+      }
+
+      function ajaxGETTypeAliment(){
+          return new Promise(function(resolve, reject) {
+              $.ajax({
+                  url: RESTAPI_URL + "/type_aliment.php",
+                  method: "GET",
+                  dataType: "json"
+              }).done(function(response){
+                  resolve(response);
+              }).fail(function(error){
+                  reject(error);
+              });
+          });
+      }
+
+      function ajaxGETAliment(){
+          return new Promise(function(resolve, reject) {
+              $.ajax({
+                  url: RESTAPI_URL + "/aliments.php",
+                  method: "GET",
+                  dataType: "json"
+              }).done(function(response){
+                  resolve(response);
+              }).fail(function(error){
+                  reject(error);
+              });
+          });
+      }
+
+      function ajaxPOSTAliment(nom, type, glucides, lipides, sucres, proteines, fibres, energie) {
+        // convertit les valeurs en entiers
+        glucides = parseInt(glucides) || 0;
+        lipides = parseInt(lipides) || 0;
+        sucres = parseInt(sucres) || 0;
+        proteines = parseInt(proteines) || 0;
+        fibres = parseInt(fibres) || 0;
+        energie = parseInt(energie) || 0;
+        
+        $.ajax({
+            url: RESTAPI_URL + "/aliments.php",
+            method: "POST",
+            data: JSON.stringify({
+                nom_aliment: nom,
+                id_type_aliment: type,
+                glucides: glucides,
+                lipides: lipides,
+                sucres: sucres,
+                proteines: proteines,
+                fibres: fibres,
+                energie: energie
+            }),
+            dataType: "json"
+        }).done(function(response) {
+            let nom_aliment = response.nom_aliment;
+            let id_type_aliment = response.id_type_aliment;
+            let glucides = response.glucides;
+            let lipides = response.lipides;
+            let sucres = response.sucres;
+            let proteines = response.proteines;
+            let fibres = response.fibres;
+            let energie = response.energie;
+            $("#alimentsTableBody").append(`
+                <tr>
+                    <td>${nom_aliment}</td>
+                    <td>${id_type_aliment}</td>
+                    <td>${glucides}</td>
+                    <td>${lipides}</td>
+                    <td>${sucres}</td>
+                    <td>${proteines}</td>
+                    <td>${fibres}</td>
+                    <td>${energie}</td>
+                    <td>
+                        <button class="btn btn-primary editBtn" onclick="editButton(this)">Edit</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-danger deleteBtn" onclick="deleteButton(this)" >Delete</button>
+                    </td>
+                </tr>
+            `);
+        }).fail(function(error) {
+            console.log("La requête s'est terminée en échec. Infos : " + JSON.stringify(error));
+        });
+      }
+
+      function ajaxPUTAliment(id, nom, type, glucides, lipides, sucres, proteines, fibres, energie) {
+        // convertit les valeurs en entiers
+        id = parseInt(id);
+        glucides = parseInt(glucides) || 0;
+        lipides = parseInt(lipides) || 0;
+        sucres = parseInt(sucres) || 0;
+        proteines = parseInt(proteines) || 0;
+        fibres = parseInt(fibres) || 0;
+        energie = parseInt(energie) || 0;
+        
+        $.ajax({
+            url: RESTAPI_URL + "/aliments.php?id=" + id,
+            method: "PUT",
+            data: JSON.stringify({
+              id_aliment: id,
+              nom_aliment: nom,
+              id_type_aliment: type,
+              glucides: glucides,
+              lipides: lipides,
+              sucres: sucres,
+              proteines: proteines,
+              fibres: fibres,
+              energie: energie
+            }),
+            dataType: "json"
+        }).done(function(response) {
+          // let id_aliment = response.id_aliment;
+          // let nom_aliment = response.nom_aliment;
+          // let id_type_aliment = response.id_type_aliment;
+          // let glucides = response.glucides;
+          // let lipides = response.lipides;
+          // let sucres = response.sucres;
+          // let proteines = response.proteines;
+          // let fibres = response.fibres;
+          // let energie = response.energie;
+          
+          // // Met à jour la ligne du tableau correspondant à l'aliment modifié
+          // // let table = $('#alimentsTable').DataTable();
+          // // let row = table.row('#' + id);
+          // // row.data([
+          // //   id_aliment,
+          // //   nom_aliment,
+          // //   id_type_aliment,
+          // //   glucides,
+          // //   lipides,
+          // //   sucres,
+          // //   proteines,
+          // //   fibres,
+          // //   energie,
+          // //   '<button class="btn btn-primary editBtn" onclick="editButton(this)">Edit</button>',
+          // //   '<button class="btn btn-danger deleteBtn" onclick="deleteButton(this)" >Delete</button>'
+          // // ]).draw();
+
+          $('#alimentsTable').DataTable().ajax.reload();
+
+          
+        }).fail(function(error) {
+            console.log("La requête s'est terminée en échec. Infos : " + JSON.stringify(error));
+        });
+      }
+
+      async function editButton(button) {
+        let row = $(button).closest('tr');
+        let data = $('#alimentsTable').DataTable().row(row).data();
+        // Récupérer l'ID du type de l'aliment à modifier
+        let nomTypeAliment = data.nom_type_aliment;
+
+        // Aller chercher les types d'aliments
+        let typesAliments = await ajaxGETTypeAliment();
+        // Récupérer le type des aliments pour le form
+        try {
+            let data = await ajaxGETTypeAliment();
+            // Parcourir les données pour les afficher dans le select
+            data.forEach(type => {
+              let selected = type.nom_type_aliment === nomTypeAliment ? 'selected' : ''; // Ajouter l'attribut selected si l'ID du type correspond à celui de l'aliment à modifier
+              $("#editIdTypeAliment").append(`<option value="${type.id_type_aliment}" ${selected}>${type.nom_type_aliment}</option>`);
             });
+        } catch (error) {
+            console.log("La requête pour les types d'aliments s'est terminée en échec. Infos : " + JSON.stringify(error));
+        }
+        openEditForm(data);
+      }
 
-        </script>
+      function openEditForm(aliment) {
+        // Afficher le formulaire de modification
+        $('#editForm').show();
+
+        // Pré-remplir le formulaire avec les données de l'aliment
+        $('#idAliment').val(aliment.id_aliment); // Hidden
+        $('#editNomAliment').val(aliment.nom_aliment);
+        $('#editGlucides').val(aliment.glucides);
+        $('#editLipides').val(aliment.lipides);
+        $('#editSucres').val(aliment.sucres);
+        $('#editProteines').val(aliment.proteines);
+        $('#editFibres').val(aliment.fibres);
+        $('#editEnergie').val(aliment.energie);
+      }
+
+      function submitEditForm() {
+        // prevent the form to be sent to the server
+        event.preventDefault();
+
+        let id = $("#idAliment").val();
+        let nom = $("#editNomAliment").val();
+        let type = $("#editIdTypeAliment").val();
+        let glucides = $("#editGlucides").val();
+        let lipides = $("#editLipides").val();
+        let sucres = $("#editSucres").val();
+        let proteines = $("#editProteines").val();
+        let fibres = $("#editFibres").val();
+        let energie = $("#editEnergie").val();
+
+        if(verifierNom(nom)){
+            return;
+        }
+
+        ajaxPUTAliment(id, nom, type, glucides, lipides, sucres, proteines, fibres, energie);
+
+        // Supprimer les inputs
+        document.getElementById("editForm").reset();
+
+        // Cacher le form
+        $("#editForm").hide();
+      }
+
+      function deleteButton(e) {
+          let row = $(e).closest('tr');
+          let id = row.find('td:eq(0)').text();
+
+          // Supprime le user de la bdd
+          ajaxDELETEUser(id);
+
+          // Supprime la ligne du tableau correspondant à l'utilisateur supprimé
+          $(e).closest('tr').remove();
+      }
+
+      $(document).ready(async function(){
+          
+        // Récuperer le type des aliments pour le form
+        try {
+          let data = await ajaxGETTypeAliment();
+          // Parcours des données pour les afficher dans le tableau
+          data.forEach(type => {
+            $("#inputType").append(`<option value="${type.id_type_aliment}">${type.nom_type_aliment}</option>`);
+          });
+        } catch (error) {
+            console.log("La requête pour les types d'aliments s'est terminée en échec. Infos : " + JSON.stringify(error));
+        }
+    
+        try {
+
+          let data = await ajaxGETAliment();
+
+
+          $('#alimentsTable').DataTable({
+              // Nombre d'éléments par page
+              pageLength: 25,
+              // Activer la pagination
+              paging: true,
+              
+              // Passer les données à la table
+              data: data,
+              columns: [
+                { data: 'nom_aliment' },
+                { data: 'nom_type_aliment' },
+                { data: 'glucides' },
+                { data: 'lipides' },
+                { data: 'sucres' },
+                { data: 'proteines' },
+                { data: 'fibres' },
+                { data: 'energie' },
+                { data: null, render: function (data, type, row, meta) {
+                    return '<button class="btn btn-primary editBtn" onclick="editButton(this)">Edit</button>';
+                } },
+                { data: null, render: function (data, type, row, meta) {
+                    return '<button class="btn btn-danger deleteBtn" onclick="deleteButton(this)">Delete</button>';
+                } },
+                { data: 'id_aliment', visible : false}
+
+              ]
+          });
+        } catch (error) {
+            console.log("La requête pour les aliments s'est terminée en échec. Infos : " + JSON.stringify(error));
+        }
+      });
+
+  </script>
 </body>
 
 </html>
