@@ -91,71 +91,38 @@
                   
                  
 
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label ">Nom Prénom</div>
-                    <div class="row">
-                    <div class="col-lg-3 col-md-4 label ">Nom Prénom</div>
-                    <div class="col-lg-9 col-md-8"><?php echo $user["nom"] . " " . $user["prenom"]; ?></div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Date de naissance</div>
-                    <div class="col-lg-9 col-md-8"><?php echo $user["date_naissance"]; ?></div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Email</div>
-                    <div class="col-lg-9 col-md-8"><?php echo $user["email"]; ?></div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Sexe</div>
-                    <div class="col-lg-9 col-md-8"><?php echo $user["sexe"]; ?></div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Taille</div>
-                    <div class="col-lg-9 col-md-8"><?php echo $user["taille"]; ?> cm</div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Poids</div>
-                    <div class="col-lg-9 col-md-8"><?php echo $user["poids"]; ?> kg</div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Objectif</div>
-                    <div class="col-lg-9 col-md-8"><?php echo $user["objectif"]; ?></div>
-                  </div>
+                  
+    <div class="row">
+      <div class="col-lg-3 col-md-4 label">Nom Prénom</div>
+      <div class="col-lg-9 col-md-8"><?= $user['nom'] . ' ' . $user['prenom'] ?></div>
+    </div>
+    <div class="row">
+      <div class="col-lg-3 col-md-4 label">Age</div>
+      <div class="col-lg-9 col-md-8"><?= $user['id_tranche_age'] ?></div>
+    </div>
+    <div class="row">
+      <div class="col-lg-3 col-md-4 label">Email</div>
+      <div class="col-lg-9 col-md-8"><?= $user['email'] ?></div>
+    </div>
+    <div class="row">
+      <div class="col-lg-3 col-md-4 label">Sexe</div>
+      <div class="col-lg-9 col-md-8"><?= $user['nom_sexe'] ?></div>
+    </div>
+    <div class="row">
+      <div class="col-lg-3 col-md-4 label">Taille</div>
+      <div class="col-lg-9 col-md-8"><?= $user['taille_min'] . 'cm - ' . $user['taille_max'] . 'cm' ?></div>
+    </div>
+    <div class="row">
+      <div class="col-lg-3 col-md-4 label">Poids</div>
+      <div class="col-lg-9 col-md-8"><?= $user['poids_min'] . 'kg - ' . $user['poids_max'] . 'kg' ?></div>
+    </div>
+    <div class="row">
+      <div class="col-lg-3 col-md-4 label">Objectif</div>
+      <div class="col-lg-9 col-md-8"><?= $user['nom_objectif'] ?></div>
+    </div>
+  
 
-                  <div class="row">
-            <div class="col-lg-3 col-md-4 label">Email</div>
-            <div class="col-lg-9 col-md-8"><?php echo $user['email']; ?></div>
-          </div>
-
-          <div class="row">
-            <div class="col-lg-3 col-md-4 label">Sexe</div>
-            <div class="col-lg-9 col-md-8"><?php echo $user['nom_sexe']; ?></div>
-          </div>
-
-          <div class="row">
-            <div class="col-lg-3 col-md-4 label">Taille</div>
-            <div class="col-lg-9 col-md-8"><?php echo $user['taille_min']; ?> - <?php echo $user['taille_max']; ?> cm</div>
-          </div>
-
-          <div class="row">
-            <div class="col-lg-3 col-md-4 label">Poids</div>
-            <div class="col-lg-9 col-md-8"><?php echo $user['poids_min']; ?> - <?php echo $user['poids_max']; ?> kg</div>
-          </div>
-
-          <div class="row">
-            <div class="col-lg-3 col-md-4 label">Objectif</div>
-            <div class="col-lg-9 col-md-8"><?php echo $user['nom_objectif']; ?></div>
-          </div>
-
-          <div class="row">
-            <div class="col-lg-3 col-md-4 label">Fréquence de pratique sportive</div>
-            <div class="col-lg-9 col-md-8"><?php echo $user['frequence_pratique_sportive']; ?></div>
-          </div>
-
-          <div class="row">
-            <div class="col-lg-3 col-md-4 label">Âge</div>
-            <div class="col-lg-9 col-md-8"><?php echo $user['age_min']; ?> - <?php echo $user['age_max']; ?> ans</div>
-          </div>
+</div>
                     
                 </div>
 
@@ -166,6 +133,29 @@
 
         </div>
       </div>
+
+<script>
+
+
+let RESTAPI_URL = "<?php 
+          require_once('config.php'); 
+          echo URL_API;
+      ?>";
+      function ajaxGETUsers(){
+          return new Promise(function(resolve, reject) {
+              $.ajax({
+                  url: RESTAPI_URL + "/users.php",
+                  method: "GET",
+                  dataType: "json"
+              }).done(function(response){
+                  resolve(response);
+              }).fail(function(error){
+                  reject(error);
+              });
+          });
+      }
+
+      <script>
     </section>
 
   </main><!-- End #main -->
