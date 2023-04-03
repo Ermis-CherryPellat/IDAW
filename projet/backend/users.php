@@ -70,18 +70,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     $array = json_decode(file_get_contents("php://input"),true); 
+    
+    if ($array == null) {
+        header("HTTP/1.1 400 Bad Request");
+        echo "Erreur : corps de requête vide ou non valide";
+        exit();
+    }
 
     $id=$array['id_utilsateur'];
     $nom = $array['nom'];
     $prenom = $array['prenom'];
     $email = $array['email'];   
-    $mdp=$array['mot_de_passe'];
-    $sexe = $array['sexe'];
-    $poids = $array['poids'];
-    $taille = $array['taille'];
-    $objectif = $array['objectif'];
-    $sport = $array['sport'];
-    $age = $array['age'];
+    $mot_de_passe=$array['mot_de_passe'];
+    $sexe = $array['id_sexe'];
+    $poids = $array['id_poids'];
+    $taille = $array['id_taille'];
+    $objectif = $array['id_objectif'];
+    $sport = $array['id_sport'];
+    $age = $array['id_age'];
 
     $sql = "INSERT INTO UTILISATEUR (nom, prenom,email,mot_de_passe, id_sexe, id_poids, id_taille, id_objectif, id_pratique_sportive, id_tranche_age) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?,?)";
     try {
@@ -92,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $id = $conn->lastInsertId();
         header("HTTP/1.1 201 Created");
         header("Location: /users.php/$id");
-        $user = array('id' => $id, 'nom' => $nom, 'prenom' => $prenom, 'sexe' => $sexe,'email' => $email,'mdp'=> $mdp, 'poids' => $poids, 'taille' => $taille, 'objectif' => $objectif, 'sport' => $sport, 'age' => $age);
+        $user = array('id' => $id, 'nom' => $nom, 'prenom' => $prenom, 'sexe' => $sexe,'email' => $email,'mdp'=> $mot_de_passe, 'poids' => $poids, 'taille' => $taille, 'objectif' => $objectif, 'sport' => $sport, 'age' => $age);
         header("Content-Type: application/json; charset=UTF-8");
         echo json_encode($user);
     } catch (PDOException $e) {

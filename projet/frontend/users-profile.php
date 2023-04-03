@@ -50,8 +50,8 @@
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item">Users</li>
-          <li class="breadcrumb-item active">Profile</li>
+          <li class="breadcrumb-item">Utilisateurs</li>
+          <li class="breadcrumb-item active">Profil</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -78,7 +78,7 @@
               <ul class="nav nav-tabs nav-tabs-bordered">
 
                 <li class="nav-item">
-                  <button class="nav-link active" >Overview</button>
+                  <button class="nav-link active" >Votre profil</button>
                 </li>
 
               </ul>
@@ -86,46 +86,9 @@
 
                 <div class="tab-pane fade show active profile-overview" id="profile-overview">
                 
-                  <h5 class="card-title">Profile Details</h5>
+                  <h5 class="card-title">Détail du profil</h5>
                   
-                  <script>
-                    function ajaxGETUsers(e){
-                      return new Promise(function(resolve, reject) {
-                              $.ajax({
-                                  url: RESTAPI_URL + "/backend/users.php",
-                                  method: "GET",
-                                  dataType: "json"
-                              }).done(function(response){
-                                  resolve(response);
-                              }).fail(function(error){
-                                  reject(error);
-                              });
-                          });
-                    } 
-
-                    try {
-                    let data = await ajaxGETUsers();
-                    
-                    // Parcours des données pour les afficher dans le tableau
-                    data.forEach(user => {
-                    $("#usersTableBody").append(`
-                    <tr>
-                        <td>${user.id_user}</td>
-                        <td>${user.nom}</td>
-                        <td>${user.email}</td>
-                        <td>
-                            <button class="btn btn-primary editBtn" onclick="editButton(this)">Edit</button>
-                        </td>
-                        <td>
-                            <button class="btn btn-danger deleteBtn" onclick="deleteButton(this)" >Delete</button>
-                        </td>
-                    </tr>
-                    `);
-                    });
-                } catch (error) {
-                    console.log("La requête s'est terminée en échec. Infos : " + JSON.stringify(error));
-                }
-                  </script>
+                 
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label ">Nom Prénom</div>
