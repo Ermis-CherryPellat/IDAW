@@ -70,14 +70,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     $array = json_decode(file_get_contents("php://input"),true); 
-    
-    if ($array == null) {
+
+    if (empty($array)) {
         header("HTTP/1.1 400 Bad Request");
-        echo "Erreur : corps de requête vide ou non valide";
+        echo "Le tableau est vide";
+        
         exit();
     }
-
-    $id=$array['id_utilisateur'];
+ 
+    
+    
+    
+ 
+    
+    
     $nom = $array['nom'];
     $prenom = $array['prenom'];
     $email = $array['email'];   

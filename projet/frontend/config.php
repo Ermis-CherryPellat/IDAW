@@ -2,4 +2,4 @@
 
 // URL de la requête
 
-define("URL_API","http://localhost:8888/projet/backend/");
+define("URL_API","http://localhost/Ermis/IDAW/projet/backend/");

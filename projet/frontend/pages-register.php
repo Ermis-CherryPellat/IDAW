@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -206,7 +207,7 @@
 
 function onFormSubmit() {
         // prevent the form to be sent to the server
-        event.preventDefault();
+
 
         let nom = $("#inputName").val();
         let prenom = $("#inputPrenom").val();
@@ -260,7 +261,7 @@ document.getElementById("addAlimentForm").reset();
             method: "POST",
             data: JSON.stringify({
                 nom: nom,
-                prenom: type,
+                prenom: prenom,
                 email: email ,
                 mot_de_passe:mot_de_passe ,
                 id_sexe: sexe,

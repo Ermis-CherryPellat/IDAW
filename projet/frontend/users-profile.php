@@ -80,6 +80,7 @@
                 <li class="nav-item">
                   <button class="nav-link active" >Votre profil</button>
                 </li>
+                
 
               </ul>
               <div class="tab-content pt-2">
@@ -92,44 +93,70 @@
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label ">Nom Prénom</div>
-                    <div class="col-lg-9 col-md-8">Kevin Anderson</div>
+                    <div class="row">
+                    <div class="col-lg-3 col-md-4 label ">Nom Prénom</div>
+                    <div class="col-lg-9 col-md-8"><?php echo $user["nom"] . " " . $user["prenom"]; ?></div>
                   </div>
-
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Date de naissance</div>
-                    <div class="col-lg-9 col-md-8">(436) 486-3538 x29071</div>
+                    <div class="col-lg-9 col-md-8"><?php echo $user["date_naissance"]; ?></div>
                   </div>
-
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Email</div>
-                    <div class="col-lg-9 col-md-8">k.anderson@example.com</div>
+                    <div class="col-lg-9 col-md-8"><?php echo $user["email"]; ?></div>
                   </div>
-
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Sexe</div>
-                    <div class="col-lg-9 col-md-8">Homme</div>
+                    <div class="col-lg-9 col-md-8"><?php echo $user["sexe"]; ?></div>
                   </div>
-
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Taille</div>
-                    <div class="col-lg-9 col-md-8">180 cm</div>
+                    <div class="col-lg-9 col-md-8"><?php echo $user["taille"]; ?> cm</div>
                   </div>
-
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Poids</div>
-                    <div class="col-lg-9 col-md-8">72 kg</div>
+                    <div class="col-lg-9 col-md-8"><?php echo $user["poids"]; ?> kg</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Objectif</div>
+                    <div class="col-lg-9 col-md-8"><?php echo $user["objectif"]; ?></div>
                   </div>
 
                   <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Objectifs</div>
-                    <div class="col-lg-9 col-md-8">Maintien de la forme</div>
-                  </div>
+            <div class="col-lg-3 col-md-4 label">Email</div>
+            <div class="col-lg-9 col-md-8"><?php echo $user['email']; ?></div>
+          </div>
 
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Pratique sportive</div>
-                    <div class="col-lg-9 col-md-8">Moyenne</div>
-                  </div>
+          <div class="row">
+            <div class="col-lg-3 col-md-4 label">Sexe</div>
+            <div class="col-lg-9 col-md-8"><?php echo $user['nom_sexe']; ?></div>
+          </div>
 
+          <div class="row">
+            <div class="col-lg-3 col-md-4 label">Taille</div>
+            <div class="col-lg-9 col-md-8"><?php echo $user['taille_min']; ?> - <?php echo $user['taille_max']; ?> cm</div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-3 col-md-4 label">Poids</div>
+            <div class="col-lg-9 col-md-8"><?php echo $user['poids_min']; ?> - <?php echo $user['poids_max']; ?> kg</div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-3 col-md-4 label">Objectif</div>
+            <div class="col-lg-9 col-md-8"><?php echo $user['nom_objectif']; ?></div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-3 col-md-4 label">Fréquence de pratique sportive</div>
+            <div class="col-lg-9 col-md-8"><?php echo $user['frequence_pratique_sportive']; ?></div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-3 col-md-4 label">Âge</div>
+            <div class="col-lg-9 col-md-8"><?php echo $user['age_min']; ?> - <?php echo $user['age_max']; ?> ans</div>
+          </div>
+                    
                 </div>
 
               </div><!-- End Bordered Tabs -->
