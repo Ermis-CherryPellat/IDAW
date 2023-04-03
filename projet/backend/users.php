@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         JOIN OBJECTIF o ON o.id_objectif = u.id_objectif
         JOIN PRATIQUE_SPORTIVE ps ON ps.id_pratique_sportive = u.id_pratique_sportive
         JOIN TRANCHE_AGE ta ON ta.id_tranche_age = u.id_tranche_age
-        WHERE u.id_utilisateur = 24;
+        WHERE u.id_utilisateur;
         ");
         $request->bindParam(':id', $id);
         $request->execute();
@@ -65,12 +65,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         exit();
     }
- 
-    
-    
-    
- 
-    
     
     $nom = $array['nom'];
     $prenom = $array['prenom'];
