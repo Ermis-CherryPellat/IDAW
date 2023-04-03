@@ -77,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
 
-    $id=$array['id_utilsateur'];
+    $id=$array['id_utilisateur'];
     $nom = $array['nom'];
     $prenom = $array['prenom'];
     $email = $array['email'];   
@@ -87,14 +87,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $taille = $array['id_taille'];
     $objectif = $array['id_objectif'];
     $sport = $array['id_sport'];
-    $age = $array['id_age'];
+    $age = $array['id_tranche_age'];
 
     $sql = "INSERT INTO UTILISATEUR (nom, prenom,email,mot_de_passe, id_sexe, id_poids, id_taille, id_objectif, id_pratique_sportive, id_tranche_age) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?,?)";
     try {
         // préparer la requête SQL pour ajouter un utilisateur à la base
         $conn = new PDO($connectionString,_MYSQL_USER,_MYSQL_PASSWORD, $options);
         $stmt = $conn->prepare($sql);
-        $request->execute([$nom, $prenom,$email,$mot_de_passe, $sexe, $poids, $taille, $objectif, $sport, $age]);
+        $stmt->execute([$nom, $prenom,$email,$mot_de_passe, $sexe, $poids, $taille, $objectif, $sport, $age]);
+
         $id = $conn->lastInsertId();
         header("HTTP/1.1 201 Created");
         header("Location: /users.php/$id");
