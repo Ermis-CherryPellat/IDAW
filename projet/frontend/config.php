@@ -2,4 +2,8 @@
 
 // URL de la requête
 
-define("URL_API","http://localhost/Ermis/IDAW/projet/backend/");
+// ERMIS
+define("URL_API","http://localhost:8888/projet/backend");
+
+// RODOLPHE à changer
+// define("URL_API","http://localhost:8888/projet/backend");
