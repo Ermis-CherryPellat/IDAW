@@ -31,29 +31,29 @@
                     <p class="text-center small">Entrez vos informations personnelles</p>
                   </div>
 
-                  <form class="row g-3 needs-validation" novalidate>
-                    <div class="col-12">
+                  <form id="addUserForm" method="POST" action="http://localhost/Ermis/IDAW/projet/backend/users.php" onsubmit="onFormSubmit();" class="row g-3 needs-validation" novalidate>
+                    <div class="form-group">
                       <label for="yourName" class="form-label">Votre Nom</label>
-                      <input type="text" name="name" class="form-control" id="yourName" required>
+                      <input type="text" name="name" class="form-control" id="inputName" required>
                       <div class="invalid-feedback">Entrez votre nom!</div>
                     </div>
 
-                    <form class="row g-3 needs-validation" novalidate>
+                    
                     <div class="col-12">
                       <label for="yourName" class="form-label">Votre Prénom</label>
-                      <input type="text" name="name" class="form-control" id="yourFirstName" required>
+                      <input type="text" name="prenom" class="form-control" id="inputPrenom" required>
                       <div class="invalid-feedback">Entrez votre prénom!</div>
                     </div>
 
                     <div class="col-12">
                       <label for="yourEmail" class="form-label">Votre Email</label>
-                      <input type="email" name="email" class="form-control" id="yourEmail" required>
+                      <input type="email" name="email" class="form-control" id="inputEmail" required>
                       <div class="invalid-feedback">Please enter a valid Email adddress!</div>
                     </div>
 
                     <div class="col-md-6">
                       <label for="gender" class="form-label">Sexe</label>
-                      <select class="form-select" name="gender" id="gender" required>
+                      <select class="form-select" name="gender" id="inputGender" required>
                         <option value="">Choisissez votre sexe</option>
                         <option value="male">Homme</option>
                         <option value="female">Femme</option>
@@ -63,7 +63,7 @@
 
                     <div class="col-md-6">
                       <label for="weight" class="form-label">Tranche de poids</label>
-                      <select class="form-select" name="weight" id="weight" required>
+                      <select class="form-select" name="weight" id="inputWeight" required>
                         <option value="">Choisissez votre tranche de poids</option>
                         <option value="0-49">Moins de 49 kg</option>
                         <option value="50-60">50 - 60 kg</option>
@@ -85,7 +85,7 @@
 
   <div class="col-md-6">
     <label for="age" class="form-label">Tranche d'âge</label>
-    <select class="form-select" name="age" id="age" required>
+    <select class="form-select" name="age" id="inputAge" required>
       <option value="">Choisissez votre tranche d'âge</option>
       <option value="0-11">Moins de 11 ans</option>
       <option value="12-18">12-18 ans</option>
@@ -102,7 +102,7 @@
 
   <div class="col-md-6">
     <label for="height" class="form-label">Taille</label>
-    <select class="form-select" name="height" id="height" required>
+    <select class="form-select" name="height" id="inputHeight" required>
       <option value="">Choisissez votre taille</option>
       <option value="150-160">1m50 - 1m60</option>
       <option value="161-170">1m61 - 1m70</option>
@@ -118,8 +118,8 @@
 
 
   <div class="col-md-6">
-    <label for="pratique sportive" class="form-label">Pratique sprtive</label>
-    <select class="form-select" name="pratiquesportive" id="pratiquesportive" required>
+    <label for="pratique sportive" class="form-label">Pratique sportive</label>
+    <select class="form-select" name="pratiquesportive" id="inputPratique" required>
       <option value="">Quelle est votre pratique sportive ? </option>
       <option value="souvent">Souvent</option>
       <option value="régulièrement">Régulièremet</option>
@@ -130,11 +130,11 @@
 
   <div class="col-md-6">
     <label for="objectifsportif" class="form-label">Pratique sprtive</label>
-    <select class="form-select" name="objectifsportif" id="objectifsportif" required>
+    <select class="form-select" name="objectifsportif" id="inputObjectif" required>
       <option value="">Quelle est votre objectif ? </option>
       <option value="perte">Perte de poids</option>
       <option value="prise">Prise de masse</option>
-      <option value="maintien">Maintien de la formes</option>
+      <option value="maintien">Maintien de la forme</option>
     </select>
     <div class="invalid-feedback">Veuillez choisir votre pratique sportive</div>
   </div>
@@ -146,22 +146,16 @@
 
                     <div class="col-12">
                       <label for="yourPassword" class="form-label">Mot de passe</label>
-                      <input type="password" name="password" class="form-control" id="yourPassword" required>
+                      <input type="password" name="password" class="form-control" id="inputMotdePasse" required>
                       <div class="invalid-feedback">Please enter your password!</div>
                     </div>
 
+                    
                     <div class="col-12">
-                      <div class="form-check">
-                        <input class="form-check-input" name="terms" type="checkbox" value="" id="acceptTerms" required>
-                        <label class="form-check-label" for="acceptTerms">I agree and accept the <a href="#">terms and conditions</a></label>
-                        <div class="invalid-feedback">You must agree before submitting.</div>
-                      </div>
+                      <button class="btn btn-primary w-100" type="submit">Créer un compte</button>
                     </div>
                     <div class="col-12">
-                      <button class="btn btn-primary w-100" type="submit">Create Account</button>
-                    </div>
-                    <div class="col-12">
-                      <p class="small mb-0">Already have an account? <a href="pages-login.php">Log in</a></p>
+                      <p class="small mb-0">Déjà un compte ? <a href="pages-login.php">Se connecter</a></p>
                     </div>
 
                     <form class="row g-3 needs-validation" novalidate>
@@ -172,10 +166,7 @@
               </div>
 
               <div class="credits">
-                <!-- All the links in the footer should remain intact. -->
-                <!-- You can delete the links only if you purchased the pro version. -->
-                <!-- Licensing information: https://bootstrapmade.com/license/ -->
-                <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+              
                 Designed by <a>Ermis CHerry Pellat & Rodolphe Ianboukhtine</a>
               </div>
 
@@ -191,6 +182,120 @@
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <?php require_once("js_files.html"); ?>
+
+  <script>
+      let RESTAPI_URL = "<?php 
+          require_once('config.php'); 
+          echo URL_API;
+      ?>";
+
+
+      function verifierNom(nom){
+        // supprimer le message d'erreur s'il existe déjà
+        $('#inputName').siblings('.text-danger').remove();
+        // vérifier si le champ nom est vide
+        if (nom.trim() === '') {
+            // vérifier si le message d'erreur existe déjà
+            if ($('#inputName').siblings('.text-danger').length == 0) {
+                // afficher le message d'erreur à côté du champ nom
+                $('#inputName').parent().append('<div class="text-danger">This field is required</div>');
+            }
+            return true;
+        };
+      }
+
+function onFormSubmit() {
+        // prevent the form to be sent to the server
+        event.preventDefault();
+
+        let nom = $("#inputName").val();
+        let prenom = $("#inputPrenom").val();
+        let email = $("#inputEmail").val();
+        let sexe = $("#inputGender").val();
+        let poids = $("#inputWeight").val();
+        let age = $("#inputAge").val();
+        let taille = $("#inputHeight").val();
+        let pratique = $("#inputPratique").val();
+        let objectif = $("#inputObjectif").val();
+        let mot_de_passe =$("#inputMotdePasse").val();
+
+        
+        if(verifierNom(nom)){
+            return;
+        }
+
+        ajaxPOSTUsers(nom, prenom, email, sexe, poids, age, taille, pratique,objectif,mot_de_passe);
+
+//supprime les inputs
+document.getElementById("addAlimentForm").reset();
+}
+
+
+        
+        function ajaxGETUsers(){
+          return new Promise(function(resolve, reject) {
+              $.ajax({
+                  url: RESTAPI_URL + "/users.php",
+                  method: "GET",
+                  dataType: "json"
+              }).done(function(response){
+                  resolve(response);
+              }).fail(function(error){
+                  reject(error);
+              });
+          });
+      }
+
+      function ajaxPOSTUsers(nom, prenom, email, sexe, poids, age, taille, pratique,objectif,mot de passe) {
+        // convertit les valeurs en entiers
+        sexe = parseInt(sexe) || 0;
+        poids = parseInt(poids) || 0;
+        age = parseInt(age) || 0;
+        taille = parseInt(taille) || 0;
+        pratique = parseInt(pratique) || 0;
+        objectif = parseInt(objectif) || 0;
+        
+        $.ajax({
+            url: RESTAPI_URL + "/users.php",
+            method: "POST",
+            data: JSON.stringify({
+                nom: nom,
+                prenom: type,
+                email: email ,
+                mot_de_passe:mot_de_passe ,
+                id_sexe: sexe,
+                id_poids: poids ,
+                id_taille: taille,
+                id_objectif: objectif ,
+                id_pratique_sportive: pratique,
+                id_tranche_age: age,
+            }),
+            dataType: "json"
+        }).done(async function(response) {
+          
+          // On n'a pas trouvé d'autre manière d'actualiser le tableau, on a essayé des methodes avec .ajax.reload() ou encore .draw() mais sans succès
+          // Récupérer les nouvelles données
+          let newData = await ajaxGETUsers();
+
+          // Vider la table existante
+          $('#usersTable').DataTable().clear();
+
+          // Ajouter les nouvelles données
+          $('#usersTable').DataTable().rows.add(newData);
+
+          // Redessiner la table
+          $('#usersTable').DataTable().draw();
+
+
+        }).fail(function(error) {
+            console.log("La requête s'est terminée en échec. Infos : " + JSON.stringify(error));
+        });
+      }
+  
+      
+
+  
+
 
 </body>
 
