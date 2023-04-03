@@ -86,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $poids = $array['id_poids'];
     $taille = $array['id_taille'];
     $objectif = $array['id_objectif'];
-    $sport = $array['id_sport'];
+    $sport = $array['id_pratique_sportive'];
     $age = $array['id_tranche_age'];
 
     $sql = "INSERT INTO UTILISATEUR (nom, prenom,email,mot_de_passe, id_sexe, id_poids, id_taille, id_objectif, id_pratique_sportive, id_tranche_age) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?,?)";

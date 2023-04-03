@@ -31,10 +31,10 @@
                     <p class="text-center small">Entrez vos informations personnelles</p>
                   </div>
 
-                  <form id="addUserForm" method="POST" action="http://localhost/Ermis/IDAW/projet/backend/users.php" onsubmit="onFormSubmit();" class="row g-3 needs-validation" novalidate>
+                  <form id="addUserForm" method="POST" action="http://localhost/Ermis/IDAW/projet/backend/users.php"  onsubmit="onFormSubmit();" class="row g-3 needs-validation" novalidate>
                     <div class="form-group">
                       <label for="yourName" class="form-label">Votre Nom</label>
-                      <input type="text" name="name" class="form-control" id="inputName" required>
+                      <input type="text" name="nom" class="form-control" id="inputName" required>
                       <div class="invalid-feedback">Entrez votre nom!</div>
                     </div>
 
@@ -53,7 +53,7 @@
 
                     <div class="col-md-6">
                       <label for="gender" class="form-label">Sexe</label>
-                      <select class="form-select" name="gender" id="inputGender" required>
+                      <select class="form-select" name="id_sexe" id="inputGender" required>
                         <option value="">Choisissez votre sexe</option>
                         <option value="male">Homme</option>
                         <option value="female">Femme</option>
@@ -63,16 +63,16 @@
 
                     <div class="col-md-6">
                       <label for="weight" class="form-label">Tranche de poids</label>
-                      <select class="form-select" name="weight" id="inputWeight" required>
+                      <select class="form-select" name="id_poids" id="inputWeight" required>
                         <option value="">Choisissez votre tranche de poids</option>
-                        <option value="0-49">Moins de 49 kg</option>
-                        <option value="50-60">50 - 60 kg</option>
-                        <option value="61-70">61 - 70 kg</option>
-                        <option value="71-80">71 - 80 kg</option>
-                        <option value="81 -90">81 - 90 kg</option>
-                        <option value="91 - 100">91 - 100 kg</option>
-                        <option value="111 - 120">111 - 120kg</option>
-                        <option value="121 - 130">121 - 130kg</option>
+                        <option value="1">Moins de 49 kg</option>
+                        <option value="2">50 - 60 kg</option>
+                        <option value="3">61 - 70 kg</option>
+                        <option value="4">71 - 80 kg</option>
+                        <option value="5">81 - 90 kg</option>
+                        <option value="6">91 - 100 kg</option>
+                        <option value="7">111 - 120kg</option>
+                        <option value="8">121 - 130kg</option>
                         
                       </select>
                       <div class="invalid-feedback">Veuillez choisir votre tranche d'âge</div>
@@ -85,15 +85,15 @@
 
   <div class="col-md-6">
     <label for="age" class="form-label">Tranche d'âge</label>
-    <select class="form-select" name="age" id="inputAge" required>
+    <select class="form-select" name="id_tranche_age" id="inputAge" required>
       <option value="">Choisissez votre tranche d'âge</option>
-      <option value="0-11">Moins de 11 ans</option>
-      <option value="12-18">12-18 ans</option>
-      <option value="19-25">19-25 ans</option>
-      <option value="26-40">26-40 ans</option>
-      <option value="41-60">41-60ans</option>
-      <option value="61-75">61-75 ans</option>
-      <option value="Plusde 76">Plus de 76 ans</option>
+      <option value="1">Moins de 11 ans</option>
+      <option value="2">12-18 ans</option>
+      <option value="3">19-25 ans</option>
+      <option value="4">26-40 ans</option>
+      <option value="5">41-60ans</option>
+      <option value="6">61-75 ans</option>
+      <option value="7">Plus de 76 ans</option>
       
     </select>
     <div class="invalid-feedback">Veuillez choisir votre tranche d'âge</div>
@@ -102,14 +102,14 @@
 
   <div class="col-md-6">
     <label for="height" class="form-label">Taille</label>
-    <select class="form-select" name="height" id="inputHeight" required>
+    <select class="form-select" name="id_taille" id="inputHeight" required>
       <option value="">Choisissez votre taille</option>
-      <option value="150-160">1m50 - 1m60</option>
-      <option value="161-170">1m61 - 1m70</option>
-      <option value="171-180">1m71 - 1m80</option>
-      <option value="181-190">1m81 - 1m90</option>
-      <option value="191-200">1m91-2m00</option>
-      <option value="201-210">Plus de 2m00</option>
+      <option value="1">1m50 - 1m60</option>
+      <option value="2">1m61 - 1m70</option>
+      <option value="3">1m71 - 1m80</option>
+      <option value="4">1m81 - 1m90</option>
+      <option value="5">1m91-2m00</option>
+      <option value="6">Plus de 2m00</option>
       
       
     </select>
@@ -119,22 +119,22 @@
 
   <div class="col-md-6">
     <label for="pratique sportive" class="form-label">Pratique sportive</label>
-    <select class="form-select" name="pratiquesportive" id="inputPratique" required>
+    <select class="form-select" name="id_pratique_sportive" id="inputPratique" required>
       <option value="">Quelle est votre pratique sportive ? </option>
-      <option value="souvent">Souvent</option>
-      <option value="régulièrement">Régulièremet</option>
-      <option value="jamais">Jamais</option>
+      <option value="1souvent">Souvent</option>
+      <option value="2">Régulièremet</option>
+      <option value="3">Jamais</option>
     </select>
     <div class="invalid-feedback">Veuillez choisir votre pratique sportive</div>
   </div>
 
   <div class="col-md-6">
     <label for="objectifsportif" class="form-label">Pratique sprtive</label>
-    <select class="form-select" name="objectifsportif" id="inputObjectif" required>
+    <select class="form-select" name="id_objectif" id="inputObjectif" required>
       <option value="">Quelle est votre objectif ? </option>
-      <option value="perte">Perte de poids</option>
-      <option value="prise">Prise de masse</option>
-      <option value="maintien">Maintien de la forme</option>
+      <option value="1">Perte de poids</option>
+      <option value="2">Prise de masse</option>
+      <option value="3">Maintien de la forme</option>
     </select>
     <div class="invalid-feedback">Veuillez choisir votre pratique sportive</div>
   </div>
@@ -146,7 +146,7 @@
 
                     <div class="col-12">
                       <label for="yourPassword" class="form-label">Mot de passe</label>
-                      <input type="password" name="password" class="form-control" id="inputMotdePasse" required>
+                      <input type="password" name="mot_de_passe" class="form-control" id="inputMotdePasse" required>
                       <div class="invalid-feedback">Please enter your password!</div>
                     </div>
 
@@ -246,7 +246,7 @@ document.getElementById("addAlimentForm").reset();
           });
       }
 
-      function ajaxPOSTUsers(nom, prenom, email, sexe, poids, age, taille, pratique,objectif,mot de passe) {
+      function ajaxPOSTUsers(nom, prenom, email, sexe, poids, age, taille, pratique,objectif,mot_de_passe) {
         // convertit les valeurs en entiers
         sexe = parseInt(sexe) || 0;
         poids = parseInt(poids) || 0;
@@ -270,7 +270,13 @@ document.getElementById("addAlimentForm").reset();
                 id_pratique_sportive: pratique,
                 id_tranche_age: age,
             }),
-            dataType: "json"
+            dataType: "json",
+            success: function(response) {
+        console.log(response);
+    },
+    error: function(error) {
+        console.log(error);
+    }
         }).done(async function(response) {
           
           // On n'a pas trouvé d'autre manière d'actualiser le tableau, on a essayé des methodes avec .ajax.reload() ou encore .draw() mais sans succès
