@@ -5,9 +5,11 @@ require_once('config.php');
 
 // Requête GET pour récupérer tous les utilisateurs de la base
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    $sql = "SELECT * FROM UTILISATEUR";
+    
+    
+    $sql = "SELECT * FROM UTILISATEUR WHERE id_utilisateur = 24";
     try {
-        // requête SQL pour récupérer les utilisateurs
+        // requête SQL pour récupérer l'utilisateur avec l'ID spécifié
         $request = $pdo->prepare("SELECT u.id_utilisateur, u.nom, u.prenom, u.email, u.mot_de_passe, s.nom_sexe, tp.tranche_min AS poids_min, tp.tranche_max AS poids_max, tt.tranche_min AS taille_min, tt.tranche_max AS taille_max, o.nom_objectif, ps.frequence_pratique_sportive, ta.tranche_min AS age_min, ta.tranche_max AS age_max
         FROM UTILISATEUR u
         JOIN SEXE s ON s.id_sexe = u.id_sexe
@@ -18,37 +20,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         JOIN TRANCHE_AGE ta ON ta.id_tranche_age = u.id_tranche_age
         WHERE u.id_utilisateur;
         ");
+        $request->bindParam(':id', $id);
         $request->execute();
-        $users = $request->fetchAll(PDO::FETCH_ASSOC);
-
-        //------format de la réponse------
-        // id_utilisateur
-        // nom
-        // prenom
-        // email
-        // mot de passe
-        // nom_sexe
-        // poids_min
-        // poids_max
-        // taille_min
-        // taille_max
-        // nom_objectif
-        // frequence_pratique_sportive
-        // age_min
-        // age_max
+        $user = $request->fetch(PDO::FETCH_ASSOC);
 
         // fermer la connexion à la base de données
         $pdo = NULL;
 
         // renvoyer la réponse en format JSON
         header('Content-Type: application/json;  charset=UTF-8');
-        echo json_encode($users);
+        echo json_encode($user);
 
     } catch (PDOException $e) {
         header("HTTP/1.1 500 Internal Server Error");
         echo "Erreur de connexion à la base de données : " . $e->getMessage();
     }
 }
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
     $id = $_GET['id_utilisateur'];
