@@ -7,7 +7,7 @@ require_once('config.php');
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     
     
-    $sql = "SELECT * FROM UTILISATEUR WHERE id_utilisateur = 24";
+    $sql = "SELECT * FROM UTILISATEUR ";
     try {
         // requête SQL pour récupérer l'utilisateur avec l'ID spécifié
         $request = $pdo->prepare("SELECT u.id_utilisateur, u.nom, u.prenom, u.email, u.mot_de_passe, s.nom_sexe, tp.tranche_min AS poids_min, tp.tranche_max AS poids_max, tt.tranche_min AS taille_min, tt.tranche_max AS taille_max, o.nom_objectif, ps.frequence_pratique_sportive, ta.tranche_min AS age_min, ta.tranche_max AS age_max
@@ -18,11 +18,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         JOIN OBJECTIF o ON o.id_objectif = u.id_objectif
         JOIN PRATIQUE_SPORTIVE ps ON ps.id_pratique_sportive = u.id_pratique_sportive
         JOIN TRANCHE_AGE ta ON ta.id_tranche_age = u.id_tranche_age
-        WHERE u.id_utilisateur;
+        
         ");
-        $request->bindParam(':id', $id);
+        
         $request->execute();
-        $user = $request->fetch(PDO::FETCH_ASSOC);
+        $user = $request->fetchAll(PDO::FETCH_ASSOC);
 
         // fermer la connexion à la base de données
         $pdo = NULL;

@@ -1,5 +1,21 @@
+<?php
+session_start();
+
+// Vérifiez si l'utilisateur a envoyé des données de connexion
+if (isset($_POST['email']) && isset($_POST['mot_de_passe'])) {
+    // Vérifiez les données de connexion de l'utilisateur
+    // Si l'authentification réussit, vous pouvez configurer des variables de session
+    $_SESSION['email'] = $_POST['email'];
+    $_SESSION['logged_in'] = true;
+    // Rediriger l'utilisateur vers une page sécurisée ou une page d'accueil
+    header('Location :users-profile.php');
+    exit;
+}
+?>
 <!DOCTYPE html>
+
 <html lang="en">
+
 
 <?php 
 
@@ -8,6 +24,7 @@
     ?>
 
   <main>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <div class="container">
 
       <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
@@ -31,20 +48,20 @@
                     <p class="text-center small">Entrez votre email et mot de passe pour vous connecter</p>
                   </div>
 
-                  <form id=loginForm   method="post" action="" onsubmit="onFormSubmit();" class="row g-3 needs-validation" novalidate>
+                  <form id=loginForm   method="post"  class="row g-3 needs-validation" novalidate>
 
                     <div class="col-12">
                       <label for="yourEmail" class="form-label">Email</label>
                       <div class="input-group has-validation">
                         <span class="input-group-text" id="inputGroupPrepend">@</span>
-                        <input type="text" name="email" class="form-control" id="yourEmail" required>
+                        <input type="text" name="email" class="form-control" id="email" required>
                         <div class="invalid-feedback">Entrez votre mot de passe</div>
                       </div>
                     </div>
 
                     <div class="col-12">
                       <label for="yourPassword" class="form-label">Mot de passe</label>
-                      <input type="password" name="mot_de_passe" class="form-control" id="yourPassword" required>
+                      <input type="password" name="mot_de_passe" class="form-control" id="mot_de_passe" required>
                       <div class="invalid-feedback">Entrez votre mot de passe!</div>
                     </div>
 
@@ -87,41 +104,58 @@
 
   <?php require_once("js_files.html"); ?>
 
-</body>
-<script>
-  let RESTAPI_URL = "<?php 
-  require_once('config.php;');
-  echo URL_API; ?>";
+   
+    <script>
 
-  async function onFormSubmit() {
-    event.preventDefault();
-    let email = $("#yourEmail").val();
-    let mot_de_passe =$("#yourPassword").val();
+let RESTAPI_URL = "<?php 
+      require_once('config.php'); 
+      echo URL_API;
+  ?>";
 
-    ajaxPOSTLogin(email,mot_de_passe);
+function validateUser(email,mot_de_passe, users) {
+    for (let i = 0; i < users.length; i++) {
+        if (users[i].email === email && users[i].mot_de_passe === mot_de_passe ) {
+            return true;
+        }
+    }
+    return false;
+}
 
-  }
-    
-    
+$(document).ready(function() {
+    // Écouteur d'événement pour le formulaire de connexion qaund on clique sur se connecter
+    $('#loginForm').submit(function(event) {
+        event.preventDefault();
 
- 
-      function ajaxPOSTLogin(email,mot_de_passe) {
-      $.ajax({
-        type: "POST",
-        url: RESTAPI_URL + "/login.php",
-        data:JSON.stringify({
-          email: email,
-          mot_de_passe: mot_de_passe,
-        }),
-        dataType: "json"
-        }).done(async function(response) {
-      console.log("ok");
-    }).fail(function(error) {
-      console.log("La requête s'est terminée en échec. Infos : " + JSON.stringify(error));
+        // Récupérer les valeurs du formulaire
+        let email = $('#email').val();
+        let mot_de_passe = $('#mot_de_passe').val();
+
+        // Envoyer une requête AJAX GET pour récupérer les utilisateurs de la base de données
+        $.ajax({
+            type: 'GET',
+            url: RESTAPI_URL + '/users.php',
+            dataType: 'json',
+            success: function(users) {
+                // Vérifier si l'utilisateur est valide
+                if (validateUser(email, mot_de_passe, users)) {
+                    // Ouvrir une session et rediriger l'utilisateur vers une page de votre site
+                    alert('Connexion réussie !');
+                    sessionStorage.setItem('email', email);
+                    sessionStorage.setItem('mot_de_passe', mot_de_passe);
+                    // Exemple de redirection vers une page du site
+                    window.location.replace('users-profile.php');
+                    } else {
+                    
+                    alert('Email ou mot de passe incorrect !');
+                }
+            },
+            error: function() {
+                alert('Une erreur s\'est produite lors de la récupération des utilisateurs.');
+            }
+        });
     });
-  };
-
-  
-</script>
-
+});
+       
+    </script>
+</body>
 </html>
