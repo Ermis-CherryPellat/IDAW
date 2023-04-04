@@ -4,7 +4,7 @@ require_once('config.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Vérifier si les champs de formulaire ont été soumis
-    
+    var_dump($_POST);
     if (isset($_POST['email']) && isset($_POST['mot_de_passe'])) {
       $username = $_POST['email'];
       $mot_de_passe = $_POST['mot_de_passe'];
@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       if ($user && password_verify($_POST['mot_de_passe'], $user['mot_de_passe'])) {
         session_start();
         $_SESSION['email'] = $user['email'];
-        $_SESSION['mot_de_passe']=$_POST['mot_de_passe'];
+        $_SESSION['mot_de_passe']=$user['mot_de_passe'];
         header("Location: profil.php");
         echo json_encode(['success' => true]);
         exit();
