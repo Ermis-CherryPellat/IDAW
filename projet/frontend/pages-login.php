@@ -27,24 +27,24 @@
                 <div class="card-body">
 
                   <div class="pt-4 pb-2">
-                    <h5 class="card-title text-center pb-0 fs-4">Se connecter à votre comptet</h5>
+                    <h5 class="card-title text-center pb-0 fs-4">Se connecter à votre compte</h5>
                     <p class="text-center small">Entrez votre email et mot de passe pour vous connecter</p>
                   </div>
 
-                  <form class="row g-3 needs-validation" novalidate>
+                  <form id=loginForm   method="post" action="" onsubmit="onFormSubmit();" class="row g-3 needs-validation" novalidate>
 
                     <div class="col-12">
-                      <label for="yourUsername" class="form-label">Username</label>
+                      <label for="yourEmail" class="form-label">Email</label>
                       <div class="input-group has-validation">
                         <span class="input-group-text" id="inputGroupPrepend">@</span>
-                        <input type="text" name="username" class="form-control" id="yourUsername" required>
+                        <input type="text" name="email" class="form-control" id="yourEmail" required>
                         <div class="invalid-feedback">Entrez votre mot de passe</div>
                       </div>
                     </div>
 
                     <div class="col-12">
                       <label for="yourPassword" class="form-label">Mot de passe</label>
-                      <input type="password" name="password" class="form-control" id="yourPassword" required>
+                      <input type="password" name="mot_de_passe" class="form-control" id="yourPassword" required>
                       <div class="invalid-feedback">Entrez votre mot de passe!</div>
                     </div>
 
@@ -58,6 +58,9 @@
                       <button class="btn btn-primary w-100" type="submit">Login</button>
                     </div>
                     <div class="col-12">
+                    <p id="loginError" class="text-danger mt-2"></p>
+                      </div>
+                    <div class="col-12">
                       <p class="small mb-0">Pas de comptre <a href="pages-register.php">Créer un compte</a></p>
                     </div>
                   </form>
@@ -66,10 +69,7 @@
               </div>
 
               <div class="credits">
-                <!-- All the links in the footer should remain intact. -->
-                <!-- You can delete the links only if you purchased the pro version. -->
-                <!-- Licensing information: https://bootstrapmade.com/license/ -->
-                <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+
                 Designed by <a>Ermis Cherry Pellat & Rodolphe Ianboukhtine</a>
               </div>
 
@@ -88,5 +88,40 @@
   <?php require_once("js_files.html"); ?>
 
 </body>
+<script>
+  let RESTAPI_URL = "<?php 
+  require_once('config.php;');
+  echo URL_API; ?>";
+
+  async function onFormSubmit() {
+    event.preventDefault();
+    let email = $("#yourEmail").val();
+    let mot_de_passe =$("#yourPassword").val();
+
+    ajaxPOSTLogin(email,mot_de_passe);
+
+  }
+    
+    
+
+ 
+      function ajaxPOSTLogin(email,mot_de_passe) {
+      $.ajax({
+        type: "POST",
+        url: RESTAPI_URL + "/login.php",
+        data:JSON.stringify({
+          email: email,
+          mot_de_passe: mot_de_passe,
+        }),
+        dataType: "json"
+        }).done(async function(response) {
+      console.log("ok");
+    }).fail(function(error) {
+      console.log("La requête s'est terminée en échec. Infos : " + JSON.stringify(error));
+    });
+  };
+
+  
+</script>
 
 </html>
