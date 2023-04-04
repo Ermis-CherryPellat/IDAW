@@ -29,29 +29,53 @@
             <h5 class="card-title">Veuillez entrer un repas</h5>
             <form id="addMealForm">
               <div class="form-group">
-                <label for="datetime">Date et heure du repas</label>
-                <input type="datetime-local" class="form-control" id="datetime" name="datetime" required>
+                  <label for="datetime">Date et heure du repas</label>
+                  <input type="datetime-local" class="form-control" id="datetime" name="datetime" required>
               </div>
               <div class="form-group">
-                <label for="mealType">Type de repas</label>
-                <select class="form-control" id="mealType" name="mealType" required>
-                  <option value="">Sélectionnez un type de repas</option>
-                  <option value="petit_dejeuner">Petit-déjeuner</option>
-                  <option value="dejeuner">Déjeuner</option>
-                  <option value="diner">Dîner</option>
-                  <option value="collation">Collation</option>
-                </select>
+                  <label for="mealType">Type de repas</label>
+                  <select class="form-control" id="typeRepas" name="typeRepas" required>
+                  </select>
               </div>
               <div id="mealFoods">
-                <div class="form-group">
-                  <label for="food1">Aliment 1</label>
-                  <input type="text" class="form-control food" id="food1" name="food1" required>
-                  <input type="number" class="form-control quantity" id="quantity1" name="quantity1" placeholder="Quantité en grammes" required>
-                </div>
+                  <div class="form-group mealFood">
+                      <label for="searchBox">Rechercher un aliment :</label>
+                      <input type="text" class="form-control" id="searchBox" placeholder="Entrez le nom d'un aliment...">
+                      <div class="dropdown" id="listeAliment" name="listeAliment">
+                        <button class="btn bouton_form dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Sélectionner un aliment
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="alimentsDropdown">
+                        </div>
+                      </div>
+
+                      <input type="number" class="form-control quantity" name="quantity" placeholder="Quantité en grammes" required>
+                      <button type="button" class="btn btn-secondary bouton_form removeFoodBtn">Supprimer</button>
+                  </div>
               </div>
+              <!-- <div id="mealFoods">
+                <div class="form-group mealFood">
+                    <label for="food1">Aliment 1</label>
+                      <table id="alimentsTable" class="display" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Nom de l'aliment</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                      </table>
+                      <label for="searchBox">Rechercher un aliment :</label>
+                      <input type="text" class="form-control" id="searchBox" placeholder="Entrez le nom d'un aliment...">
+                    </div>
+                    <input type="number" class="form-control quantity" name="quantity" placeholder="Quantité en grammes" required>
+                    <button type="button" class="btn btn-secondary bouton_form removeFoodBtn">Supprimer</button>
+                </div>
+              </div> -->
               <button type="button" class="btn btn-primary bouton_form" id="addFoodBtn">Ajouter un aliment</button>
               <button type="submit" class="btn btn-success bouton_form">Enregistrer le repas</button>
             </form>
+
           </div>
         </div>
       </div>
@@ -91,11 +115,159 @@
   <?php require_once("js_files.html"); ?>
 
   <script>
-
-      $(document).on('click', '#addFoodBtn', function() {
-        var foodCount = $('.food').length + 1;
-        $('#mealFoods').append('<div class="form-group"><label for="food' + foodCount + '">Aliment ' + foodCount + '</label><input type="text" class="form-control food" id="food' + foodCount + '" name="food' + foodCount + '" required><input type="number" class="form-control quantity" id="quantity' + foodCount + '" name="quantity' + foodCount + '" placeholder="Quantité en grammes" required></div>');
+    let RESTAPI_URL = "<?php 
+          require_once('config.php'); 
+          echo URL_API;
+      ?>";
+    function ajaxGETTypeRepas(){
+      return new Promise(function(resolve, reject) {
+        $.ajax({
+            url: RESTAPI_URL + "/type_de_repas.php",
+            method: "GET",
+            dataType: "json"
+        }).done(function(response){
+            resolve(response);
+        }).fail(function(error){
+            reject(error);
+        });
       });
+    }
+
+    function ajaxGETAliment(){
+          return new Promise(function(resolve, reject) {
+              $.ajax({
+                  url: RESTAPI_URL + "/aliments.php",
+                  method: "GET",
+                  dataType: "json"
+              }).done(function(response){
+                  resolve(response);
+              }).fail(function(error){
+                  reject(error);
+              });
+          });
+      }
+
+    // On ajoute un nouvel aliment quand le bouton "Ajouter un aliment" est cliqué
+    $('#addFoodBtn').click(function() {
+      // On clone la première div d'aliment et on la modifie pour qu'elle soit unique
+      var newMealFood = $('.mealFood').first().clone();
+      var lastIndex = $('#mealFoods .mealFood').length;
+      newMealFood.find('.food').attr('name', 'aliment[' + lastIndex + ']').val('');
+      newMealFood.find('.quantity').attr('name', 'quantity[' + lastIndex + ']').val('');
+      newMealFood.find('.removeFoodBtn').show();
+      // On ajoute la nouvelle div d'aliment à la liste
+      $('#mealFoods').append(newMealFood);
+    });
+
+    // On supprime l'aliment correspondant à un bouton "Supprimer" quand il est cliqué
+    // + on vérifier s'il y a plus d'un aliment avant de le supprimer
+    $('#mealFoods').on('click', '.removeFoodBtn', function() {
+      if($('#mealFoods > .form-group').length > 1) {
+      $(this).closest('.form-group').remove();
+      }    
+    });
+
+
+    
+
+
+
+    $(document).ready(async function(){
+      // Récuperer le type des aliments pour le form
+      try {
+        let data = await ajaxGETTypeRepas();
+        // Parcours des données pour les afficher dans le tableau
+        data.forEach(type => {
+          $("#typeRepas").append(`<option value="${type.id_type_repas}">${type.nom_type_repas}</option>`);
+        });
+      } catch (error) {
+          console.log("La requête pour les types de repas s'est terminée en échec. Infos : " + JSON.stringify(error));
+      }
+
+      // Récupérer les aliments et les stocker dans une variable
+    let aliments = [];
+
+// Fonction pour filtrer les aliments en fonction de la recherche
+function filterAliments(searchTerm) {
+    return aliments.filter(function(aliment) {
+        return aliment.nom_aliment.toLowerCase().includes(searchTerm.toLowerCase());
+    });
+}
+
+// Fonction pour mettre à jour la liste déroulante des aliments
+function updateAlimentsDropdown(searchTerm) {
+    let filteredAliments = filterAliments(searchTerm);
+    $("#alimentsDropdown").empty();
+    if (filteredAliments.length > 0) {
+        filteredAliments.forEach(function(aliment) {
+          console.log("ok");
+            $("#alimentsDropdown").append(`<a class="dropdown-item" href="#" data-aliment-id="${aliment.id_aliment}">${aliment.nom_aliment}</a>`);
+        });
+    } else {
+        $("#alimentsDropdown").append(`<span class="dropdown-item text-muted">Aucun aliment trouvé</span>`);
+    }
+}
+
+// Initialisation de la recherche d'aliments
+$("#searchBox").on("input", function() {
+    let searchTerm = $(this).val();
+    updateAlimentsDropdown(searchTerm);
+});
+
+// Gestion de la sélection d'un aliment dans la liste déroulante
+$("#alimentsDropdown").on("click", ".dropdown-item", function(event) {
+    event.preventDefault();
+    let alimentId = $(this).data("aliment-id");
+    let alimentNom = $(this).text();
+    $("#listeAliment").val(alimentId);
+    $("#dropdownMenuButton").text(alimentNom);
+});
+  
+// Récupération des aliments et initialisation de la liste déroulante des aliments
+(async function() {
+    try {
+        let response = await ajaxGETAliment();
+        aliments = response;
+    } catch (error) {
+        console.log("La requête pour les aliments s'est terminée en échec. Infos : " + JSON.stringify(error));
+    }
+})();
+
+      // Récuperer les aliments pour le form
+      // try {
+      //   let data = await ajaxGETAliment();
+      //   // Parcours des données pour les afficher dans le tableau
+      //   data.forEach(aliment => {
+      //     $("#listeAliment").append(`<option value="${aliment.id_aliment}">${aliment.nom_aliment}</option>`);
+      //   });
+      // } catch (error) {
+      //     console.log("La requête pour les types de repas s'est terminée en échec. Infos : " + JSON.stringify(error));
+      // }
+
+      //////////
+      // let options = {
+      //   ajax: {
+      //     url: RESTAPI_URL + "/aliments.php",
+      //     dataSrc: "",
+      //   },
+      //   columns: [
+      //     { data: "nom_aliment" },
+      //   ],
+      // };
+
+      // // Initialiser le DataTable avec les options
+      // $('#alimentsTable').DataTable(options);
+
+      // $('#alimentsTable tbody').on('click', 'tr', function() {
+      //   // Récupération des données de la ligne sélectionnée
+      //   var data = table.row( this ).data();
+
+      //   // Ajout des données à votre formulaire
+      //   $('#selectedAliment').val(data[0]); // Suppose que l'id de l'aliment est dans la première colonne du tableau
+      // });
+    });
+   
+
   </script>
 
 </body>

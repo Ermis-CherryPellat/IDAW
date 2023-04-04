@@ -99,7 +99,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
     }
 }
 
-// Requête PATCH pour mettre à jour partiellement les informations d'un utilisateur
+// Requête PATCH pour mettre à jour partiellement les informations d'un aliment
 if ($_SERVER['REQUEST_METHOD'] === 'PATCH') {
     
     $array = json_decode(file_get_contents("php://input"), true);
@@ -174,7 +174,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'PATCH') {
     }
 }
 
-// Requête DELETE pour supprimer un utilisateur
+// Requête DELETE pour supprimer un aliment
 if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
 
     $array = json_decode(file_get_contents("php://input"), true);

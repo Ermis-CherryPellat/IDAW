@@ -35,7 +35,7 @@
                 </div>
                 <div class="form-group">
                   <label for="type_aliment">Type d'aliment :</label>
-                  <select class="form-control" id="inputType" name="inputType">
+                  <select class="form-control" id="inputType" name="inputType" required>
                   </select>
                 </div>
                 <div class="form-group">
