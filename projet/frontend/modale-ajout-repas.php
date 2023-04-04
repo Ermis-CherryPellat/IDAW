@@ -1,5 +1,5 @@
-<form id="addMealForm">
-    <div class="row">
+<form id="addRepasForm" onsubmit="onFormSubmit();">
+    <div class="row rowAliment">
         <div class="col-lg-3">
             <label for="datetime">Date et heure du repas</label>
             <input type="datetime-local" class="form-control" id="datetime" name="datetime" required>
@@ -15,7 +15,7 @@
     </div>
     
     <div class="form-group">
-        <label for="alimentChoisi" class="card-title">Aliment</label>
+        <label for="alimentChoisi" class="card-title">Aliments du repas</label>
             <p>Choisissez dans le tableau au moins un aliment de votre repas.</p>
             <div id="alimentsChoisis">
             </div>

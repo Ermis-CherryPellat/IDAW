@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Mar 30, 2023 at 01:17 PM
+-- Generation Time: Apr 04, 2023 at 04:53 PM
 -- Server version: 5.7.39
 -- PHP Version: 8.2.0
 
@@ -24,26 +24,26 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ALIMENT`
+-- Table structure for table `aliment`
 --
 
-CREATE TABLE `ALIMENT` (
+CREATE TABLE `aliment` (
   `id_aliment` int(11) NOT NULL,
-  `nom_aliment` varchar(200) NOT NULL,
+  `nom_aliment` varchar(200) COLLATE utf8_bin NOT NULL,
   `id_type_aliment` int(11) NOT NULL,
   `glucides` int(11) NOT NULL,
   `lipides` int(11) NOT NULL,
   `sucres` int(11) NOT NULL,
   `proteines` int(11) NOT NULL,
-  `fibre` int(11) NOT NULL,
+  `fibres` int(11) NOT NULL,
   `energie` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Dumping data for table `ALIMENT`
+-- Dumping data for table `aliment`
 --
 
-INSERT INTO `ALIMENT` (`id_aliment`, `nom_aliment`, `id_type_aliment`, `glucides`, `lipides`, `sucres`, `proteines`, `fibre`, `energie`) VALUES
+INSERT INTO `aliment` (`id_aliment`, `nom_aliment`, `id_type_aliment`, `glucides`, `lipides`, `sucres`, `proteines`, `fibres`, `energie`) VALUES
 (393, 'Salade de thon et légumes, appertisée', 13, 0, 0, 0, 12, 0, 0),
 (394, 'Salade composée avec viande ou poisson, appertisée', 13, 0, 0, 0, 0, 0, 0),
 (395, 'Champignons à la grecque, appertisés', 13, 0, 0, 0, 0, 0, 0),
@@ -754,7 +754,7 @@ INSERT INTO `ALIMENT` (`id_aliment`, `nom_aliment`, `id_type_aliment`, `glucides
 (1100, 'Fève, surgelée, bouillie/cuite à l\'eau', 14, 0, 0, 0, 0, 0, 0),
 (1101, 'Lentille verte, bouillie/cuite à l\'eau', 14, 0, 0, 0, 0, 0, 0),
 (1102, 'Lentille blonde, bouillie/cuite à l\'eau', 14, 0, 0, 0, 0, 0, 0);
-INSERT INTO `ALIMENT` (`id_aliment`, `nom_aliment`, `id_type_aliment`, `glucides`, `lipides`, `sucres`, `proteines`, `fibre`, `energie`) VALUES
+INSERT INTO `aliment` (`id_aliment`, `nom_aliment`, `id_type_aliment`, `glucides`, `lipides`, `sucres`, `proteines`, `fibres`, `energie`) VALUES
 (1103, 'Lentille corail, bouillie/cuite à l\'eau', 14, 0, 0, 0, 0, 0, 0),
 (1104, 'Légume sec, cuit (aliment moyen)', 14, 0, 0, 0, 0, 0, 0),
 (1105, 'Fève à écosser, fraîche', 14, 0, 0, 0, 0, 0, 0),
@@ -1544,7 +1544,7 @@ INSERT INTO `ALIMENT` (`id_aliment`, `nom_aliment`, `id_type_aliment`, `glucides
 (1889, 'Diot, cru', 16, 0, 0, 0, 0, 0, 0),
 (1890, 'Saucisse de Strasbourg ou Knack', 16, 0, 0, 0, 0, 0, 0),
 (1891, 'Saucisse cocktail', 16, 0, 0, 0, 0, 0, 0);
-INSERT INTO `ALIMENT` (`id_aliment`, `nom_aliment`, `id_type_aliment`, `glucides`, `lipides`, `sucres`, `proteines`, `fibre`, `energie`) VALUES
+INSERT INTO `aliment` (`id_aliment`, `nom_aliment`, `id_type_aliment`, `glucides`, `lipides`, `sucres`, `proteines`, `fibres`, `energie`) VALUES
 (1892, 'Saucisse viennoise, crue', 16, 0, 0, 0, 0, 0, 0),
 (1893, 'Saucisse de jambon pur porc', 16, 0, 0, 0, 0, 0, 0),
 (1894, 'Saucisse de bière', 16, 0, 0, 0, 0, 0, 0),
@@ -2281,7 +2281,7 @@ INSERT INTO `ALIMENT` (`id_aliment`, `nom_aliment`, `id_type_aliment`, `glucides
 (2625, 'Eau minérale, plate (aliment moyen)', 18, 0, 0, 0, 0, 0, 0),
 (2626, 'Eau minérale, gazeuse (aliment moyen)', 18, 0, 0, 0, 0, 0, 0),
 (2627, 'Eau du robinet', 18, 0, 0, 0, 0, 0, 0);
-INSERT INTO `ALIMENT` (`id_aliment`, `nom_aliment`, `id_type_aliment`, `glucides`, `lipides`, `sucres`, `proteines`, `fibre`, `energie`) VALUES
+INSERT INTO `aliment` (`id_aliment`, `nom_aliment`, `id_type_aliment`, `glucides`, `lipides`, `sucres`, `proteines`, `fibres`, `energie`) VALUES
 (2628, 'Eau embouteillée de source', 18, 0, 0, 0, 0, 0, 0),
 (2629, 'Eau minérale Abatilles, embouteillée, non gazeuse, faiblement minéralisée (Arcachon, 33)', 18, 0, 0, 0, 0, 0, 0),
 (2630, 'Eau minérale Aix-les-Bains, embouteillée, non gazeuse, faiblement minéralisée (Aix-les-Bains, 73)', 18, 0, 0, 0, 0, 0, 0),
@@ -2910,7 +2910,7 @@ INSERT INTO `ALIMENT` (`id_aliment`, `nom_aliment`, `id_type_aliment`, `glucides
 (3253, 'Huile de beurre ou Beurre concentré', 21, 0, 0, 0, 0, 0, 0),
 (3254, 'Beurre à 80% MG, demi-sel', 21, 0, 0, 0, 0, 0, 0),
 (3255, 'Beurre à 80% MG, salé', 21, 0, 0, 0, 0, 0, 0);
-INSERT INTO `ALIMENT` (`id_aliment`, `nom_aliment`, `id_type_aliment`, `glucides`, `lipides`, `sucres`, `proteines`, `fibre`, `energie`) VALUES
+INSERT INTO `aliment` (`id_aliment`, `nom_aliment`, `id_type_aliment`, `glucides`, `lipides`, `sucres`, `proteines`, `fibres`, `energie`) VALUES
 (3256, 'Beurre à 82% MG, doux, tendre', 21, 0, 0, 0, 0, 0, 0),
 (3257, 'Beurre à 60-62% MG, à teneur réduite en matière grasse, doux', 21, 0, 0, 0, 0, 0, 0),
 (3258, 'Beurre à 60-62% MG, à teneur réduite en matière grasse, demi-sel', 21, 0, 0, 0, 0, 0, 0),
@@ -3232,25 +3232,33 @@ INSERT INTO `ALIMENT` (`id_aliment`, `nom_aliment`, `id_type_aliment`, `glucides
 (3574, 'Céréales instantanées, poudre à reconstituer, dès 4/6 mois', 23, 0, 0, 0, 0, 0, 0),
 (3575, 'Céréales instantanées, poudre à reconstituer, dès 6 mois', 23, 0, 0, 0, 0, 0, 0),
 (3576, 'Biscuit pour bébé', 23, 0, 0, 0, 0, 0, 0),
-(3577, 'Poudre cacaotée pour bébé', 23, 0, 0, 0, 0, 0, 0);
+(3577, 'Poudre cacaotée pour bébé', 23, 0, 0, 0, 0, 0, 0),
+(3578, 'tete de chat', 13, 1, 2, 3, 4, 5, 6),
+(3579, 'tete de chat', 13, 1, 2, 3, 4, 5, 6),
+(3581, 'tete de chat', 13, 1, 2, 3, 4, 5, 6),
+(3582, 'tete de chat', 13, 1, 2, 3, 4, 5, 6),
+(3596, 'aa', 13, 0, 0, 0, 0, 0, 0),
+(3599, 'a', 13, 0, 0, 0, 0, 0, 0),
+(3605, '1', 13, 1, 1, 0, 0, 0, 0),
+(3607, '12', 13, 0, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ALIMENT_CONSOMME`
+-- Table structure for table `aliment_consomme`
 --
 
-CREATE TABLE `ALIMENT_CONSOMME` (
+CREATE TABLE `aliment_consomme` (
   `masse` int(11) NOT NULL,
   `id_aliment` int(11) NOT NULL,
   `id_repas` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Dumping data for table `ALIMENT_CONSOMME`
+-- Dumping data for table `aliment_consomme`
 --
 
-INSERT INTO `ALIMENT_CONSOMME` (`masse`, `id_aliment`, `id_repas`) VALUES
+INSERT INTO `aliment_consomme` (`masse`, `id_aliment`, `id_repas`) VALUES
 (200, 393, 1),
 (500, 393, 3),
 (300, 472, 3),
@@ -3262,19 +3270,19 @@ INSERT INTO `ALIMENT_CONSOMME` (`masse`, `id_aliment`, `id_repas`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `APPORT_NUTRITIONNEL`
+-- Table structure for table `apport_nutritionnel`
 --
 
-CREATE TABLE `APPORT_NUTRITIONNEL` (
+CREATE TABLE `apport_nutritionnel` (
   `id_apport_nutritionnel` int(11) NOT NULL,
-  `nom_apport_nutritionnel` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `nom_apport_nutritionnel` varchar(20) COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Dumping data for table `APPORT_NUTRITIONNEL`
+-- Dumping data for table `apport_nutritionnel`
 --
 
-INSERT INTO `APPORT_NUTRITIONNEL` (`id_apport_nutritionnel`, `nom_apport_nutritionnel`) VALUES
+INSERT INTO `apport_nutritionnel` (`id_apport_nutritionnel`, `nom_apport_nutritionnel`) VALUES
 (1, 'glucide'),
 (2, 'proteine'),
 (3, 'lipides'),
@@ -3283,31 +3291,31 @@ INSERT INTO `APPORT_NUTRITIONNEL` (`id_apport_nutritionnel`, `nom_apport_nutriti
 -- --------------------------------------------------------
 
 --
--- Table structure for table `BESOIN_APPORT_NUTRITIONNEL`
+-- Table structure for table `besoin_apport_nutritionnel`
 --
 
-CREATE TABLE `BESOIN_APPORT_NUTRITIONNEL` (
+CREATE TABLE `besoin_apport_nutritionnel` (
   `quantite_nutritionnelle` int(11) NOT NULL,
   `id_apport_nutritionnel` int(11) NOT NULL,
   `id_user` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `OBJECTIF`
+-- Table structure for table `objectif`
 --
 
-CREATE TABLE `OBJECTIF` (
+CREATE TABLE `objectif` (
   `id_objectif` int(11) NOT NULL,
-  `nom_objectif` varchar(40) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `nom_objectif` varchar(40) COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Dumping data for table `OBJECTIF`
+-- Dumping data for table `objectif`
 --
 
-INSERT INTO `OBJECTIF` (`id_objectif`, `nom_objectif`) VALUES
+INSERT INTO `objectif` (`id_objectif`, `nom_objectif`) VALUES
 (1, 'prise_masse'),
 (2, 'perte_poids'),
 (3, 'maintien_forme');
@@ -3315,30 +3323,30 @@ INSERT INTO `OBJECTIF` (`id_objectif`, `nom_objectif`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `POURCENTAGE_SOUS_ALIMENT`
+-- Table structure for table `pourcentage_sous_aliment`
 --
 
-CREATE TABLE `POURCENTAGE_SOUS_ALIMENT` (
+CREATE TABLE `pourcentage_sous_aliment` (
   `pourcentage_sous_aliment` int(11) NOT NULL,
   `id_aliment` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `PRATIQUE_SPORTIVE`
+-- Table structure for table `pratique_sportive`
 --
 
-CREATE TABLE `PRATIQUE_SPORTIVE` (
+CREATE TABLE `pratique_sportive` (
   `id_pratique_sportive` int(11) NOT NULL,
-  `frequence_pratique_sportive` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `frequence_pratique_sportive` varchar(20) COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Dumping data for table `PRATIQUE_SPORTIVE`
+-- Dumping data for table `pratique_sportive`
 --
 
-INSERT INTO `PRATIQUE_SPORTIVE` (`id_pratique_sportive`, `frequence_pratique_sportive`) VALUES
+INSERT INTO `pratique_sportive` (`id_pratique_sportive`, `frequence_pratique_sportive`) VALUES
 (1, 'bas'),
 (2, 'moyen'),
 (3, 'eleve');
@@ -3346,21 +3354,21 @@ INSERT INTO `PRATIQUE_SPORTIVE` (`id_pratique_sportive`, `frequence_pratique_spo
 -- --------------------------------------------------------
 
 --
--- Table structure for table `REPAS`
+-- Table structure for table `repas`
 --
 
-CREATE TABLE `REPAS` (
+CREATE TABLE `repas` (
   `id_repas` int(11) NOT NULL,
   `id_utilisateur` int(11) NOT NULL,
   `id_type_repas` int(11) NOT NULL,
   `date_consommation` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Dumping data for table `REPAS`
+-- Dumping data for table `repas`
 --
 
-INSERT INTO `REPAS` (`id_repas`, `id_utilisateur`, `id_type_repas`, `date_consommation`) VALUES
+INSERT INTO `repas` (`id_repas`, `id_utilisateur`, `id_type_repas`, `date_consommation`) VALUES
 (1, 42, 1, '2023-03-21 15:35:58'),
 (2, 42, 0, '2023-03-28 10:38:21'),
 (3, 42, 2, '2023-03-28 20:38:21');
@@ -3368,39 +3376,39 @@ INSERT INTO `REPAS` (`id_repas`, `id_utilisateur`, `id_type_repas`, `date_consom
 -- --------------------------------------------------------
 
 --
--- Table structure for table `SEXE`
+-- Table structure for table `sexe`
 --
 
-CREATE TABLE `SEXE` (
+CREATE TABLE `sexe` (
   `id_sexe` int(11) NOT NULL,
-  `nom_sexe` varchar(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `nom_sexe` varchar(11) COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Dumping data for table `SEXE`
+-- Dumping data for table `sexe`
 --
 
-INSERT INTO `SEXE` (`id_sexe`, `nom_sexe`) VALUES
+INSERT INTO `sexe` (`id_sexe`, `nom_sexe`) VALUES
 (0, 'Masculin'),
 (1, 'Feminin');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `TRANCHE_AGE`
+-- Table structure for table `tranche_age`
 --
 
-CREATE TABLE `TRANCHE_AGE` (
+CREATE TABLE `tranche_age` (
   `id_tranche_age` int(11) NOT NULL,
   `tranche_min` int(11) NOT NULL,
   `tranche_max` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Dumping data for table `TRANCHE_AGE`
+-- Dumping data for table `tranche_age`
 --
 
-INSERT INTO `TRANCHE_AGE` (`id_tranche_age`, `tranche_min`, `tranche_max`) VALUES
+INSERT INTO `tranche_age` (`id_tranche_age`, `tranche_min`, `tranche_max`) VALUES
 (1, 0, 11),
 (2, 12, 18),
 (3, 19, 25),
@@ -3412,20 +3420,20 @@ INSERT INTO `TRANCHE_AGE` (`id_tranche_age`, `tranche_min`, `tranche_max`) VALUE
 -- --------------------------------------------------------
 
 --
--- Table structure for table `TRANCHE_POIDS`
+-- Table structure for table `tranche_poids`
 --
 
-CREATE TABLE `TRANCHE_POIDS` (
+CREATE TABLE `tranche_poids` (
   `id_tranche_poids` int(11) NOT NULL,
   `tranche_min` int(11) NOT NULL,
   `tranche_max` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Dumping data for table `TRANCHE_POIDS`
+-- Dumping data for table `tranche_poids`
 --
 
-INSERT INTO `TRANCHE_POIDS` (`id_tranche_poids`, `tranche_min`, `tranche_max`) VALUES
+INSERT INTO `tranche_poids` (`id_tranche_poids`, `tranche_min`, `tranche_max`) VALUES
 (1, 0, 49),
 (2, 50, 60),
 (3, 61, 70),
@@ -3439,20 +3447,20 @@ INSERT INTO `TRANCHE_POIDS` (`id_tranche_poids`, `tranche_min`, `tranche_max`) V
 -- --------------------------------------------------------
 
 --
--- Table structure for table `TRANCHE_TAILLE`
+-- Table structure for table `tranche_taille`
 --
 
-CREATE TABLE `TRANCHE_TAILLE` (
+CREATE TABLE `tranche_taille` (
   `id_tranche_taille` int(11) NOT NULL,
   `tranche_min` int(11) NOT NULL,
   `tranche_max` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Dumping data for table `TRANCHE_TAILLE`
+-- Dumping data for table `tranche_taille`
 --
 
-INSERT INTO `TRANCHE_TAILLE` (`id_tranche_taille`, `tranche_min`, `tranche_max`) VALUES
+INSERT INTO `tranche_taille` (`id_tranche_taille`, `tranche_min`, `tranche_max`) VALUES
 (1, 150, 160),
 (2, 161, 170),
 (3, 171, 180),
@@ -3463,31 +3471,19 @@ INSERT INTO `TRANCHE_TAILLE` (`id_tranche_taille`, `tranche_min`, `tranche_max`)
 -- --------------------------------------------------------
 
 --
--- Table structure for table `TYPE_ALIMENT`
+-- Table structure for table `type_aliment`
 --
 
-CREATE TABLE `TYPE_ALIMENT` (
+CREATE TABLE `type_aliment` (
   `id_type_aliment` int(11) NOT NULL,
-  `nom_type_aliment` varchar(150) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `nom_type_aliment` varchar(150) COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Dumping data for table `TYPE_ALIMENT`
+-- Dumping data for table `type_aliment`
 --
 
-INSERT INTO `TYPE_ALIMENT` (`id_type_aliment`, `nom_type_aliment`) VALUES
-(1, 'fruit'),
-(2, 'legume'),
-(3, 'legumineuse'),
-(4, 'cereale'),
-(5, 'boisson'),
-(6, 'viande'),
-(7, 'poisson'),
-(8, 'fruit_de_mer'),
-(9, 'produit_laitier'),
-(10, 'produit_sucre'),
-(11, 'alcool'),
-(12, 'matiere_grasse'),
+INSERT INTO `type_aliment` (`id_type_aliment`, `nom_type_aliment`) VALUES
 (13, 'entrées et plats composés'),
 (14, 'fruits, légumes, légumineuses et oléagineux'),
 (15, 'produits céréaliers'),
@@ -3504,19 +3500,19 @@ INSERT INTO `TYPE_ALIMENT` (`id_type_aliment`, `nom_type_aliment`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `TYPE_DE_REPAS`
+-- Table structure for table `type_de_repas`
 --
 
-CREATE TABLE `TYPE_DE_REPAS` (
+CREATE TABLE `type_de_repas` (
   `id_type_repas` int(11) NOT NULL,
-  `nom_type_repas` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `nom_type_repas` varchar(20) COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Dumping data for table `TYPE_DE_REPAS`
+-- Dumping data for table `type_de_repas`
 --
 
-INSERT INTO `TYPE_DE_REPAS` (`id_type_repas`, `nom_type_repas`) VALUES
+INSERT INTO `type_de_repas` (`id_type_repas`, `nom_type_repas`) VALUES
 (0, 'Petit dejeuner'),
 (1, 'Dejeuner'),
 (2, 'Gouter'),
@@ -3525,150 +3521,161 @@ INSERT INTO `TYPE_DE_REPAS` (`id_type_repas`, `nom_type_repas`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `UTILISATEUR`
+-- Table structure for table `utilisateur`
 --
 
-CREATE TABLE `UTILISATEUR` (
+CREATE TABLE `utilisateur` (
   `id_utilisateur` int(11) NOT NULL,
-  `email` varchar(60) NOT NULL,
-  `prenom` varchar(40) NOT NULL,
+  `mot_de_passe` varchar(40) COLLATE utf8_bin NOT NULL,
+  `email` varchar(60) COLLATE utf8_bin NOT NULL,
+  `prenom` varchar(40) COLLATE utf8_bin NOT NULL,
   `id_sexe` int(11) NOT NULL,
   `id_poids` int(11) NOT NULL,
   `id_taille` int(11) NOT NULL,
   `id_objectif` int(11) NOT NULL,
   `id_pratique_sportive` int(11) NOT NULL,
   `id_tranche_age` int(11) NOT NULL,
-  `nom` varchar(40) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `nom` varchar(40) COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Dumping data for table `UTILISATEUR`
+-- Dumping data for table `utilisateur`
 --
 
-INSERT INTO `UTILISATEUR` (`id_utilisateur`, `email`, `prenom`, `id_sexe`, `id_poids`, `id_taille`, `id_objectif`, `id_pratique_sportive`, `id_tranche_age`, `nom`) VALUES
-(22, 'william.nguyen@etu.imt-lille-douai.fr', 'William', 0, 2, 3, 1, 1, 3, 'NGUYEN'),
-(23, 'alexis.poirot@etu.imt-lille-douai.fr', 'Alexis', 0, 3, 2, 2, 1, 3, 'POIROT'),
-(24, 'antoine.lambert@etu.imt-lille-douai.fr', 'Antoine', 0, 4, 3, 1, 2, 3, 'LAMBERT'),
-(25, 'cedric.prast@etu.imt-lille-douai.fr', 'Cédric', 0, 2, 3, 3, 3, 3, 'PRAST'),
-(26, 'anthony.gouthier@etu.imt-lille-douai.fr', 'Anthony', 0, 2, 2, 3, 2, 3, 'GOUTHIER'),
-(27, 'johan.gaudin@etu.imt-lille-douai.fr', 'Johan', 0, 3, 4, 1, 3, 3, 'GAUDIN'),
-(28, 'guillaume.faure@etu.imt-lille-douai.fr', 'Guillaume', 0, 3, 3, 2, 2, 3, 'FAURE'),
-(29, 'hatim.hebboul@etu.imt-lille-douai.fr', 'Hatim', 0, 4, 4, 2, 1, 3, 'HEBBOUL'),
-(30, 'armand.sumo@etu.imt-lille-douai.fr', 'Armand', 0, 2, 3, 3, 2, 3, 'SUMO MOUDJIE TCHAMABE'),
-(31, 'mathis.jolivel@etu.imt-lille-douai.fr', 'Mathis', 0, 3, 2, 1, 1, 3, 'JOLIVEL'),
-(32, 'ezzat.al.zahabi@etu.imt-lille-douai.fr', 'Ezzat', 0, 2, 4, 2, 2, 4, 'AL ZAHABI'),
-(33, 'gaelle.erhart@etu.imt-lille-douai.fr', 'Gaelle', 1, 3, 4, 3, 1, 3, 'ERHART'),
-(34, 'lucas.arib@etu.imt-lille-douai.fr', 'Lucas', 0, 4, 2, 1, 3, 3, 'ARIB'),
-(35, 'hugo.lim@etu.imt-lille-douai.fr', 'Hugo', 0, 2, 4, 2, 2, 3, 'LIM'),
-(36, 'sacha.sicoli@etu.imt-lille-douai.fr', 'Sacha', 0, 3, 2, 1, 3, 3, 'SICOLI'),
-(37, 'emil.perouse@etu.imt-lille-douai.fr', 'Emil', 0, 2, 3, 3, 1, 3, 'PEROUSE'),
-(38, 'lea.grumiaux@etu.imt-lille-douai.fr', 'Léa', 1, 3, 4, 2, 2, 3, 'GRUMIAUX'),
-(39, 'pierre.martin@etu.imt-lille-douai.fr', 'Pierre', 0, 2, 2, 2, 1, 3, 'MARTIN'),
-(40, 'kanlanfaye.djamoine@etu.imt-lille-douai.fr', 'Kanlanfaye', 0, 3, 4, 2, 3, 3, 'DJAMOINE'),
-(41, 'tanguy.feenstra@etu.imt-lille-douai.fr', 'Tanguy', 0, 4, 2, 3, 2, 3, 'FEENSTRA'),
-(42, 'maxime.de.veyrac@etu.imt-lille-douai.fr', 'Maxime', 0, 2, 4, 3, 1, 3, 'DE VEYRAC'),
-(43, 'mekki.ben.hamidouche@etu.imt-lille-douai.fr', 'Mekki', 0, 4, 3, 3, 3, 3, 'BEN HAMIDOUCHE'),
-(44, 'julia.zink@etu.imt-lille-douai.fr', 'Julia', 1, 3, 3, 1, 2, 3, 'ZINK'),
-(45, 'alexandre.favreau@etu.imt-lille-douai.fr', 'Alexandre', 0, 4, 3, 2, 2, 3, 'FAVREAU'),
-(46, 'nilavan.deva@etu.imt-lille-douai.fr', 'Nilavan', 0, 2, 3, 1, 1, 3, 'DEVA');
+INSERT INTO `utilisateur` (`id_utilisateur`, `mot_de_passe`, `email`, `prenom`, `id_sexe`, `id_poids`, `id_taille`, `id_objectif`, `id_pratique_sportive`, `id_tranche_age`, `nom`) VALUES
+(22, '', 'william.nguyen@etu.imt-lille-douai.fr', 'William', 0, 2, 3, 1, 1, 3, 'NGUYEN'),
+(23, '', 'alexis.poirot@etu.imt-lille-douai.fr', 'Alexis', 0, 3, 2, 2, 1, 3, 'POIROT'),
+(24, '', 'antoine.lambert@etu.imt-lille-douai.fr', 'Antoine', 0, 4, 3, 1, 2, 3, 'LAMBERT'),
+(25, '', 'cedric.prast@etu.imt-lille-douai.fr', 'Cédric', 0, 2, 3, 3, 3, 3, 'PRAST'),
+(26, '', 'anthony.gouthier@etu.imt-lille-douai.fr', 'Anthony', 0, 2, 2, 3, 2, 3, 'GOUTHIER'),
+(27, '', 'johan.gaudin@etu.imt-lille-douai.fr', 'Johan', 0, 3, 4, 1, 3, 3, 'GAUDIN'),
+(28, '', 'guillaume.faure@etu.imt-lille-douai.fr', 'Guillaume', 0, 3, 3, 2, 2, 3, 'FAURE'),
+(29, '', 'hatim.hebboul@etu.imt-lille-douai.fr', 'Hatim', 0, 4, 4, 2, 1, 3, 'HEBBOUL'),
+(30, '', 'armand.sumo@etu.imt-lille-douai.fr', 'Armand', 0, 2, 3, 3, 2, 3, 'SUMO MOUDJIE TCHAMABE'),
+(31, '', 'mathis.jolivel@etu.imt-lille-douai.fr', 'Mathis', 0, 3, 2, 1, 1, 3, 'JOLIVEL'),
+(32, '', 'ezzat.al.zahabi@etu.imt-lille-douai.fr', 'Ezzat', 0, 2, 4, 2, 2, 4, 'AL ZAHABI'),
+(33, '', 'gaelle.erhart@etu.imt-lille-douai.fr', 'Gaelle', 1, 3, 4, 3, 1, 3, 'ERHART'),
+(34, '', 'lucas.arib@etu.imt-lille-douai.fr', 'Lucas', 0, 4, 2, 1, 3, 3, 'ARIB'),
+(35, '', 'hugo.lim@etu.imt-lille-douai.fr', 'Hugo', 0, 2, 4, 2, 2, 3, 'LIM'),
+(36, '', 'sacha.sicoli@etu.imt-lille-douai.fr', 'Sacha', 0, 3, 2, 1, 3, 3, 'SICOLI'),
+(37, '', 'emil.perouse@etu.imt-lille-douai.fr', 'Emil', 0, 2, 3, 3, 1, 3, 'PEROUSE'),
+(38, '', 'lea.grumiaux@etu.imt-lille-douai.fr', 'Léa', 1, 3, 4, 2, 2, 3, 'GRUMIAUX'),
+(39, '', 'pierre.martin@etu.imt-lille-douai.fr', 'Pierre', 0, 2, 2, 2, 1, 3, 'MARTIN'),
+(40, '', 'kanlanfaye.djamoine@etu.imt-lille-douai.fr', 'Kanlanfaye', 0, 3, 4, 2, 3, 3, 'DJAMOINE'),
+(41, '', 'tanguy.feenstra@etu.imt-lille-douai.fr', 'Tanguy', 0, 4, 2, 3, 2, 3, 'FEENSTRA'),
+(42, '', 'maxime.de.veyrac@etu.imt-lille-douai.fr', 'Maxime', 0, 2, 4, 3, 1, 3, 'DE VEYRAC'),
+(43, '', 'mekki.ben.hamidouche@etu.imt-lille-douai.fr', 'Mekki', 0, 4, 3, 3, 3, 3, 'BEN HAMIDOUCHE'),
+(44, '', 'julia.zink@etu.imt-lille-douai.fr', 'Julia', 1, 3, 3, 1, 2, 3, 'ZINK'),
+(45, '', 'alexandre.favreau@etu.imt-lille-douai.fr', 'Alexandre', 0, 4, 3, 2, 2, 3, 'FAVREAU'),
+(46, '', 'nilavan.deva@etu.imt-lille-douai.fr', 'Nilavan', 0, 2, 3, 1, 1, 3, 'DEVA'),
+(47, 'a', 'a@a.com', 'Paul', 0, 1, 1, 1, 1, 1, 'Fromage'),
+(48, 'a', 'a@a.com', 'Paul', 0, 1, 1, 1, 1, 1, 'Fromage'),
+(49, 'a', 'a@a.com', 'Paul', 0, 1, 1, 1, 1, 1, 'Fromage'),
+(50, 'a', 'a@a.com', 'Paul', 0, 1, 1, 1, 1, 1, 'Fromage'),
+(51, 'a', 'a@a.com', 'Paul', 0, 1, 1, 1, 1, 1, 'Fromage'),
+(52, '123456', 'johndoe@example.com', 'John', 1, 2, 1, 2, 1, 2, 'Doe'),
+(53, '123456', 'johndoe@example.com', 'John', 1, 2, 1, 2, 1, 2, 'Doe'),
+(54, 'a', 'a@a.com', 'Paul', 0, 1, 1, 1, 1, 1, 'Fromage'),
+(55, 'a', 'a@a.com', 'Paul', 0, 1, 1, 1, 1, 1, 'Fromage'),
+(56, '123456', 'johndoe@example.com', 'John', 1, 2, 1, 2, 1, 1, 'Doe');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `ALIMENT`
+-- Indexes for table `aliment`
 --
-ALTER TABLE `ALIMENT`
+ALTER TABLE `aliment`
   ADD PRIMARY KEY (`id_aliment`),
   ADD KEY `id_type_aliment` (`id_type_aliment`);
 
 --
--- Indexes for table `ALIMENT_CONSOMME`
+-- Indexes for table `aliment_consomme`
 --
-ALTER TABLE `ALIMENT_CONSOMME`
+ALTER TABLE `aliment_consomme`
   ADD PRIMARY KEY (`id_aliment`,`id_repas`),
   ADD KEY `id_repas` (`id_repas`);
 
 --
--- Indexes for table `APPORT_NUTRITIONNEL`
+-- Indexes for table `apport_nutritionnel`
 --
-ALTER TABLE `APPORT_NUTRITIONNEL`
+ALTER TABLE `apport_nutritionnel`
   ADD PRIMARY KEY (`id_apport_nutritionnel`);
 
 --
--- Indexes for table `BESOIN_APPORT_NUTRITIONNEL`
+-- Indexes for table `besoin_apport_nutritionnel`
 --
-ALTER TABLE `BESOIN_APPORT_NUTRITIONNEL`
+ALTER TABLE `besoin_apport_nutritionnel`
   ADD KEY `id_user` (`id_user`),
   ADD KEY `id_apport_nutritionnel` (`id_apport_nutritionnel`);
 
 --
--- Indexes for table `OBJECTIF`
+-- Indexes for table `objectif`
 --
-ALTER TABLE `OBJECTIF`
+ALTER TABLE `objectif`
   ADD PRIMARY KEY (`id_objectif`);
 
 --
--- Indexes for table `POURCENTAGE_SOUS_ALIMENT`
+-- Indexes for table `pourcentage_sous_aliment`
 --
-ALTER TABLE `POURCENTAGE_SOUS_ALIMENT`
+ALTER TABLE `pourcentage_sous_aliment`
   ADD KEY `id_aliment` (`id_aliment`);
 
 --
--- Indexes for table `PRATIQUE_SPORTIVE`
+-- Indexes for table `pratique_sportive`
 --
-ALTER TABLE `PRATIQUE_SPORTIVE`
+ALTER TABLE `pratique_sportive`
   ADD PRIMARY KEY (`id_pratique_sportive`);
 
 --
--- Indexes for table `REPAS`
+-- Indexes for table `repas`
 --
-ALTER TABLE `REPAS`
+ALTER TABLE `repas`
   ADD PRIMARY KEY (`id_repas`),
   ADD KEY `id_utilisateur` (`id_utilisateur`),
   ADD KEY `id_type_repas` (`id_type_repas`);
 
 --
--- Indexes for table `SEXE`
+-- Indexes for table `sexe`
 --
-ALTER TABLE `SEXE`
+ALTER TABLE `sexe`
   ADD PRIMARY KEY (`id_sexe`);
 
 --
--- Indexes for table `TRANCHE_AGE`
+-- Indexes for table `tranche_age`
 --
-ALTER TABLE `TRANCHE_AGE`
+ALTER TABLE `tranche_age`
   ADD PRIMARY KEY (`id_tranche_age`);
 
 --
--- Indexes for table `TRANCHE_POIDS`
+-- Indexes for table `tranche_poids`
 --
-ALTER TABLE `TRANCHE_POIDS`
+ALTER TABLE `tranche_poids`
   ADD PRIMARY KEY (`id_tranche_poids`);
 
 --
--- Indexes for table `TRANCHE_TAILLE`
+-- Indexes for table `tranche_taille`
 --
-ALTER TABLE `TRANCHE_TAILLE`
+ALTER TABLE `tranche_taille`
   ADD PRIMARY KEY (`id_tranche_taille`);
 
 --
--- Indexes for table `TYPE_ALIMENT`
+-- Indexes for table `type_aliment`
 --
-ALTER TABLE `TYPE_ALIMENT`
+ALTER TABLE `type_aliment`
   ADD PRIMARY KEY (`id_type_aliment`,`nom_type_aliment`);
 
 --
--- Indexes for table `TYPE_DE_REPAS`
+-- Indexes for table `type_de_repas`
 --
-ALTER TABLE `TYPE_DE_REPAS`
+ALTER TABLE `type_de_repas`
   ADD PRIMARY KEY (`id_type_repas`);
 
 --
--- Indexes for table `UTILISATEUR`
+-- Indexes for table `utilisateur`
 --
-ALTER TABLE `UTILISATEUR`
+ALTER TABLE `utilisateur`
   ADD PRIMARY KEY (`id_utilisateur`),
   ADD KEY `id_sexe` (`id_sexe`),
   ADD KEY `id_tranche_age` (`id_tranche_age`),
@@ -3682,112 +3689,85 @@ ALTER TABLE `UTILISATEUR`
 --
 
 --
--- AUTO_INCREMENT for table `ALIMENT`
+-- AUTO_INCREMENT for table `aliment`
 --
-ALTER TABLE `ALIMENT`
-  MODIFY `id_aliment` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3578;
+ALTER TABLE `aliment`
+  MODIFY `id_aliment` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3609;
 
 --
--- AUTO_INCREMENT for table `APPORT_NUTRITIONNEL`
+-- AUTO_INCREMENT for table `apport_nutritionnel`
 --
-ALTER TABLE `APPORT_NUTRITIONNEL`
+ALTER TABLE `apport_nutritionnel`
   MODIFY `id_apport_nutritionnel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `OBJECTIF`
+-- AUTO_INCREMENT for table `objectif`
 --
-ALTER TABLE `OBJECTIF`
+ALTER TABLE `objectif`
   MODIFY `id_objectif` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `PRATIQUE_SPORTIVE`
+-- AUTO_INCREMENT for table `pratique_sportive`
 --
-ALTER TABLE `PRATIQUE_SPORTIVE`
+ALTER TABLE `pratique_sportive`
   MODIFY `id_pratique_sportive` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `REPAS`
+-- AUTO_INCREMENT for table `repas`
 --
-ALTER TABLE `REPAS`
+ALTER TABLE `repas`
   MODIFY `id_repas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `TRANCHE_AGE`
+-- AUTO_INCREMENT for table `tranche_age`
 --
-ALTER TABLE `TRANCHE_AGE`
+ALTER TABLE `tranche_age`
   MODIFY `id_tranche_age` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT for table `TRANCHE_POIDS`
+-- AUTO_INCREMENT for table `tranche_poids`
 --
-ALTER TABLE `TRANCHE_POIDS`
+ALTER TABLE `tranche_poids`
   MODIFY `id_tranche_poids` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT for table `TRANCHE_TAILLE`
+-- AUTO_INCREMENT for table `tranche_taille`
 --
-ALTER TABLE `TRANCHE_TAILLE`
+ALTER TABLE `tranche_taille`
   MODIFY `id_tranche_taille` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `TYPE_ALIMENT`
+-- AUTO_INCREMENT for table `type_aliment`
 --
-ALTER TABLE `TYPE_ALIMENT`
+ALTER TABLE `type_aliment`
   MODIFY `id_type_aliment` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
--- AUTO_INCREMENT for table `UTILISATEUR`
+-- AUTO_INCREMENT for table `utilisateur`
 --
-ALTER TABLE `UTILISATEUR`
-  MODIFY `id_utilisateur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+ALTER TABLE `utilisateur`
+  MODIFY `id_utilisateur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `ALIMENT`
+-- Constraints for table `aliment`
 --
-ALTER TABLE `ALIMENT`
-  ADD CONSTRAINT `aliment_ibfk_3` FOREIGN KEY (`id_type_aliment`) REFERENCES `TYPE_ALIMENT` (`id_type_aliment`) ON UPDATE CASCADE;
+ALTER TABLE `aliment`
+  ADD CONSTRAINT `aliment_ibfk_3` FOREIGN KEY (`id_type_aliment`) REFERENCES `type_aliment` (`id_type_aliment`) ON UPDATE CASCADE;
 
 --
--- Constraints for table `ALIMENT_CONSOMME`
+-- Constraints for table `utilisateur`
 --
-ALTER TABLE `ALIMENT_CONSOMME`
-  ADD CONSTRAINT `aliment_consomme_ibfk_2` FOREIGN KEY (`id_repas`) REFERENCES `REPAS` (`id_repas`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `aliment_consomme_ibfk_3` FOREIGN KEY (`id_aliment`) REFERENCES `ALIMENT` (`id_aliment`) ON UPDATE CASCADE;
-
---
--- Constraints for table `BESOIN_APPORT_NUTRITIONNEL`
---
-ALTER TABLE `BESOIN_APPORT_NUTRITIONNEL`
-  ADD CONSTRAINT `besoin_apport_nutritionnel_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `UTILISATEUR` (`id_utilisateur`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `besoin_apport_nutritionnel_ibfk_2` FOREIGN KEY (`id_apport_nutritionnel`) REFERENCES `APPORT_NUTRITIONNEL` (`id_apport_nutritionnel`) ON UPDATE CASCADE;
-
---
--- Constraints for table `POURCENTAGE_SOUS_ALIMENT`
---
-ALTER TABLE `POURCENTAGE_SOUS_ALIMENT`
-  ADD CONSTRAINT `pourcentage_sous_aliment_ibfk_1` FOREIGN KEY (`id_aliment`) REFERENCES `ALIMENT` (`id_aliment`) ON UPDATE CASCADE;
-
---
--- Constraints for table `REPAS`
---
-ALTER TABLE `REPAS`
-  ADD CONSTRAINT `repas_ibfk_2` FOREIGN KEY (`id_utilisateur`) REFERENCES `UTILISATEUR` (`id_utilisateur`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `repas_ibfk_4` FOREIGN KEY (`id_type_repas`) REFERENCES `TYPE_DE_REPAS` (`id_type_repas`) ON UPDATE CASCADE;
-
---
--- Constraints for table `UTILISATEUR`
---
-ALTER TABLE `UTILISATEUR`
-  ADD CONSTRAINT `utilisateur_ibfk_1` FOREIGN KEY (`id_sexe`) REFERENCES `SEXE` (`id_sexe`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `utilisateur_ibfk_10` FOREIGN KEY (`id_objectif`) REFERENCES `OBJECTIF` (`id_objectif`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `utilisateur_ibfk_6` FOREIGN KEY (`id_tranche_age`) REFERENCES `TRANCHE_AGE` (`id_tranche_age`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `utilisateur_ibfk_7` FOREIGN KEY (`id_taille`) REFERENCES `TRANCHE_TAILLE` (`id_tranche_taille`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `utilisateur_ibfk_8` FOREIGN KEY (`id_poids`) REFERENCES `TRANCHE_POIDS` (`id_tranche_poids`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `utilisateur_ibfk_9` FOREIGN KEY (`id_pratique_sportive`) REFERENCES `PRATIQUE_SPORTIVE` (`id_pratique_sportive`) ON UPDATE CASCADE;
+ALTER TABLE `utilisateur`
+  ADD CONSTRAINT `utilisateur_ibfk_1` FOREIGN KEY (`id_sexe`) REFERENCES `sexe` (`id_sexe`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `utilisateur_ibfk_10` FOREIGN KEY (`id_objectif`) REFERENCES `objectif` (`id_objectif`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `utilisateur_ibfk_6` FOREIGN KEY (`id_tranche_age`) REFERENCES `tranche_age` (`id_tranche_age`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `utilisateur_ibfk_7` FOREIGN KEY (`id_taille`) REFERENCES `tranche_taille` (`id_tranche_taille`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `utilisateur_ibfk_8` FOREIGN KEY (`id_poids`) REFERENCES `tranche_poids` (`id_tranche_poids`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `utilisateur_ibfk_9` FOREIGN KEY (`id_pratique_sportive`) REFERENCES `pratique_sportive` (`id_pratique_sportive`) ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -27,7 +27,7 @@
         <div class="col-lg-6">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Veuillez entrer un repas</h5>
+              <h5 class="card-title">Un nouveau repas ... ?</h5>
               <!-- Button pour ouvrir la modale -->
               <a type="button" class="btn btn-primary " id="open-modal">Ajouter un repas</a>
             </div>
@@ -110,6 +110,24 @@
       $(this).closest('.form-group').remove();
     });
 
+    function onFormSubmit() {
+        // prevent the form to be sent to the server
+        event.preventDefault();
+
+        let user = $("#inputNom").val(); //récupérer l'utilisateur avec la session/cookies !!!
+        let type = $("#typeRepas").val(); //récupère l'id_type_repas
+        let date = $("#datetime").val();
+        
+        let newRepas = ajaxPOSTRepas(user, type, date);
+
+
+
+
+        //supprime les inputs et ferme la modale
+        document.getElementById("addRepasForm").reset();
+        modal.style.display = "none";
+      }
+
     // ============ JavaScript pour les API ============
     let RESTAPI_URL = "<?php 
           require_once('config.php'); 
@@ -142,6 +160,40 @@
                   reject(error);
               });
           });
+      }
+
+      function ajaxPOSTRepas(user, type, date) {
+        $.ajax({
+            url: RESTAPI_URL + "/repas.php",
+            method: "POST",
+            data: JSON.stringify({
+                id_utilisateur: user,
+                id_type_repas: type,
+                date_consommation: date
+            }),
+            dataType: "json"
+        }).done(async function(response) {
+          
+          // A modifier quand j'aurai fait l'historique des repas !!!
+
+          // // On n'a pas trouvé d'autre manière d'actualiser le tableau, on a essayé des methodes avec .ajax.reload() ou encore .draw() mais sans succès
+          // // Récupérer les nouvelles données
+          // let newData = await ajaxGETAliment();
+
+          // // Vider la table existante
+          // $('#alimentsTable').DataTable().clear();
+
+          // // Ajouter les nouvelles données
+          // $('#alimentsTable').DataTable().rows.add(newData);
+
+          // // Redessiner la table
+          // $('#alimentsTable').DataTable().draw();
+
+          console.log(response);
+
+        }).fail(function(error) {
+            console.log("La requête s'est terminée en échec. Infos : " + JSON.stringify(error));
+        });
       }
 
       async function chooseButton(button) {

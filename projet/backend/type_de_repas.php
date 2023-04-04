@@ -5,7 +5,6 @@ require_once('config.php');
 
 // Requête GET pour récupérer tous les types de repas de la base
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    $sql = "SELECT * FROM type_de_repas";
     try {
         // requête SQL pour récupérer les aliments
         $request = $pdo->prepare("SELECT t.id_type_repas, t.nom_type_repas

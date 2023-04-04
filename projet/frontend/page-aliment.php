@@ -28,7 +28,7 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Ajouter un aliment</h5>
-              <form id="addAlimentForm" method="POST" action="" onsubmit="onFormSubmit();">
+              <form id="addAlimentForm" onsubmit="onFormSubmit();">
                 <div class="form-group">
                   <label for="nom_aliment">Nom de l'aliment :</label>
                   <input type="text" class="form-control" id="inputNom" name="inputNom">
