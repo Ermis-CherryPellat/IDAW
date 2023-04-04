@@ -3,10 +3,16 @@
 require_once('db_init.php');   
 require_once('config.php');
 
+
+// a modifier !
+
+
 // Requête GET pour récupérer tous les aliments de la base
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+
+    $sql = "SELECT * FROM type_aliment";
     try {
-        // requête SQL pour récupérer les types aliments
+        // requête SQL pour récupérer les aliments
         $request = $pdo->prepare("SELECT t.id_type_aliment, t.nom_type_aliment
         FROM type_aliment t
         ");
@@ -34,6 +40,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 // Requête POST pour ajouter un aliment à la base
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
+    //INSERT INTO ALIMENT_CONSOMME (`masse`, `id_aliment`, `id_repas`) VALUES ('100', '2250', '3');
+
+
     $array = json_decode(file_get_contents("php://input"),true); 
 
     $nom_type_aliment = $array['nom_type_aliment'];

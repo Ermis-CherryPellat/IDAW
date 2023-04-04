@@ -28,7 +28,7 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Ajouter un aliment</h5>
-              <form id="addAlimentForm" method="POST" action="" onsubmit="onFormSubmit();">
+              <form id="addAlimentForm" onsubmit="onFormSubmit();">
                 <div class="form-group">
                   <label for="nom_aliment">Nom de l'aliment :</label>
                   <input type="text" class="form-control" id="inputNom" name="inputNom">
@@ -323,7 +323,7 @@
       async function editButton(button) {
         let row = $(button).closest('tr');
         let data = $('#alimentsTable').DataTable().row(row).data();
-        // Récupérer l'ID du type de l'aliment à modifier
+        // Récupérer le nom du type de l'aliment à modifier
         let nomTypeAliment = data.nom_type_aliment;
 
         // Aller chercher les types d'aliments
