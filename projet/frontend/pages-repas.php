@@ -6,6 +6,7 @@
   require_once("head.html");
   require_once("header.html");
   require_once("sidebar.html"); 
+
 ?>
 
 
@@ -28,8 +29,7 @@
             <div class="card-body">
               <h5 class="card-title">Veuillez entrer un repas</h5>
               <!-- Button pour ouvrir la modale -->
-                <a type="button" class="btn btn-primary " id="open-modal">Ajouter un repas</a>
-
+              <a type="button" class="btn btn-primary " id="open-modal">Ajouter un repas</a>
             </div>
           </div>
         </div>
@@ -60,14 +60,14 @@
       </div>
     </section>
 
-      <!-- La modale -->
-      <div id="modal" class="modal">
-        <div class="modal-content">
-          <span id="close-modal" class="close">&times;</span>
-          <h5 class="card-title">Ajout d'un repas</h2>
-          <p>Contenu de la modale</p>
-        </div>
+    <!-- La modale (j'ajoute un z-index à la modale et à la sidebar pour que la modale apparaisse par dessus) -->
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <span id="close-modal" class="close">&times;</span>
+        <h5 class="card-title">Ajout d'un repas</h5>
+        <?php require_once("modale-ajout-repas.php"); ?>
       </div>
+    </div>
 
   </main><!-- End #main -->
 
@@ -103,11 +103,19 @@
       }
     }
 
+
+    // On supprime l'aliment correspondant à un bouton "Supprimer" quand il est cliqué
+    // + on vérifier s'il y a plus d'un aliment avant de le supprimer
+    $('#alimentsChoisis').on('click', '.removeFoodBtn', function() {
+      $(this).closest('.form-group').remove();
+    });
+
     // ============ JavaScript pour les API ============
     let RESTAPI_URL = "<?php 
           require_once('config.php'); 
           echo URL_API;
       ?>";
+
     function ajaxGETTypeRepas(){
       return new Promise(function(resolve, reject) {
         $.ajax({
@@ -136,7 +144,76 @@
           });
       }
 
+      async function chooseButton(button) {
+        let row = $(button).closest('tr');
+        let data = $('#alimentsTable').DataTable().row(row).data();
+        let nomAliment = data.nom_aliment;
+        let idAliment = data.id_aliment;
 
+        try {
+              $("#alimentsChoisis").append(`<div class="form-group" id="aliment${idAliment}">
+                <div class="row rowAliment">
+                  <div class="col-lg-3 alimentRepas">
+                    <label for="aliment${idAliment}">${nomAliment}</label>
+                  </div>
+                  <div class="col-lg-3 alimentRepas">
+                    <input type="number" class="form-control quantity" name="quantity" placeholder="Quantité en grammes" required>
+                  </div>
+                  <div class="col-lg-3 alimentRepas">
+                    <button type="button" class="btn btn-secondary bouton_form removeFoodBtn">Supprimer</button>
+                  </div>
+                </div>
+                `);
+            
+        } catch (error) {
+            console.log("La séléction d'aliment s'est terminée en échec. Infos : " + JSON.stringify(error));
+        }
+      }
+
+      $(document).ready(async function(){
+        // Récuperer le type des aliments pour le form
+        try {
+          let data = await ajaxGETTypeRepas();
+          // Parcours des données pour les afficher dans le tableau
+          data.forEach(type => {
+            $("#typeRepas").append(`<option value="${type.id_type_repas}">${type.nom_type_repas}</option>`);
+          });
+        } catch (error) {
+            console.log("La requête pour les types de repas s'est terminée en échec. Infos : " + JSON.stringify(error));
+        }
+
+        try {
+          let data = await ajaxGETAliment();
+
+          let alimentsTable = $('#alimentsTable').DataTable({
+              // Nombre d'éléments par page
+              pageLength: 25,
+              // Activer la pagination
+              paging: true,
+              
+              // Passer les données à la table
+              data: data,
+              columns: [
+                { data: 'nom_aliment' },
+                { data: 'nom_type_aliment' },
+                { data: 'glucides' },
+                { data: 'lipides' },
+                { data: 'sucres' },
+                { data: 'proteines' },
+                { data: 'fibres' },
+                { data: 'energie' },
+                { data: null, render: function (data, type, row, meta) {
+                    return '<button class="btn btn-primary" onclick="chooseButton(this)">Choisir</button>';
+                } },
+                { data: 'id_aliment', visible : false, render: function(data, type, row, meta) {
+                  return '<div id="' + data + '">' + data + '</div>';
+                }}
+              ]
+          });
+        } catch (error) {
+            console.log("La requête pour les aliments s'est terminée en échec. Infos : " + JSON.stringify(error));
+        }
+      });
 
   </script>
 

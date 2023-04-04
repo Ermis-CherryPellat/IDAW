@@ -323,7 +323,7 @@
       async function editButton(button) {
         let row = $(button).closest('tr');
         let data = $('#alimentsTable').DataTable().row(row).data();
-        // Récupérer l'ID du type de l'aliment à modifier
+        // Récupérer le nom du type de l'aliment à modifier
         let nomTypeAliment = data.nom_type_aliment;
 
         // Aller chercher les types d'aliments
