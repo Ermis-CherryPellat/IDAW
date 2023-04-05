@@ -35,7 +35,7 @@ if (isset($_POST['email']) && isset($_POST['mot_de_passe'])) {
               <div class="d-flex justify-content-center py-4">
                 <a href="index.php" class="logo d-flex align-items-center w-auto">
                   <img src="assets/img/logo.png" alt="">
-                  <span class="d-none d-lg-block">IMangerMieux</span>
+                  <span class="d-none d-lg-block">i Manger Mieux</span>
                 </a>
               </div><!-- End Logo -->
 
