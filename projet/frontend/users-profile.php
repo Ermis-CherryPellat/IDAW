@@ -58,7 +58,7 @@
           <div class="card">
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
-              <h2>     Prenom Nom                 </h2>
+              <h2>     <span id="prenom"> </span>  <span id="nom"> </span>                </h2>
               <h3>                         </h3>
             </div>
           </div>
@@ -87,18 +87,10 @@
                  
 
                   
-    <div class="row">
-      <div class="col-lg-3 col-md-4 label">Prénom</div>
-      <div class="col-lg-9 col-md-8">  <span id="prenom"> </span> </div>
-    </div>
 
     <div class="row">
-      <div class="col-lg-3 col-md-4 label">Nom</div>
-      <div class="col-lg-9 col-md-8">  <span id="nom"> </span> </div>
-    </div>
-    <div class="row">
   <div class="col-lg-3 col-md-4 label">Age</div>
-  <div class="col-lg-9 col-md-8"><span id="age_min"></span> - <span id="age_max"></span></div>
+  <div class="col-lg-9 col-md-8"><span id="age_min"></span> - <span id="age_max"></span> ans</div>
 </div>
 <div class="row">
   <div class="col-lg-3 col-md-4 label">Email</div>
@@ -110,20 +102,41 @@
 </div>
 <div class="row">
   <div class="col-lg-3 col-md-4 label">Tranche de taille</div>
-  <div class="col-lg-9 col-md-8"><span id="taille_min"></span> - <span id="taille_max"></span></div>
+  <div class="col-lg-9 col-md-8"><span id="taille_min"></span> - <span id="taille_max"></span> cm</div>
 </div>
 <div class="row">
   <div class="col-lg-3 col-md-4 label">Poids</div>
-  <div class="col-lg-9 col-md-8"><span id="poids_min"></span> - <span id="poids_max"></span></div>
+  <div class="col-lg-9 col-md-8"><span id="poids_min"></span> - <span id="poids_max"></span> kg</div>
+  <!-- <select class="form-select" name="id_poids" id="inputWeight" required>
+                      <option value="">Choisissez votre tranche de poids</option>
+                      <option value="1">Moins de 49 kg</option>
+                      <option value="2">50 - 60 kg</option>
+                      <option value="3">61 - 70 kg</option>
+                      <option value="4">71 - 80 kg</option>
+                      <option value="5">81 - 90 kg</option>
+                      <option value="6">91 - 100 kg</option>
+                      <option value="7">111 - 120kg</option>
+                      <option value="8">121 - 130kg</option> -->
 </div>
+
 <div class="row">
   <div class="col-lg-3 col-md-4 label">Objectif</div>
   <div class="col-lg-9 col-md-8"><span id="nom_objectif"></span></div>
+  <!-- <option value="1">Souvent</option>
+ <option value="2">Régulièremet</option>
+<option value="3">Jamais</option> -->
 </div>
+
 <div class="row">
   <div class="col-lg-3 col-md-4 label">Pratique</div>
   <div class="col-lg-9 col-md-8"><span id="frequence_pratique_sportive"></span></div>
+
+  <!-- <option value="1">Perte de poids</option>
+                      <option value="2">Prise de masse</option>
+                      <option value="3">Maintien de la forme</option> -->
+
 </div>
+
   
 
 </div>
@@ -156,11 +169,14 @@ $.ajax({
   url: RESTAPI_URL + '/users.php?id_utilisateur=' + id_utilisateur ,
   dataType: 'json',
   success: function(user) {
-    
-    console.log(user);
-    console.log(id_utilisateur);
-  // affiche l'email du user
-    console.log((user[0].email));
+
+
+    // TEST 
+  // affiche le resultat de la requete ajax  
+  //   console.log(user);
+  //   console.log(id_utilisateur);
+  // // affiche l'email du user dans la console
+  //   console.log((user[0].email));
     
     
 

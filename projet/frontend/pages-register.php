@@ -66,7 +66,7 @@
                     <label for="weight" class="form-label">Tranche de poids</label>
                     <select class="form-select" name="id_poids" id="inputWeight" required>
                       <option value="">Choisissez votre tranche de poids</option>
-                      <option value="1" selected>Moins de 49 kg</option>
+                      <option value="1">Moins de 49 kg</option>
                       <option value="2">50 - 60 kg</option>
                       <option value="3">61 - 70 kg</option>
                       <option value="4">71 - 80 kg</option>
@@ -83,7 +83,7 @@
                     <label for="age" class="form-label">Tranche d'âge</label>
                     <select class="form-select" name="id_tranche_age" id="inputAge" required>
                       <option value="">Choisissez votre tranche d'âge</option>
-                      <option value="1" selected>Moins de 11 ans</option>
+                      <option value="1">Moins de 11 ans</option>
                       <option value="2">12-18 ans</option>
                       <option value="3">19-25 ans</option>
                       <option value="4">26-40 ans</option>
