@@ -88,33 +88,42 @@
 
                   
     <div class="row">
-      <div class="col-lg-3 col-md-4 label">Nom Prénom</div>
+      <div class="col-lg-3 col-md-4 label">Prénom</div>
       <div class="col-lg-9 col-md-8">  <span id="prenom"> </span> </div>
     </div>
+
     <div class="row">
-      <div class="col-lg-3 col-md-4 label">Age</div>
-      <div class="col-lg-9 col-md-8"></div>
+      <div class="col-lg-3 col-md-4 label">Nom</div>
+      <div class="col-lg-9 col-md-8">  <span id="nom"> </span> </div>
     </div>
     <div class="row">
-      <div class="col-lg-3 col-md-4 label">Email</div>
-      <div class="col-lg-9 col-md-8"></div>
-    </div>
-    <div class="row">
-      <div class="col-lg-3 col-md-4 label">Sexe</div>
-      <div class="col-lg-9 col-md-8">                    </div>
-    </div>
-    <div class="row">
-      <div class="col-lg-3 col-md-4 label">Taille</div>
-      <div class="col-lg-9 col-md-8"></div>
-    </div>
-    <div class="row">
-      <div class="col-lg-3 col-md-4 label">Poids</div>
-      <div class="col-lg-9 col-md-8"></div>
-    </div>
-    <div class="row">
-      <div class="col-lg-3 col-md-4 label">Objectif</div>
-      <div class="col-lg-9 col-md-8">                     </div>
-    </div>
+  <div class="col-lg-3 col-md-4 label">Age</div>
+  <div class="col-lg-9 col-md-8"><span id="age_min"></span> - <span id="age_max"></span></div>
+</div>
+<div class="row">
+  <div class="col-lg-3 col-md-4 label">Email</div>
+  <div class="col-lg-9 col-md-8"><span id="email"></span></div>
+</div>
+<div class="row">
+  <div class="col-lg-3 col-md-4 label">Sexe</div>
+  <div class="col-lg-9 col-md-8"><span id="nom_sexe"></span></div>
+</div>
+<div class="row">
+  <div class="col-lg-3 col-md-4 label">Tranche de taille</div>
+  <div class="col-lg-9 col-md-8"><span id="taille_min"></span> - <span id="taille_max"></span></div>
+</div>
+<div class="row">
+  <div class="col-lg-3 col-md-4 label">Poids</div>
+  <div class="col-lg-9 col-md-8"><span id="poids_min"></span> - <span id="poids_max"></span></div>
+</div>
+<div class="row">
+  <div class="col-lg-3 col-md-4 label">Objectif</div>
+  <div class="col-lg-9 col-md-8"><span id="nom_objectif"></span></div>
+</div>
+<div class="row">
+  <div class="col-lg-3 col-md-4 label">Pratique</div>
+  <div class="col-lg-9 col-md-8"><span id="frequence_pratique_sportive"></span></div>
+</div>
   
 
 </div>
@@ -147,22 +156,43 @@ $.ajax({
   url: RESTAPI_URL + '/users.php?id_utilisateur=' + id_utilisateur ,
   dataType: 'json',
   success: function(user) {
+    
     console.log(user);
     console.log(id_utilisateur);
+  // affiche l'email du user
+    console.log((user[0].email));
+    
+    
 
-    // Mettre à jour le contenu HTML du header avec le nom et le prénom de l'utilisateur
-    var nom_utilisateur = user.nom;
-    var prenom_utilisateur = user.prenom;
-    document.getElementById('nom').textContent = nom_utilisateur;
-    document.getElementById('prenom').textContent = prenom_utilisateur;
-    document.getElementById('email').textContent = email
-    document.getElementById('nom_sexe').textContent = sexe
-    document.getElementById('poids_min').textContent = poids_min
-    document.getElementById('poids_max').textContent = poids_max
-    document.getElementById('taille_min').textContent = taille_min
-    document.getElementById('taille_max').textContent = taille_max
-    document.getElementById('nom_objectif').textContent = objecti
-    document.getElementById('frequence_pratique_sportive').textContent = frequence_pratique
+    // Récupérer les valeurs des champs de l'objet utilisateur
+    var nom = user[0].nom;
+    
+    var prenom = user[0].prenom;
+    var email = user[0].email;
+    var sexe = user[0].nom_sexe;
+    var poids_min = user[0].poids_min;
+    var poids_max = user[0].poids_max;
+    var taille_min = user[0].taille_min;
+    var taille_max = user[0].taille_max;
+    var age_min = user[0].age_min;
+    var age_max = user[0].age_max;
+    var nom_objectif = user[0].nom_objectif;
+    var frequence_pratique_sportive = user[0].frequence_pratique_sportive;
+    
+       // Mettre à jour le contenu HTML avec les informations utilisateur récupérées
+    document.getElementById('nom').textContent = nom;
+    document.getElementById('prenom').textContent = prenom;
+    document.getElementById('age_min').textContent = age_min;
+    document.getElementById('age_max').textContent = age_max;
+    document.getElementById('email').textContent = email;
+    document.getElementById('nom_sexe').textContent = sexe;
+    document.getElementById('taille_min').textContent = taille_min;
+    document.getElementById('taille_max').textContent = taille_max;
+    document.getElementById('poids_min').textContent =  poids_min;
+    document.getElementById('poids_max').textContent = poids_max;
+
+    document.getElementById('nom_objectif').textContent = nom_objectif
+    document.getElementById('frequence_pratique_sportive').textContent = frequence_pratique_sportive
   }
 }).done(function() {
   console.log("La requête AJAX a réussi");
