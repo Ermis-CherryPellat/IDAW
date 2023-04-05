@@ -6,6 +6,7 @@ if (isset($_POST['email']) && isset($_POST['mot_de_passe'])) {
     // Vérifiez les données de connexion de l'utilisateur
     // Si l'authentification réussit, vous pouvez configurer des variables de session
     $_SESSION['email'] = $_POST['email'];
+    
     $_SESSION['logged_in'] = true;
     // Rediriger l'utilisateur vers une page sécurisée ou une page d'accueil
     header('Location :users-profile.php');
@@ -120,6 +121,23 @@ function validateUser(email,mot_de_passe, users) {
     }
     return false;
 }
+// accède à l'id de l'utilisateur connecté
+function stockerID(email,mot_de_passe, users){
+ 
+  // Recherche l'utilisateur correspondant à l'email et au mot de passe donnés
+  for (let i = 0; i < users.length; i++) {
+    if (users[i].email === email && users[i].mot_de_passe === mot_de_passe) {
+      // Retourne l'id de l'utilisateur correspondant
+      return users[i].id_utilisateur;
+    }
+  }
+  // Retourne null si aucun utilisateur correspondant n'est trouvé
+  return null;
+}
+
+
+
+
 
 $(document).ready(function() {
     // Écouteur d'événement pour le formulaire de connexion qaund on clique sur se connecter
@@ -142,6 +160,7 @@ $(document).ready(function() {
                     alert('Connexion réussie !');
                     sessionStorage.setItem('email', email);
                     sessionStorage.setItem('mot_de_passe', mot_de_passe);
+                    sessionStorage.setItem('id_utilisateur',stockerID(email,mot_de_passe, users));
                     // Exemple de redirection vers une page du site
                     window.location.replace('users-profile.php');
                     } else {

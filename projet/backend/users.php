@@ -9,6 +9,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     
     $sql = "SELECT * FROM UTILISATEUR ";
     try {
+// récupérer l'ID utilisateur à partir des paramètres de requête
+        $id_utilisateur = isset($_GET['id_utilisateur']) ? $_GET['id_utilisateur'] : null;
+
         // requête SQL pour récupérer l'utilisateur avec l'ID spécifié
         $request = $pdo->prepare("SELECT u.id_utilisateur, u.nom, u.prenom, u.email, u.mot_de_passe, s.nom_sexe, tp.tranche_min AS poids_min, tp.tranche_max AS poids_max, tt.tranche_min AS taille_min, tt.tranche_max AS taille_max, o.nom_objectif, ps.frequence_pratique_sportive, ta.tranche_min AS age_min, ta.tranche_max AS age_max
         FROM UTILISATEUR u
@@ -18,9 +21,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         JOIN OBJECTIF o ON o.id_objectif = u.id_objectif
         JOIN PRATIQUE_SPORTIVE ps ON ps.id_pratique_sportive = u.id_pratique_sportive
         JOIN TRANCHE_AGE ta ON ta.id_tranche_age = u.id_tranche_age
-        
+        WHERE (:id_utilisateur IS NULL OR u.id_utilisateur = :id_utilisateur)
         ");
-        
+        $request->bindParam(':id_utilisateur', $id_utilisateur, PDO::PARAM_INT);
         $request->execute();
         $user = $request->fetchAll(PDO::FETCH_ASSOC);
 

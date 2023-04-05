@@ -26,19 +26,13 @@
   <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
 
-  <!-- Template Main CSS File -->
+
   <link href="assets/css/style.css" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: NiceAdmin
-  * Updated: Mar 09 2023 with Bootstrap v5.2.3
-  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+
 </head>
 
-<?php require_once("header.html");
+<?php require_once("header.php");
     require_once("sidebar.html"); ?>
 
 <body>
@@ -63,8 +57,8 @@
           <div class="card">
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
-              <h2>Kevin Anderson</h2>
-              <h3>Web Designer</h3>
+              <h2>     Prenom Nom                 </h2>
+              <h3>                         </h3>
             </div>
           </div>
 
@@ -94,31 +88,31 @@
                   
     <div class="row">
       <div class="col-lg-3 col-md-4 label">Nom Prénom</div>
-      <div class="col-lg-9 col-md-8"><?= $user['nom'] . ' ' . $user['prenom'] ?></div>
+      <div class="col-lg-9 col-md-8">  <span id="prenom-utilisateur"> </span> </div>
     </div>
     <div class="row">
       <div class="col-lg-3 col-md-4 label">Age</div>
-      <div class="col-lg-9 col-md-8"><?= $user['id_tranche_age'] ?></div>
+      <div class="col-lg-9 col-md-8"></div>
     </div>
     <div class="row">
       <div class="col-lg-3 col-md-4 label">Email</div>
-      <div class="col-lg-9 col-md-8"><?= $user['email'] ?></div>
+      <div class="col-lg-9 col-md-8"></div>
     </div>
     <div class="row">
       <div class="col-lg-3 col-md-4 label">Sexe</div>
-      <div class="col-lg-9 col-md-8"><?= $user['nom_sexe'] ?></div>
+      <div class="col-lg-9 col-md-8">                    </div>
     </div>
     <div class="row">
       <div class="col-lg-3 col-md-4 label">Taille</div>
-      <div class="col-lg-9 col-md-8"><?= $user['taille_min'] . 'cm - ' . $user['taille_max'] . 'cm' ?></div>
+      <div class="col-lg-9 col-md-8"></div>
     </div>
     <div class="row">
       <div class="col-lg-3 col-md-4 label">Poids</div>
-      <div class="col-lg-9 col-md-8"><?= $user['poids_min'] . 'kg - ' . $user['poids_max'] . 'kg' ?></div>
+      <div class="col-lg-9 col-md-8"></div>
     </div>
     <div class="row">
       <div class="col-lg-3 col-md-4 label">Objectif</div>
-      <div class="col-lg-9 col-md-8"><?= $user['nom_objectif'] ?></div>
+      <div class="col-lg-9 col-md-8">                     </div>
     </div>
   
 
@@ -134,33 +128,38 @@
         </div>
       </div>
 
+
+<script>
+
+var id_utilisateur = sessionStorage.getItem('id_utilisateur');
+
+// Envoyer une requête AJAX GET pour récupérer les informations de l'utilisateur
+$.ajax({
+  type: 'GET',
+  url: RESTAPI_URL + '/users.php?id=' + id_utilisateur,
+  dataType: 'json',
+  success: function(user) {
+    console.log(user);
+    // Mettre à jour le contenu HTML du header avec le nom et le prénom de l'utilisateur
+    var nom_utilisateur = user.nom;
+    var prenom_utilisateur = user.prenom;
+    document.getElementById('nom-utilisateur').textContent = nom_utilisateur;
+    document.getElementById('prenom-utilisateur').textContent = prenom_utilisateur;
+  }
+}).done(function() {
+  console.log("La requête AJAX a réussi");
+}).fail(function() {
+  console.log("La requête AJAX a échoué");
+});
+
 <script>
 
 
-let RESTAPI_URL = "<?php 
-          require_once('config.php'); 
-          echo URL_API;
-      ?>";
-      function ajaxGETUsers(){
-          return new Promise(function(resolve, reject) {
-              $.ajax({
-                  url: RESTAPI_URL + "/users.php",
-                  method: "GET",
-                  dataType: "json"
-              }).done(function(response){
-                  resolve(response);
-              }).fail(function(error){
-                  reject(error);
-              });
-          });
-      }
+   
 
-      <script>
-    </section>
+  </main>
 
-  </main><!-- End #main -->
-
-  <!-- ======= Footer ======= -->
+ 
 <?php require_once("footer.php") ?>
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
@@ -175,7 +174,7 @@ let RESTAPI_URL = "<?php
   <script src="assets/vendor/tinymce/tinymce.min.js"></script>
   <script src="assets/vendor/php-email-form/validate.js"></script>
 
-  <!-- Template Main JS File -->
+
   <script src="assets/js/main.js"></script>
 
 </body>

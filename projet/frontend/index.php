@@ -6,7 +6,7 @@
 <?php
     require_once("head.html");
 
-    require_once("header.html");
+    require_once("header.php");
     require_once("sidebar.html"); 
     ?>
 

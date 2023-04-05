@@ -3,7 +3,7 @@
   
 <?php 
 
-  require_once("head.html");
+  require_once("head.php");
   ?>
 
   <main>
