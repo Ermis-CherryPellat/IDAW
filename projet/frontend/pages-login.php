@@ -109,7 +109,7 @@ let RESTAPI_URL = "<?php
 function getID_UserByEmailAndPassword(email, mot_de_passe, users) {
     for (let i = 0; i < users.length; i++) {
         if (users[i].email === email && users[i].mot_de_passe === mot_de_passe) {
-            return users[i];
+            return users[i].id_utilisateur;
         }
     }
     return null;

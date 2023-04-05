@@ -89,7 +89,7 @@
                   
     <div class="row">
       <div class="col-lg-3 col-md-4 label">Nom Prénom</div>
-      <div class="col-lg-9 col-md-8">  <span id="prenom-utilisateur"> </span> </div>
+      <div class="col-lg-9 col-md-8">  <span id="prenom"> </span> </div>
     </div>
     <div class="row">
       <div class="col-lg-3 col-md-4 label">Age</div>
@@ -144,7 +144,7 @@ var id_utilisateur = sessionStorage.getItem('id_utilisateur');
 // Envoyer une requête AJAX GET pour récupérer les informations de l'utilisateur
 $.ajax({
   type: 'GET',
-  url: RESTAPI_URL + '/users.php?id=' + 50,
+  url: RESTAPI_URL + '/users.php?id_utilisateur=' + id_utilisateur ,
   dataType: 'json',
   success: function(user) {
     console.log(user);
@@ -153,8 +153,16 @@ $.ajax({
     // Mettre à jour le contenu HTML du header avec le nom et le prénom de l'utilisateur
     var nom_utilisateur = user.nom;
     var prenom_utilisateur = user.prenom;
-    document.getElementById('nom-utilisateur').textContent = nom_utilisateur;
-    document.getElementById('prenom-utilisateur').textContent = prenom_utilisateur;
+    document.getElementById('nom').textContent = nom_utilisateur;
+    document.getElementById('prenom').textContent = prenom_utilisateur;
+    document.getElementById('email').textContent = email
+    document.getElementById('nom_sexe').textContent = sexe
+    document.getElementById('poids_min').textContent = poids_min
+    document.getElementById('poids_max').textContent = poids_max
+    document.getElementById('taille_min').textContent = taille_min
+    document.getElementById('taille_max').textContent = taille_max
+    document.getElementById('nom_objectif').textContent = objecti
+    document.getElementById('frequence_pratique_sportive').textContent = frequence_pratique
   }
 }).done(function() {
   console.log("La requête AJAX a réussi");
