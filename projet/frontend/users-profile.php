@@ -31,6 +31,7 @@
 
 
 </head>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <?php require_once("header.php");
     require_once("sidebar.html"); ?>
@@ -128,18 +129,27 @@
         </div>
       </div>
 
+  </main>
 
-<script>
+  <script>
+
+let RESTAPI_URL = "<?php 
+      require_once('config.php'); 
+      echo URL_API;
+  ?>";
+
 
 var id_utilisateur = sessionStorage.getItem('id_utilisateur');
 
 // Envoyer une requête AJAX GET pour récupérer les informations de l'utilisateur
 $.ajax({
   type: 'GET',
-  url: RESTAPI_URL + '/users.php?id=' + id_utilisateur,
+  url: RESTAPI_URL + '/users.php?id=' + 50,
   dataType: 'json',
   success: function(user) {
     console.log(user);
+    console.log(id_utilisateur);
+
     // Mettre à jour le contenu HTML du header avec le nom et le prénom de l'utilisateur
     var nom_utilisateur = user.nom;
     var prenom_utilisateur = user.prenom;
@@ -152,12 +162,7 @@ $.ajax({
   console.log("La requête AJAX a échoué");
 });
 
-<script>
-
-
-   
-
-  </main>
+</script>
 
  
 <?php require_once("footer.php") ?>
