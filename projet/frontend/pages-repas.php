@@ -151,10 +151,10 @@
 
 
     // ============ JavaScript pour les API ============
-    let RESTAPI_URL = "<?php 
-          require_once('config.php'); 
-          echo URL_API;
-      ?>";
+    // let RESTAPI_URL = "<?php 
+    //       require_once('config.php'); 
+    //       echo URL_API;
+    //   ?>";
 
     function ajaxGETTypeRepas(){
       return new Promise(function(resolve, reject) {

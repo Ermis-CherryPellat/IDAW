@@ -163,10 +163,10 @@
   <?php require_once("js_files.html"); ?>
 
   <script>
-      let RESTAPI_URL = "<?php 
-          require_once('config.php'); 
-          echo URL_API;
-      ?>";
+      // let RESTAPI_URL = "<?php 
+      //     require_once('config.php'); 
+      //     echo URL_API;
+      // ?>";
 
       function verifierNom(nom){
         // supprimer le message d'erreur s'il existe déjà
@@ -449,7 +449,6 @@
               pageLength: 25,
               // Activer la pagination
               paging: true,
-              
               // Passer les données à la table
               data: data,
               columns: [
