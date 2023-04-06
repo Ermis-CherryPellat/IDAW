@@ -26,8 +26,8 @@
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6><span id="prenom"> </span>  <span id="nom"></h6>
-              <span id="nom_objectif"></span>
+              <h6><span class="prenom"> </span>  <span class="nom"></h6>
+              <span class="nom_objectif"></span>
             </li>
             <li>
               <hr class="dropdown-divider">
@@ -60,36 +60,15 @@
   </header>
 
 </main>
+<script src="fonctions.js"></script>
 
 <script>
-
+  
 let RESTAPI_URL = "<?php 
           require_once('config.php'); 
           echo URL_API;
       ?>";
-
-
-  var id_utilisateur = sessionStorage.getItem('id_utilisateur');
-
-  // Envoyer une requête AJAX GET pour récupérer les informations de l'utilisateur
-  $.ajax({
-    type: 'GET',
-    url: RESTAPI_URL + '/users.php?id_utilisateur=' + id_utilisateur ,
-    dataType: 'json',
-    success: function(user) {
-
-      var nom = user[0].nom;
-      var prenom = user[0].prenom;
-      var nom_objectif = user[0].nom_objectif;
-      document.getElementById('nom').textContent = nom;
-      document.getElementById('prenom').textContent = prenom;
-      document.getElementById('nom_objectif').textContent = nom_objectif;
-
-    }
-  }).done(function() {
-    console.log("La requête AJAX a réussi");
-  }).fail(function() {
-    console.log("La requête AJAX a échoué");
-  });
-
+  // Appeler la fonction getUserInfo()
+  getUserInfo();
 </script>
+
