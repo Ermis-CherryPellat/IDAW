@@ -73,3 +73,50 @@ function getUserInfo() {
       console.log("La requête AJAX a échoué");
     });
   }
+
+  function calculerIMC() {
+    var id_utilisateur = sessionStorage.getItem('id_utilisateur');
+
+    // Envoyer une requête AJAX GET pour récupérer les informations de l'utilisateur
+    $.ajax({
+        type: 'GET',
+        url: RESTAPI_URL + '/users.php?id_utilisateur=' + id_utilisateur ,
+        dataType: 'json',
+        success: function(user) {
+            // Récupérer les valeurs des champs de l'objet utilisateur
+            var sexe = user[0].nom_sexe;
+            var poids_min = parseFloat(user[0].poids_min);
+            var poids_max = parseFloat(user[0].poids_max);
+            var poids= (poids_min+poids_max)/2;
+            var taille_min = (user[0].taille_min)/100;
+            var taille_max = (user[0].taille_max)/100;
+            var taille=(taille_max+taille_min)/2;
+            console.log('poids : ' + poids);
+            // Calculer l'IMC en fonction du sexe
+            var imc = 0;
+            if (sexe === 'Masculin') {
+                imc = poids/  (taille ** 2);
+
+                console.log('imc : ' +imc );
+            } else if (sexe === 'Feminin') {
+                imc = poids / ((taille ** 2)) - 0.75;
+            } else {
+                console.log('Sexe non reconnu');
+            }
+            console.log('IMC calculé : ' + imc.toFixed(2));
+
+
+            
+            // Mettre à jour la valeur de l'IMC dans la balise HTML avec la classe 'imc'
+            var imcElements = document.getElementsByClassName('imc');
+            for (var i = 0; i < imcElements.length; i++) {
+              imcElements[i].textContent = imc.toFixed(2);
+            }
+            
+        }
+    }).done(function() {
+        console.log("La requête AJAX a réussi");
+    }).fail(function() {
+        console.log("La requête AJAX a échoué");
+    });
+}
