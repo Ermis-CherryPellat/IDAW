@@ -137,7 +137,7 @@
                   </div>
 
                   <div class="col-12">
-                    <button class="btn btn-primary w-100" type="submit">Créer un compte</button>
+                    <button class="btn btn-primary w-100" action=""  type="submit">Créer un compte</button>
                   </div>
                   <div class="col-12">
                     <p class="small mb-0">Déjà un compte ? <a href="pages-login.php">Se connecter</a></p>
@@ -174,19 +174,6 @@
       echo URL_API;
   ?>";
 
-  function verifierNom(nom){
-    // supprimer le message d'erreur s'il existe déjà
-    $('#inputName').siblings('.text-danger').remove();
-    // vérifier si le champ nom est vide
-    if (nom.trim() === '') {
-        // vérifier si le message d'erreur existe déjà
-        if ($('#inputName').siblings('.text-danger').length == 0) {
-            // afficher le message d'erreur à côté du champ nom
-            $('#inputName').parent().append('<div class="text-danger">This field is required</div>');
-        }
-        return true;
-    };
-  }
 
   async function onFormSubmit() {
     // prevent the form to be sent to the server
@@ -203,12 +190,17 @@
     let objectif = $("#inputObjectif").val();
     let mot_de_passe =$("#inputMotdePasse").val();
 
-    if(verifierNom(nom)){
-        return;
-    }
+
+    
     // console.log(nom, prenom, email, sexe, poids, age, taille, pratique, objectif,mot_de_passe);
     ajaxPOSTUsers(nom, prenom, email, sexe, poids, age, taille, pratique,objectif,mot_de_passe);
     // console.log(ajaxGETUsers());
+    alert('Compte créé !');
+    window.location.replace('pages-login.php');
+    
+
+    
+
   }
 
   function ajaxGETUsers(){

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -58,7 +59,7 @@
           <div class="card">
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
-              <h2>     <span id="prenom"> </span>  <span id="nom"> </span>                </h2>
+              <h2>     <span id="Prenom"> </span>  <span id="Nom"> </span>                </h2>
               <h3>                         </h3>
             </div>
           </div>
@@ -121,7 +122,7 @@
 
 <div class="row">
   <div class="col-lg-3 col-md-4 label">Objectif</div>
-  <div class="col-lg-9 col-md-8"><span id="nom_objectif"></span></div>
+  <div class="col-lg-9 col-md-8"><span id="Nom_objectif"></span></div>
   <!-- <option value="1">Souvent</option>
  <option value="2">Régulièremet</option>
 <option value="3">Jamais</option> -->
@@ -155,10 +156,7 @@
 
   <script>
 
-let RESTAPI_URL = "<?php 
-      require_once('config.php'); 
-      echo URL_API;
-  ?>";
+
 
 
 var id_utilisateur = sessionStorage.getItem('id_utilisateur');
@@ -171,8 +169,8 @@ $.ajax({
   success: function(user) {
 
 
-    // TEST 
-  // affiche le resultat de la requete ajax  
+
+ 
   //   console.log(user);
   //   console.log(id_utilisateur);
   // // affiche l'email du user dans la console
@@ -181,9 +179,9 @@ $.ajax({
     
 
     // Récupérer les valeurs des champs de l'objet utilisateur
-    var nom = user[0].nom;
+    var Nom = user[0].nom;
     
-    var prenom = user[0].prenom;
+    var Prenom = user[0].prenom;
     var email = user[0].email;
     var sexe = user[0].nom_sexe;
     var poids_min = user[0].poids_min;
@@ -192,12 +190,12 @@ $.ajax({
     var taille_max = user[0].taille_max;
     var age_min = user[0].age_min;
     var age_max = user[0].age_max;
-    var nom_objectif = user[0].nom_objectif;
+    var nom_objectif = user[0].Nom_objectif;
     var frequence_pratique_sportive = user[0].frequence_pratique_sportive;
     
        // Mettre à jour le contenu HTML avec les informations utilisateur récupérées
-    document.getElementById('nom').textContent = nom;
-    document.getElementById('prenom').textContent = prenom;
+    document.getElementById('Nom').textContent = Nom;
+    document.getElementById('Prenom').textContent = Prenom;
     document.getElementById('age_min').textContent = age_min;
     document.getElementById('age_max').textContent = age_max;
     document.getElementById('email').textContent = email;
@@ -207,7 +205,7 @@ $.ajax({
     document.getElementById('poids_min').textContent =  poids_min;
     document.getElementById('poids_max').textContent = poids_max;
 
-    document.getElementById('nom_objectif').textContent = nom_objectif
+    document.getElementById('Nom_objectif').textContent = Nom_objectif;
     document.getElementById('frequence_pratique_sportive').textContent = frequence_pratique_sportive
   }
 }).done(function() {

@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     
     $sql = "SELECT * FROM UTILISATEUR ";
     try {
-// récupérer l'ID utilisateur à partir des paramètres de requête
+// récupérer l'ID utilisateur à partir des paramètres de requête : soit récupérer 1 user ou tous les users
         $id_utilisateur = isset($_GET['id_utilisateur']) ? $_GET['id_utilisateur'] : null;
 
         // requête SQL pour récupérer l'utilisateur avec l'ID spécifié

@@ -3,6 +3,7 @@
 
 <!-- ======= Header ======= -->
 <header id="header" class="header fixed-top d-flex align-items-center">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <div class="d-flex align-items-center justify-content-between">
       <a href="index.php" class="logo d-flex align-items-center">
@@ -24,8 +25,8 @@
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6><span id="prenom-utilisateur"></span></h6>
-              <span>Web Designer</span>
+              <h6><span id="prenom"> </span>  <span id="nom"></h6>
+              <span id="nom_objectif"></span>
             </li>
             <li>
               <hr class="dropdown-divider">
@@ -56,22 +57,38 @@
     </nav><!-- End Icons Navigation -->
 
   </header><!-- End Header -->
-<!-- <script>
+
+</main>
+
+<script>
+
+let RESTAPI_URL = "<?php 
+      require_once('config.php'); 
+      echo URL_API;
+  ?>";
+
 
 var id_utilisateur = sessionStorage.getItem('id_utilisateur');
 
 // Envoyer une requête AJAX GET pour récupérer les informations de l'utilisateur
 $.ajax({
-    type: 'GET',
-    url: RESTAPI_URL + '/users.php?id=' + id_utilisateur,
-    dataType: 'json',
-    success: function(user) {
-        // Mettre à jour le contenu HTML du header avec le nom et le prénom de l'utilisateur
-        var nom_utilisateur = user.nom;
-        var prenom_utilisateur = user.prenom;
-        document.getElementById('nom-utilisateur').textContent = nom_utilisateur;
-        document.getElementById('prenom-utilisateur').textContent = prenom_utilisateur;
-    }
+  type: 'GET',
+  url: RESTAPI_URL + '/users.php?id_utilisateur=' + id_utilisateur ,
+  dataType: 'json',
+  success: function(user) {
+
+    var nom = user[0].nom;
+    var prenom = user[0].prenom;
+    var nom_objectif = user[0].nom_objectif;
+    document.getElementById('nom').textContent = nom;
+    document.getElementById('prenom').textContent = prenom;
+    document.getElementById('nom_objectif').textContent = nom_objectif;
+
+  }
+}).done(function() {
+  console.log("La requête AJAX a réussi");
+}).fail(function() {
+  console.log("La requête AJAX a échoué");
 });
 
-<scipt> -->
+</script>

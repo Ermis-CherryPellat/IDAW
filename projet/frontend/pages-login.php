@@ -71,7 +71,7 @@ session_start();
                     <p id="loginError" class="text-danger mt-2"></p>
                       </div>
                     <div class="col-12">
-                      <p class="small mb-0">Pas de comptre <a href="pages-register.php">Créer un compte</a></p>
+                      <p class="small mb-0">Pas de compte <a href="pages-register.php">Créer un compte</a></p>
                     </div>
                   </form>
 
@@ -153,7 +153,7 @@ $(document).ready(function() {
                     sessionStorage.setItem('id_utilisateur',getID_UserByEmailAndPassword(email, mot_de_passe, users));
                     
                     // Exemple de redirection vers une page du site
-                    window.location.replace('users-profile.php');
+                    window.location.replace('pages-analyse.php');
                     } else {
                     
                     alert('Email ou mot de passe incorrect !');
