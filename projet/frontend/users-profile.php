@@ -59,7 +59,7 @@
           <div class="card">
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
-              <h2>     <span id="Prenom"> </span>  <span id="Nom"> </span>                </h2>
+              <h2>     <span class="prenom"> </span>  <span class="nom"> </span>                </h2>
               <h3>                         </h3>
             </div>
           </div>
@@ -91,23 +91,23 @@
 
     <div class="row">
   <div class="col-lg-3 col-md-4 label">Age</div>
-  <div class="col-lg-9 col-md-8"><span id="age_min"></span> - <span id="age_max"></span> ans</div>
+  <div class="col-lg-9 col-md-8"><span class="age"></span></div>
 </div>
 <div class="row">
   <div class="col-lg-3 col-md-4 label">Email</div>
-  <div class="col-lg-9 col-md-8"><span id="email"></span></div>
+  <div class="col-lg-9 col-md-8"><span class="email"></span></div>
 </div>
 <div class="row">
   <div class="col-lg-3 col-md-4 label">Sexe</div>
-  <div class="col-lg-9 col-md-8"><span id="nom_sexe"></span></div>
+  <div class="col-lg-9 col-md-8"><span class="sexe"></span></div>
 </div>
 <div class="row">
   <div class="col-lg-3 col-md-4 label">Tranche de taille</div>
-  <div class="col-lg-9 col-md-8"><span id="taille_min"></span> - <span id="taille_max"></span> cm</div>
+  <div class="col-lg-9 col-md-8"><span class=taille></span></div>
 </div>
 <div class="row">
   <div class="col-lg-3 col-md-4 label">Poids</div>
-  <div class="col-lg-9 col-md-8"><span id="poids_min"></span> - <span id="poids_max"></span> kg</div>
+  <div class="col-lg-9 col-md-8"><span class="poids"></span></div>
   <!-- <select class="form-select" name="id_poids" id="inputWeight" required>
                       <option value="">Choisissez votre tranche de poids</option>
                       <option value="1">Moins de 49 kg</option>
@@ -122,7 +122,7 @@
 
 <div class="row">
   <div class="col-lg-3 col-md-4 label">Objectif</div>
-  <div class="col-lg-9 col-md-8"><span id="Nom_objectif"></span></div>
+  <div class="col-lg-9 col-md-8"><span class="nom_objectif"></span></div>
   <!-- <option value="1">Souvent</option>
  <option value="2">Régulièremet</option>
 <option value="3">Jamais</option> -->
@@ -130,7 +130,7 @@
 
 <div class="row">
   <div class="col-lg-3 col-md-4 label">Pratique</div>
-  <div class="col-lg-9 col-md-8"><span id="frequence_pratique_sportive"></span></div>
+  <div class="col-lg-9 col-md-8"><span class="frequence"></span></div>
 
   <!-- <option value="1">Perte de poids</option>
                       <option value="2">Prise de masse</option>
@@ -153,68 +153,14 @@
       </div>
 
   </main>
+  <script src="fonctions.js"></script>
 
-  <script>
-
-
-
-
-var id_utilisateur = sessionStorage.getItem('id_utilisateur');
-
-// Envoyer une requête AJAX GET pour récupérer les informations de l'utilisateur
-$.ajax({
-  type: 'GET',
-  url: RESTAPI_URL + '/users.php?id_utilisateur=' + id_utilisateur ,
-  dataType: 'json',
-  success: function(user) {
-
-
-
- 
-  //   console.log(user);
-  //   console.log(id_utilisateur);
-  // // affiche l'email du user dans la console
-  //   console.log((user[0].email));
-    
-    
-
-    // Récupérer les valeurs des champs de l'objet utilisateur
-    var Nom = user[0].nom;
-    
-    var Prenom = user[0].prenom;
-    var email = user[0].email;
-    var sexe = user[0].nom_sexe;
-    var poids_min = user[0].poids_min;
-    var poids_max = user[0].poids_max;
-    var taille_min = user[0].taille_min;
-    var taille_max = user[0].taille_max;
-    var age_min = user[0].age_min;
-    var age_max = user[0].age_max;
-    var nom_objectif = user[0].Nom_objectif;
-    var frequence_pratique_sportive = user[0].frequence_pratique_sportive;
-    
-       // Mettre à jour le contenu HTML avec les informations utilisateur récupérées
-    document.getElementById('Nom').textContent = Nom;
-    document.getElementById('Prenom').textContent = Prenom;
-    document.getElementById('age_min').textContent = age_min;
-    document.getElementById('age_max').textContent = age_max;
-    document.getElementById('email').textContent = email;
-    document.getElementById('nom_sexe').textContent = sexe;
-    document.getElementById('taille_min').textContent = taille_min;
-    document.getElementById('taille_max').textContent = taille_max;
-    document.getElementById('poids_min').textContent =  poids_min;
-    document.getElementById('poids_max').textContent = poids_max;
-
-    document.getElementById('Nom_objectif').textContent = Nom_objectif;
-    document.getElementById('frequence_pratique_sportive').textContent = frequence_pratique_sportive
-  }
-}).done(function() {
-  console.log("La requête AJAX a réussi");
-}).fail(function() {
-  console.log("La requête AJAX a échoué");
-});
-
+<script>
+  
+  // Appeler la fonction getUserInfo()
+  getUserInfo();
 </script>
+ 
 
  
 <?php require_once("footer.php") ?>
