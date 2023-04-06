@@ -125,7 +125,7 @@
       // prevent the form to be sent to the server
       event.preventDefault();
 
-      let user = $("#inputNom").val(); //récupérer l'utilisateur avec la session/cookies !!!
+      let user = window.sessionStorage.getItem('id_utilisateur');
       let type = $("#typeRepas").val(); //récupère l'id_type_repas
       let date = $("#datetime").val();
 
@@ -135,7 +135,6 @@
       $(".aliments-group").each(async function() {
         let quantity = $(this).find(".quantity").val();
         let idAliment = $(this).attr("id").replace("aliment", "");
-        console.log(quantity, idAliment, newRepas);
         await ajaxPOSTAlimentConsomme(quantity, idAliment, newRepas);
       });
 
@@ -183,6 +182,7 @@
     }
 
     function ajaxPOSTRepas(user, type, date) {
+      console.log(user, type, date);
       return new Promise(function(resolve, reject) {
         $.ajax({
             url: RESTAPI_URL + "/repas.php",
@@ -252,12 +252,12 @@
       });
     }
 
-    function ajaxGETRepas(){
+    function ajaxGETRepas(id_utilisateur){
       return new Promise(function(resolve, reject) {
         $.ajax({
-            url: RESTAPI_URL + "/repas.php",
-            method: "GET",
-            dataType: "json"
+          url: RESTAPI_URL + "/repas.php?id_utilisateur=" + id_utilisateur,
+          method: "GET",
+          dataType: "json"
         }).done(function(response){
             resolve(response);
         }).fail(function(error){
@@ -354,33 +354,34 @@
     }
     
     try {
-      let repasData = await ajaxGETRepas();
+      let id_utilisateur = window.sessionStorage.getItem('id_utilisateur');
+      let repasData = await ajaxGETRepas(id_utilisateur);
       let typeRepasData = await ajaxGETTypeRepas();
 
-      repasTable = $('#repasTable').DataTable({ // Initialisation de repasTable dans la portée globale
-      pageLength: 25,
-      paging: true,
-      data: repasData,
-      columns: [
-        { data: 'date_consommation' },
-        {
-          data: null, render: function (data, type, row, meta) {
-            let typeRepas = typeRepasData.find(typeRepas => typeRepas.id_type_repas === row.id_type_repas);
-            return typeRepas ? typeRepas.nom_type_repas : '';
-          }
-        },
-        {
-          data: null, render: function (data, type, row, meta) {
-            return '<button class="btn " onclick="viewButton(this)">Voir</button>';
-          }
-        },
-        { data: 'id_repas', visible: false }
-          ]
-        });
-      } catch (error) {
-        console.log("La requête pour les repas s'est terminée en échec. Infos : " + JSON.stringify(error));
-      }
-    });
+      repasTable = $('#repasTable').DataTable({ 
+        pageLength: 25,
+        paging: true,
+        data: repasData,
+        columns: [
+          { data: 'date_consommation' },
+          {
+            data: null, render: function (data, type, row, meta) {
+              let typeRepas = typeRepasData.find(typeRepas => typeRepas.id_type_repas === row.id_type_repas);
+              return typeRepas ? typeRepas.nom_type_repas : '';
+            }
+          },
+          {
+            data: null, render: function (data, type, row, meta) {
+              return '<button class="btn " onclick="viewButton(this)">Voir</button>';
+            }
+          },
+          { data: 'id_repas', visible: false }
+            ]
+          });
+        } catch (error) {
+          console.log("La requête pour les repas s'est terminée en échec. Infos : " + JSON.stringify(error));
+        }
+      });
 
   </script>
 

@@ -4,15 +4,20 @@ require_once('db_init.php');
 require_once('config.php');
 
 
-// Requête GET pour récupérer tous les aliments de la base
+// Requête GET pour récupérer tous les repas de la base
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     try {
-        // requête SQL pour récupérer les aliments
+        $id_utilisateur = $_GET['id_utilisateur'];
+
+        // requête SQL pour récupérer les repas de l'utilisateur donné
         $request = $pdo->prepare("SELECT r.id_repas, r.id_utilisateur, r.id_type_repas, r.date_consommation
         FROM repas r
+        WHERE r.id_utilisateur = :id_utilisateur
         ");
+        $request->bindParam(':id_utilisateur', $id_utilisateur, PDO::PARAM_INT);
         $request->execute();
         $repas = $request->fetchAll(PDO::FETCH_ASSOC);
+
 
         //------format de la réponse------
         // id_repas	
@@ -42,8 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $array = json_decode(file_get_contents("php://input"),true); 
 
-    // $id_utilisateur = $array['id_utilisateur'];
-    $id_utilisateur = 41;
+    $id_utilisateur = $array['id_utilisateur'];
     $id_type_repas = $array['id_type_repas'];
     $date_consommation = $array['date_consommation'];
 
