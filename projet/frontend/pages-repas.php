@@ -60,8 +60,6 @@
                                   <th>Type de repas</th>
                                   <th>Date de consommation</th>
                                   <th></th>
-                                  <th></th>                                  
-                                  <th></th>                                  
                               </tr>
                           </thead>
                           <tbody></tbody>
@@ -373,20 +371,10 @@
         },
         {
           data: null, render: function (data, type, row, meta) {
-            return '<button class="btn btn-primary" onclick="editButton(this)">Modifier</button>';
+            return '<button class="btn " onclick="viewButton(this)">Voir</button>';
           }
         },
-        {
-          data: null, render: function (data, type, row, meta) {
-                return '<button class="btn btn-danger" onclick="deleteButton(this)">Supprimer</button>';
-              }
-            },
-            {
-              data: null, render: function (data, type, row, meta) {
-                return '<button class="btn " onclick="viewButton(this)">Voir</button>';
-              }
-            },
-            { data: 'id_repas', visible: false }
+        { data: 'id_repas', visible: false }
           ]
         });
       } catch (error) {
