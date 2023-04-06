@@ -151,7 +151,8 @@ $(document).ready(function() {
                     sessionStorage.setItem('email', email);
                     sessionStorage.setItem('mot_de_passe', mot_de_passe);
                     sessionStorage.setItem('id_utilisateur',getID_UserByEmailAndPassword(email, mot_de_passe, users));
-                    
+                    // Mettre la variable de session utilisateur_connecte à true
+                    <?php $_SESSION["utilisateur_connecte"] = true; ?>
                     // Exemple de redirection vers une page du site
                     window.location.replace('pages-analyse.php');
                     } else {
