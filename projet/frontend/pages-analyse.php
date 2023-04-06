@@ -8,6 +8,14 @@
   require_once("sidebar.html"); 
 
 ?>
+<script src="fonctions.js"></script>
+
+<script>
+  
+  // Appeler la fonction getUserInfo()
+  calculerIMC();
+</script>
+
 
   <main id="main" class="main">
 
@@ -39,7 +47,7 @@
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-cart"></i>
+                      <i class="bi bi-person"></i>
                     </div>
                     <div class="ps-3">
                       <h6><span class="poids"></span></h6>
@@ -63,10 +71,10 @@
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-currency-dollar"></i>
+                      <i class="bi bi-person-fill"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>$3,264</h6>
+                      <h6><span class="imc"></span></h6>
                       <span class="text-success small pt-1 fw-bold"></span> <span class="text-muted small pt-2 ps-1">increase</span>
 
                     </div>
@@ -91,7 +99,7 @@
                       <i class="bi bi-people"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>1244</h6>
+                      <h6><span class="nom_objectif"></span></h6>
                       <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span>
 
                     </div>
@@ -259,7 +267,7 @@
             
 
             <div class="card-body">
-              <h5 class="card-title">Recent Activity </h5>
+              <h5 class="card-title">Recent Activity <span>| Today</span></h5>
 
               <div class="activity">
 
