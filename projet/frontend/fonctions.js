@@ -232,6 +232,35 @@ function calculerBesoinsNutritionnels() {
         });
     }
 
+function CalculNutritionUser() {
+  var id_utilisateur = sessionStorage.getItem('id_utilisateur');
+
+  $.ajax({
+    type: 'GET',
+    url: RESTAPI_URL + '/nutriments.php?id_utilisateur=' + id_utilisateur ,
+    dataType: 'json',
+    success: function(data) {
+
+      console.log('data',data);
+      sessionStorage.setItem('MoyNutrimentJour', JSON.stringify(data));
+      sessionStorage.setItem('Calories', JSON.stringify(data[0].avg_energie));
+
+      
+
+
+    }
+    }).done(function() {
+      console.log("La requête AJAX a réussi");
+    }).fail(function() {
+      console.log("La requête AJAX a échoué");
+    });
+  }
+
+
+
+
+  
+
   
 
  
