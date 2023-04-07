@@ -85,10 +85,6 @@
                 
                   <h5 class="card-title">Détail du profil</h5>
                   
-                 
-
-                  
-
     <div class="row">
   <div class="col-lg-3 col-md-4 label">Age</div>
   <div class="col-lg-9 col-md-8"><span class="age"></span></div>
@@ -108,33 +104,19 @@
 <div class="row">
   <div class="col-lg-3 col-md-4 label">Poids</div>
   <div class="col-lg-9 col-md-8"><span class="poids"></span></div>
-  <!-- <select class="form-select" name="id_poids" id="inputWeight" required>
-                      <option value="">Choisissez votre tranche de poids</option>
-                      <option value="1">Moins de 49 kg</option>
-                      <option value="2">50 - 60 kg</option>
-                      <option value="3">61 - 70 kg</option>
-                      <option value="4">71 - 80 kg</option>
-                      <option value="5">81 - 90 kg</option>
-                      <option value="6">91 - 100 kg</option>
-                      <option value="7">111 - 120kg</option>
-                      <option value="8">121 - 130kg</option> -->
+ 
 </div>
 
 <div class="row">
   <div class="col-lg-3 col-md-4 label">Objectif</div>
   <div class="col-lg-9 col-md-8"><span class="nom_objectif"></span></div>
-  <!-- <option value="1">Souvent</option>
- <option value="2">Régulièremet</option>
-<option value="3">Jamais</option> -->
+ 
 </div>
 
 <div class="row">
   <div class="col-lg-3 col-md-4 label">Pratique</div>
   <div class="col-lg-9 col-md-8"><span class="frequence"></span></div>
 
-  <!-- <option value="1">Perte de poids</option>
-                      <option value="2">Prise de masse</option>
-                      <option value="3">Maintien de la forme</option> -->
 
 </div>
 
