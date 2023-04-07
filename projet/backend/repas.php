@@ -64,19 +64,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo json_encode($repas);
     } catch (PDOException $e) {
         header("HTTP/1.1 400 Bad Request");
-        echo "Erreur lors de la création de l'aliment : " . $e->getMessage();
+        echo "Erreur lors de la création du repas : " . $e->getMessage();
     }
 }
 
-// a modifier !
 
-// Requête PUT pour mettre à jour les informations d'un aliment, à noter que l'aliment est mis à jour en fonction de son identifiant
+// Requête PUT pour mettre à jour les informations d'un repas, à noter que le repas est mis à jour en fonction de son identifiant
 if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
     
     $array = json_decode(file_get_contents("php://input"), true);
     
     $id = $array['id_repas'];
-    $id_utilsateurs = $array['id_utilsateurs']; //On ne doit pas pouvoir changer l'utilisateur
+    $id_utilisateurs = $array['id_utilisateurs']; 
     $id_type_repas = $array['id_type_repas'];
     $date_consommation = $array['date_consommation'];
     
@@ -86,12 +85,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
         $stmt = $conn->prepare($sql);
         $stmt->execute([$id_type_repas, $date_consommation, $id]);
         header("HTTP/1.1 200 OK");
-        $repas = array('id_repas' => $id, 'id_utilsateurs' => $id_utilsateurs, 'id_type_repas' => $id_type_repas, 'date_consommation' => $date_consommation);
+        $repas = array('id_repas' => $id, 'id_utilisateurs' => $id_utilisateurs, 'id_type_repas' => $id_type_repas, 'date_consommation' => $date_consommation);
         header("Content-Type: application/json; charset=UTF-8");
         echo json_encode($repas);
     } catch (PDOException $e) {
         header("HTTP/1.1 400 Bad Request");
-        echo "Erreur lors de la mise à jour de l'aliment : " . $e->getMessage();
+        echo "Erreur lors de la mise à jour du repas : " . $e->getMessage();
     }
 }
 
@@ -110,6 +109,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
         header("HTTP/1.1 204 No Content");
     } catch (PDOException $e) {
         header("HTTP/1.1 400 Bad Request");
-        echo "Erreur lors de la suppression de l'aliment : " . $e->getMessage();
+        echo "Erreur lors de la suppression du repas : " . $e->getMessage();
     }
 }

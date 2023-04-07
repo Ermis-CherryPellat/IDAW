@@ -31,26 +31,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     }
 }
 
-// Requête POST pour ajouter un aliment à la base
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    
-    $array = json_decode(file_get_contents("php://input"),true); 
 
-    $nom_type_aliment = $array['nom_type_aliment'];
-   
-    $sql = "INSERT INTO type_aliment (nom_type_aliment) VALUES (?)";
-    try {
-        $conn = new PDO($connectionString,_MYSQL_USER,_MYSQL_PASSWORD, $options);
-        $stmt = $conn->prepare($sql);
-        $stmt->execute([$nom_type_aliment]);
-        $id = $conn->lastInsertId();
-        header("HTTP/1.1 201 Created");
-        header("Location: /type_aliment.php/$id");
-        $type_aliment = array('id_type_aliment' => $id, 'nom_type_aliment' => $nom_type_aliment);
-        header("Content-Type: application/json; charset=UTF-8");
-        echo json_encode($type_aliment);
-    } catch (PDOException $e) {
-        header("HTTP/1.1 400 Bad Request");
-        echo "Erreur lors de la création du type d'aliment : " . $e->getMessage();
-    }
-}

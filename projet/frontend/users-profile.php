@@ -35,7 +35,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <?php require_once("header.php");
-    require_once("sidebar.html"); ?>
+    require_once("sidebar.php"); ?>
 
 <body>
 
