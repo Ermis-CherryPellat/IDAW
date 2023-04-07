@@ -129,9 +129,15 @@
       <script>
 function diagramme() {
   var besoinsNutritionnels = JSON.parse(sessionStorage.getItem('besoinsNutritionnels'));
+  var objectifProt = besoinsNutritionnels.proteines
+  var objectifGluc =  besoinsNutritionnels.glucides
+  var objectifLip  =  besoinsNutritionnels.lipides
+  var objectifFibres = besoinsNutritionnels.fibres
+  var objectiSucres =   besoinsNutritionnels.sucres
 
   // Données du diagramme à barres
-  const data = [besoinsNutritionnels.proteines, besoinsNutritionnels.glucides, besoinsNutritionnels.lipides, besoinsNutritionnels.fibres, besoinsNutritionnels.sucres];
+  const data = [var objectifProt,var objectifGluc,var objectifLip,var objectifFibres,var objectiSucres];
+  const data2 = [30,50,70,90,30]
   const labels = ['Proteines', 'Glucides', 'Lipides', 'Fibres', 'Sucres'];
   const colors = ['#3366cc', '#dc3912', '#ff9900', '#109618', '#990099'];
 
