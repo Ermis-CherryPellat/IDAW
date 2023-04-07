@@ -184,13 +184,15 @@ function calculerBesoinsNutritionnels() {
               console.log('Sexe non reconnu');
           }
           sessionStorage.setItem('besoinsNutritionnels', JSON.stringify(besoinsNutritionnels));
-          console.log('Besoins nutritionnels calculés :', besoinsNutritionnels);
-          console.log('type proteines',typeof besoinsNutritionnels.proteines);
+          
 
           // Mettre à jour la valeur des besoins nutritionnels dans les balises HTML correspondantes
           var caloriesElements = document.getElementsByClassName('calories');
           for (var i = 0; i < caloriesElements.length; i++) {
-              caloriesElements[i].textContent = besoinsNutritionnels.calories ;
+              var calories = Math.floor(besoinsNutritionnels.calories);
+              caloriesElements[i].textContent = calories;
+          
+          
 
           
 
@@ -218,7 +220,7 @@ function calculerBesoinsNutritionnels() {
         
               var sucresElements = document.getElementsByClassName('sucres');
               for (var i = 0; i < sucresElements.length; i++) {
-                  sucresElements[i].textContent = besoinsNutritionnels.sucres + ' g';
+                  sucresElements[i].textContent = besoinsNutritionnels.sucres;
               }
 
 
@@ -240,10 +242,22 @@ function CalculNutritionUser() {
     url: RESTAPI_URL + '/nutriments.php?id_utilisateur=' + id_utilisateur ,
     dataType: 'json',
     success: function(data) {
-
+      
       console.log('data',data);
-      sessionStorage.setItem('MoyNutrimentJour', JSON.stringify(data));
+      sessionStorage.setItem('MoyNutrimentJour', JSON.stringify(data[0]));
       sessionStorage.setItem('Calories', JSON.stringify(data[0].avg_energie));
+      
+
+            // Sélectionnez le span HTML en utilisant l'ID ou la classe
+            var spanCalories = document.querySelector('#span-calories'); // Utilisez # pour sélectionner l'ID ou . pour sélectionner la classe
+
+            // Ajouter la valeur de Calories dans le span HTML
+            var calories = Math.floor(data[0].avg_energie);
+            spanCalories.innerText = calories;
+
+      
+      
+
 
       
 
@@ -255,6 +269,106 @@ function CalculNutritionUser() {
       console.log("La requête AJAX a échoué");
     });
   }
+
+  function NutrimentUser(){
+    var besoinsNutritionnels = JSON.parse(sessionStorage.getItem('besoinsNutritionnels'));
+    var MoyNutritionUser = JSON.parse(sessionStorage.getItem('MoyNutrimentJour'));
+    var ProtUser = MoyNutritionUser.avg_proteines;
+    
+
+    var GlucUser = MoyNutritionUser.avg_glucides;
+    var LipUser = MoyNutritionUser.avg_lipides;
+    var FibUser = MoyNutritionUser.avg_fibres;
+    var SucrUser = MoyNutritionUser.avg_sucres;
+    
+    
+    var objectifProt = besoinsNutritionnels.proteines;
+    var objectifGluc =  besoinsNutritionnels.glucides;
+    var objectifLip  =  besoinsNutritionnels.lipides;
+    var objectifFibres = besoinsNutritionnels.fibres;
+    var objectiSucres =   besoinsNutritionnels.sucres;
+  
+  
+    // Données du diagramme à barres
+    const data = [objectifProt,objectifGluc,objectifLip,objectifFibres,objectiSucres];
+    console.log('objectif',data);
+    const data2 = [ProtUser,GlucUser,LipUser,FibUser,SucrUser];
+  
+    const dataPourcentage = [];
+    for (let i = 0; i < data.length; i++) {
+    dataPourcentage.push((data2[i] / data[i]) * 100);
+
+    
+  }
+  console.log('POURCENTAGE',dataPourcentage);
+  sessionStorage.setItem('Nutriments consommés',dataPourcentage);
+}
+
+ 
+function drawDiagram() {
+  const percentages = sessionStorage.getItem('Nutriments consommés');
+  const titles = ["Protéines", "Glucides", "Lipides", "Fibres", "Sucres"];
+  const colors = ["#4CAF50", "#2196F3", "#FFC107", "#FF5722", "#9C27B0"];
+
+  const svg = d3.select("body")
+              .append("svg")
+              .attr("width", 500)
+              .attr("height", 300);
+  
+  const chartBars = svg.selectAll("rect")
+                      .data(percentages)
+                      .enter()
+                      .append("rect")
+                      .attr("class", "chart-bar")
+                      .attr("x", (d, i) => i * 80 + 50)
+                      .attr("y", 150)
+                      .attr("height", 0)
+                      .attr("width", 50)
+                      .attr("fill", (d, i) => colors[i]);
+  
+  chartBars.transition()
+           .delay((d, i) => i * 500)
+           .attr("y", (d) => 150 - 1.5 * d)
+           .attr("height", (d) => 1.5 * d);
+  
+  const chartFills = svg.selectAll(".chart-fill")
+                        .data(percentages)
+                        .enter()
+                        .append("rect")
+                        .attr("class", "chart-fill")
+                        .attr("x", (d, i) => i * 80 + 50)
+                        .attr("y", 150)
+                        .attr("height", 0)
+                        .attr("width", 50)
+                        .attr("fill", (d, i) => colors[i]);
+  
+  chartFills.transition()
+            .delay((d, i) => i * 500)
+            .attr("y", (d) => 150 - 1.5 * d)
+            .attr("height", (d) => 1.5 * d);
+  
+  const chartLabels = svg.selectAll(".chart-label")
+                         .data(percentages)
+                         .enter()
+                         .append("text")
+                         .attr("class", "chart-label")
+                         .text((d) => `${d}%`)
+                         .attr("x", (d, i) => i * 80 + 75)
+                         .attr("y", (d) => 150 - 1.5 * d - 5);
+  
+  const chartTitles = svg.selectAll(".chart-title")
+                         .data(titles)
+                         .enter()
+                         .append("text")
+                         .attr("class", "chart-title")
+                         .text((d) => d)
+                         .attr("x", (d, i) => i * 80 + 75)
+                         .attr("y", 210);
+}
+
+
+
+  
 
 
 
