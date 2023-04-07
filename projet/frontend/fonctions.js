@@ -51,6 +51,7 @@ function getUserInfo() {
         for (var i = 0; i < poidsElements.length; i++) {
           poidsElements[i].textContent = poids_min + "kg - " + poids_max + "kg";
         }
+        console.log('tranche poids','poids');
   
         var tailleElements = document.getElementsByClassName('taille');
         for (var i = 0; i < tailleElements.length; i++) {
@@ -178,10 +179,13 @@ function calculerBesoinsNutritionnels() {
               besoinsNutritionnels.lipides = Math.round(besoinsNutritionnels.calories * 0.3 / 9);
               besoinsNutritionnels.fibres = Math.round(14 * poids / 1000);
               besoinsNutritionnels.sucres = Math.round(besoinsNutritionnels.glucides * 0.1);
+              
           } else {
               console.log('Sexe non reconnu');
           }
+          sessionStorage.setItem('besoinsNutritionnels', JSON.stringify(besoinsNutritionnels));
           console.log('Besoins nutritionnels calculés :', besoinsNutritionnels);
+          console.log('type proteines',typeof besoinsNutritionnels.proteines);
 
           // Mettre à jour la valeur des besoins nutritionnels dans les balises HTML correspondantes
           var caloriesElements = document.getElementsByClassName('calories');
@@ -216,6 +220,10 @@ function calculerBesoinsNutritionnels() {
               for (var i = 0; i < sucresElements.length; i++) {
                   sucresElements[i].textContent = besoinsNutritionnels.sucres + ' g';
               }
+
+
+
+            
             }
           }).done(function() {
             console.log("La requête AJAX a réussi");
@@ -224,66 +232,7 @@ function calculerBesoinsNutritionnels() {
         });
     }
 
-    function dessinerDiagramme() {
-      calculerBesoinsNutritionnels()
-
-      // Définir les données pour le diagramme à barres
-      var sucres = besoinsNutritionnels.sucres;
-      var donnees = [
-          { nom: "Sucres", valeur: sucres },
-          { nom: "Lipides", valeur: besoinsNutritionnels.lipides },
-          { nom: "Protéines", valeur: besoinsNutritionnels.proteines },
-          { nom: "Fibres", valeur: besoinsNutritionnels.fibres },
-          { nom: "Glucides", valeur: besoinsNutritionnels.glucides }
-      ];
   
-      // Définir les dimensions du diagramme à barres
-      var largeur = 500;
-      var hauteur = 300;
-      var marge = 50;
-  
-      // Définir l'échelle pour les axes x et y
-      var echelleX = d3.scaleBand()
-          .range([0, largeur])
-          .domain(donnees.map(function(d) { return d.nom; }))
-          .padding(0.4);
-      var echelleY = d3.scaleLinear()
-          .range([hauteur, 0])
-          .domain([0, d3.max(donnees, function(d) { return d.valeur; })]);
-  
-      // Dessiner l'axe x
-      var axeX = d3.axisBottom(echelleX);
-      d3.select("#barchart")
-          .append("g")
-          .attr("transform", "translate(" + marge + "," + (hauteur + marge) + ")")
-          .call(axeX);
-  
-      // Dessiner l'axe y
-      var axeY = d3.axisLeft(echelleY);
-      d3.select("#barchart")
-          .append("g")
-          .attr("transform", "translate(" + marge + "," + marge + ")")
-          .call(axeY);
-  
-      // Dessiner les barres
-      var barres = d3.select("#barchart")
-          .selectAll("rect")
-          .data(donnees)
-          .enter()
-          .append("rect")
-          .attr("x", function(d) { return echelleX(d.nom) + marge; })
-          .attr("y", function(d) { return echelleY(d.valeur) + marge; })
-          .attr("width", echelleX.bandwidth())
-          .attr("height", function(d) { return hauteur - echelleY(d.valeur); })
-          .attr("fill", function(d) {
-              if (d.valeur > seuilsNutritionnels[d.nom]) {
-                  return "#66BB6A";
-              } else {
-                  return "#EF5350";
-              }
-          });
-  }
-
 
  
 

@@ -13,10 +13,10 @@
 
 <script>
   
-  // Appeler la fonction getUserInfo()
+  getUserInfo();
   calculerIMC();
   calculerBesoinsNutritionnels();
-  dessinerDiagramme();
+  
 
 </script>
 
@@ -122,19 +122,72 @@
                 <div class="card-body">
                   <h5 class="card-title">Nutriments à consommer <span></span></h5>
 
-                  <!-- Line Chart -->
-                  <div id="barchart"></div>
-                  
+                      <!-- Bar Chart -->
+      <svg id="bar-chart"></svg>
+      
+      <script src="https://d3js.org/d3.v6.min.js"></script>
+      <script>
+function diagramme() {
+  var besoinsNutritionnels = JSON.parse(sessionStorage.getItem('besoinsNutritionnels'));
+
+  // Données du diagramme à barres
+  const data = [besoinsNutritionnels.proteines, besoinsNutritionnels.glucides, besoinsNutritionnels.lipides, besoinsNutritionnels.fibres, besoinsNutritionnels.sucres];
+  const labels = ['Proteines', 'Glucides', 'Lipides', 'Fibres', 'Sucres'];
+  const colors = ['#3366cc', '#dc3912', '#ff9900', '#109618', '#990099'];
+
+  // Définition de la taille du graphique
+  const width = 700;
+  const height = 400;
+
+  // Création de l'échelle pour l'axe y
+  const yScale = d3.scaleLinear()
+    .domain([0, d3.max(data)])
+    .range([height, 0]);
+
+  // Création de l'échelle pour l'axe x
+  const xScale = d3.scaleBand()
+    .domain(d3.range(data.length))
+    .range([0, width])
+    .paddingInner(0.05);
+
+  // Création de l'élément SVG pour le graphique à barres
+  const svg = d3.select("#bar-chart")
+    .attr("width", width)
+    .attr("height", height);
+
+  // Ajout des barres au graphique
+  const bars = svg.selectAll("g")
+    .data(data)
+    .enter()
+    .append("g")
+    .attr("transform", (d, i) => `translate(${xScale(i)},0)`);
+
+  bars.append("rect")
+    .attr("y", d => yScale(d))
+    .attr("width", xScale.bandwidth())
+    .attr("height", d => height - yScale(d))
+    .attr("fill", (d, i) => colors[i])
+    .append("title")
+    .text((d, i) => labels[i] + ": " + d); // Ajout de la valeur sur la barre elle-même
+
+  bars.append("text")
+    .attr("x", xScale.bandwidth() / 2)
+    .attr("y", d => yScale(d) + 15)
+    .attr("text-anchor", "middle")
+    .attr("fill", "white")
+    .text((d, i) => labels[i]);
+
+}
 
 
+diagramme();
 
-                  
-                  <!-- End Line Chart -->
 
-                </div>
-
-              </div>
-            </div><!-- End  -->
+      </script>
+      <!-- End Bar Chart -->
+    </div>
+  </div>
+</div>
 
             <!-- Recent Sales -->
             <div class="col-12">
