@@ -9,12 +9,15 @@
 
 ?>
 <script src="fonctions.js"></script>
+<script src="https://d3js.org/d3.v7.min.js"></script>
 
 <script>
   
   // Appeler la fonction getUserInfo()
   calculerIMC();
   calculerBesoinsNutritionnels();
+  dessinerDiagramme();
+
 </script>
 
 
@@ -117,10 +120,11 @@
 
                 
                 <div class="card-body">
-                  <h5 class="card-title">Reports <span>/Today</span></h5>
+                  <h5 class="card-title">Nutriments à consommer <span></span></h5>
 
                   <!-- Line Chart -->
                   <div id="barchart"></div>
+                  
 
 
 
