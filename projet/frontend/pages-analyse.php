@@ -16,6 +16,7 @@
   getUserInfo();
   calculerIMC();
   calculerBesoinsNutritionnels();
+  CalculNutritionUser();
   
 
 </script>
@@ -129,15 +130,24 @@
       <script>
 function diagramme() {
   var besoinsNutritionnels = JSON.parse(sessionStorage.getItem('besoinsNutritionnels'));
-  var objectifProt = besoinsNutritionnels.proteines
-  var objectifGluc =  besoinsNutritionnels.glucides
-  var objectifLip  =  besoinsNutritionnels.lipides
-  var objectifFibres = besoinsNutritionnels.fibres
-  var objectiSucres =   besoinsNutritionnels.sucres
+  var MoyNutritionUser = JSON.parse(sessionStorage.getItem('MoyNutrimentJour'));
+  var ProtUser = MoyNutritionUser.avg_proteines;
+  var GlucUser = MoyNutritionUser.avg_glucides;
+  var LipUser = MoyNutritionUser.avg_lipides;
+  var FibUser = MoyNutritionUser.avg_fibres;
+  var SucrUser = MoyNutritionUser.avg_sucres;
+  
+  
+  var objectifProt = besoinsNutritionnels.proteines;
+  var objectifGluc =  besoinsNutritionnels.glucides;
+  var objectifLip  =  besoinsNutritionnels.lipides;
+  var objectifFibres = besoinsNutritionnels.fibres;
+  var objectiSucres =   besoinsNutritionnels.sucres;
+
 
   // Données du diagramme à barres
   const data = [var objectifProt,var objectifGluc,var objectifLip,var objectifFibres,var objectiSucres];
-  const data2 = [30,50,70,90,30]
+  const data2 = [var ProtUser,var GlucUser,var LipUser,var FibUser,var SucrUser];
   const labels = ['Proteines', 'Glucides', 'Lipides', 'Fibres', 'Sucres'];
   const colors = ['#3366cc', '#dc3912', '#ff9900', '#109618', '#990099'];
 
