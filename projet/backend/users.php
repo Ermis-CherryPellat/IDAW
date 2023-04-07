@@ -42,11 +42,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
-    $id = $_GET['id_utilisateur'];
+    // récupérer l'ID utilisateur à partir des paramètres de requête
+    $id_utilisateur = isset($_GET['id_utilisateur']) ? $_GET['id_utilisateur'] : null;
+
+    // requête SQL pour supprimer l'utilisateur avec l'ID spécifié
     $sql = "DELETE FROM UTILISATEUR WHERE id_utilisateur = ?";
     try {
         $request = $pdo->prepare($sql);
-        $request->execute([$id]);
+        $request->execute([$id_utilisateur]);
         $pdo = NULL;
         header("HTTP/1.1 204 No Content");
     } catch (PDOException $e) {
@@ -57,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
 
 
 // Requête POST pour ajouter un utilisateur à la base
-// Pas encore testé mais modfié
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     $array = json_decode(file_get_contents("php://input"),true); 
