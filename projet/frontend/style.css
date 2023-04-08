@@ -1,13 +1,3 @@
-#graphique {
-    width: 600px;
-    height: 300px;
-    border: 1px solid #ccc;
-    display: flex;
-  }
-  
-  .barre {
-    height: 100%;
-    flex-grow: 1;
-    margin: 0 5px;
-    background-color: #3498db;
-  }
+#mon-diagramme {
+  margin-left: 200px;
+}

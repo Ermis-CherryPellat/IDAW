@@ -22,6 +22,9 @@
   
 
 </script>
+<head>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
 
 
   <main id="main" class="main">
@@ -92,7 +95,7 @@
             </div><!-- End Revenue Card -->
 
             <!-- Customers Card -->
-            <div class="col-xxl-4 col-xl-12">
+            <div class="col-lg-4">
 
               <div class="card info-card customers-card">
 
@@ -101,11 +104,11 @@
                 <div class="card-body">
                   <h5 class="card-title">Objectif Calories Quotidien</h5>
 
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                  
+                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                       <i class="bi bi-people"></i>
                     </div>
-                    <div class="ps-3">
+                    
                     <h6> <span id="span-calories"></span> / </h6>  
                     <h6><span class="calories"></span>  kgCal </h6>
                       
@@ -117,45 +120,27 @@
 
                 </div>
               </div>
-
-            </div><!-- End Customers Card -->
-
-            <!-- Nutriments à consommer  -->
-            <div class="col-12">
-            <script>
-
-drawDiagram();
-</script>
-              <div class="card">
-
-                
-                <div class="card-body">
-                  <h5 class="card-title">Nutriments à consommer <span></span></h5>
-                    <div id="reportsChart"></div>
-
-                    
-     </div>  <!-- End  Chart -->
+<!-- Nutriments à consommer  -->
+<div class="col-lg-12">
+  <div class="card info-card customers-card">
+    <div class="card-body">
+      <h5 class="card-title text-center">Pourcentage de nutriments consommés par rapport aux objectifs<span></span></h5>
+      <div class="text-center">
+        <div class="diagram-container" style="margin-left: 50px;">
+  <!-- insérez ici le code de votre diagramme -->
+        <script>
+          drawDiagram();
+        </script>
+        </div>
+          <!-- insérez ici le code de votre diagramme -->
+          <script>
+            drawDiagram();
+          </script>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-
-            
-
-
-
-     
-
-      </div>
-    </section>
-
-  </main>
-
-
-        
-
-
-          
-
 
   </main><!-- End #main -->
 
