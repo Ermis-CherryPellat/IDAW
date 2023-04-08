@@ -39,5 +39,11 @@ Page qui permet d'afficher une liste d'aliments dans un tableau DataTable.
 Possibilité aussi sur cette page d'ajouts, de modifications et supressions d'aliments.
 
 ## Page de dashboard/analyse
+!! Gros problème avec l'affichage du diagramme impossible à résoudre !!
+Dans ce board, on a accès au suivi de son activité nutrtionnel.
+Il y a la tranche de poids actuel et l'IMC actuel acalculé en fonction de la taille, du poids et du sexe.
+On peut observer son objectif de calories quotidien et ses calories consommées moyennes par jour pourse rendre compte si l'utilisateru consomme assez de calories avec son almentation. Les objectifs quotidiens sont calculé avec un efonction javascript en fonction de la pratique sportive, le pois, lâ taille et le sexe.
+
+Enfin on a  un diagramme pour indiquer les objectids nutriments du jours : sucres, fibre, protéines , lipides et glucides. Ce sontd es barres. Ce sont des barres de pourcentages , comme des jauges qui montent en fonction des nutriments consommés , jusqu'aux objectifs uotidiens , toujours claculés en fonction d ela pratique sportivr, taille , sexe et poids. 
 
 
