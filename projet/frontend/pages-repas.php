@@ -33,17 +33,6 @@
             </div>
           </div>
         </div>
-
-        <div class="col-lg-6">
-
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Précédent repas</h5>
-              <p>Montre le dernier repas consommé</p>
-            </div>
-          </div>
-
-        </div>
       </div>
     </section>
     <section class="section">
@@ -52,8 +41,18 @@
               <div class="card">
                   <div class="card-body">
                       <h5 class="card-title">Historique des repas consommés</h5>
-                      <p>Ceci est une section qui prend toute la place en dessous des deux premières sections.</p>
-                      <p>Ici on ajoutera un tableau avec la liste des repas consommés précédents</p>
+                      <p>Retrouvez ici tous les repas que vous avez consommés.</p>
+
+                      <!-- Modal de détail d'un repas, qui finalement n'est pas une modal car nous n'avons pas réussi à l'afficher en tant que modal-->
+                      <div id="viewRepasModal" class="modal2 hidden" >
+                          <div class="modal-content">
+                            <span id="close-modal2" class="close" onclick="fermerModal()">&times;</span>
+                            <h5 class="card-title">Détails du repas</h5>
+                            <div class="modal-body">
+                            </div>
+                          </div>
+                      </div>
+
                       <table id="repasTable" class="display">
                           <thead>
                               <tr>
@@ -80,6 +79,11 @@
       </div>
     </div>
 
+    
+
+    
+
+
   </main><!-- End #main -->
 
   <?php require_once("footer.php"); ?>
@@ -91,7 +95,7 @@
   
   <script>
 
-    // ============ JavaScript pour la modale ============
+    // ============ JavaScript pour la modale d'ajout d'un repas ============
     // Récupérer la modale et les boutons pour l'ouvrir et la fermer
     var modal = document.getElementById("modal");
     var btn = document.getElementById("open-modal");
@@ -112,7 +116,7 @@
       if (event.target == modal) {
         modal.style.display = "none";
       }
-    }
+    }   
 
 
     // On supprime l'aliment correspondant à un bouton "Supprimer" quand il est cliqué
@@ -143,15 +147,7 @@
       modal.style.display = "none";
     }
 
-
-
-
-
     // ============ JavaScript pour les API ============
-    // let RESTAPI_URL = "<?php 
-    //       require_once('config.php'); 
-    //       echo URL_API;
-    //   ?>";
 
     function ajaxGETTypeRepas(){
       return new Promise(function(resolve, reject) {
@@ -193,16 +189,32 @@
                 date_consommation: date
             }),
             dataType: "json"
-        }).done(function(response) {
-            let newRepasId = response.id_repas;
-            resolve(newRepasId);
+        }).done(async function(response) {
+          let newRepasId = response.id_repas;
+          resolve(newRepasId);
+
+          // On n'a pas trouvé d'autre manière d'actualiser le tableau, on a essayé des methodes avec .ajax.reload() ou encore .draw() mais sans succès
+          // Récupérer les nouvelles données
+          let newData = await ajaxGETRepas(user);
+
+          // Vider la table existante
+          $('#repasTable').DataTable().clear();
+
+          // Ajouter les nouvelles données
+          $('#repasTable').DataTable().rows.add(newData);
+
+          // Redessiner la table
+          $('#repasTable').DataTable().draw();
+
+          // console.log(response);
+
+
         }).fail(function(error) {
             console.log("La requête s'est terminée en échec. Infos : " + JSON.stringify(error));
             reject(error);
         });
       });
     }
-
 
     function ajaxGETAlimentConsomme(){
       return new Promise(function(resolve, reject) {
@@ -292,23 +304,57 @@
       }
     }
 
-    function viewButton(button, repasTable) {
-      let repas = repasTable.row($(button).parents('tr')).data();
+    let repasTable; // Déclaration de repasTable dans une portée accessible à viewButton
+    let typeRepasData;
+    
+    async function viewButton(button, repasTable) {
+      let repas = repasTable.row(button.closest('tr')).data();
+      console.log(repas);
       let typeRepas = typeRepasData.find(typeRepas => typeRepas.id_type_repas === repas.id_type_repas);
 
       let modalContent = '<p>Date de consommation : ' + repas.date_consommation + '</p>' +
                         '<p>Type de repas : ' + (typeRepas ? typeRepas.nom_type_repas : '') + '</p>';
 
-      // Ajouter le contenu des aliments du repas
-      // ...
-      
+      try {
+        let alimentConsommeData = await ajaxGETAlimentConsomme(repas.id_repas);
+        let alimentData = await ajaxGETAliment();
+
+        if (alimentConsommeData.length > 0) {
+          modalContent += '<p>Contenu du repas :</p><ul>';
+          for (let alimentConsomme of alimentConsommeData) {
+            if (alimentConsomme.id_repas === repas.id_repas) { // vérifier si l'aliment consommé appartient au repas actuel
+              let aliment = alimentData.find(aliment => aliment.id_aliment === alimentConsomme.id_aliment);
+              if (aliment) {
+                modalContent += '<li>' + aliment.nom_aliment + ' (' + alimentConsomme.masse + ' g)</li>';
+              }
+            }
+          }
+          modalContent += '</ul>';
+        } else {
+          modalContent += '<p>Aucun aliment consommé dans ce repas.</p>';
+        }
+      } catch (error) {
+        console.log("La requête pour les aliments consommés s'est terminée en échec. Infos : " + JSON.stringify(error));
+      }
+
       // Ouvrir la modale
       $('#viewRepasModal .modal-body').html(modalContent);
-      $('#viewRepasModal').modal('show');
+      ouvrirModal();
     }
 
+
+    function ouvrirModal() {
+      var modal = document.getElementById("viewRepasModal");
+      modal.classList.remove("hidden");
+    }
+
+    function fermerModal() {
+      var modal = document.getElementById("viewRepasModal");
+      modal.classList.add("hidden");
+    }
+
+
     $(document).ready(async function(){
-    let repasTable; // Déclaration de repasTable dans une portée accessible à viewButton
 
     // Récuperer le type des aliments pour le form
     try {
@@ -342,7 +388,7 @@
             { data: 'fibres' },
             { data: 'energie' },
             { data: null, render: function (data, type, row, meta) {
-                return '<button class="btn btn-primary" onclick="chooseButton(this)">Choisir</button>';
+                return '<button class="btn btn-primary" onclick="chooseButton(this)" >Choisir</button>';
             } },
             { data: 'id_aliment', visible : false, render: function(data, type, row, meta) {
               return '<div id="' + data + '">' + data + '</div>';
@@ -356,7 +402,7 @@
     try {
       let id_utilisateur = window.sessionStorage.getItem('id_utilisateur');
       let repasData = await ajaxGETRepas(id_utilisateur);
-      let typeRepasData = await ajaxGETTypeRepas();
+      typeRepasData = await ajaxGETTypeRepas();
 
       repasTable = $('#repasTable').DataTable({ 
         pageLength: 25,
@@ -372,7 +418,7 @@
           },
           {
             data: null, render: function (data, type, row, meta) {
-              return '<button class="btn " onclick="viewButton(this)">Voir</button>';
+              return '<a type="button" class="btn btn-primary " onclick="viewButton(this, repasTable)">Voir</a>';
             }
           },
           { data: 'id_repas', visible: false }

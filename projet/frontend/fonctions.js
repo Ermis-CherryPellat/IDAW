@@ -51,7 +51,7 @@ function getUserInfo() {
         for (var i = 0; i < poidsElements.length; i++) {
           poidsElements[i].textContent = poids_min + "kg - " + poids_max + "kg";
         }
-        console.log('tranche poids','poids');
+        // console.log('tranche poids','poids');
   
         var tailleElements = document.getElementsByClassName('taille');
         for (var i = 0; i < tailleElements.length; i++) {
