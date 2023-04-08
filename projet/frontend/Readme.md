@@ -1,4 +1,9 @@
 # Front-end 
+!!!!!!!!!!!!!!!! POUR SE CONNECTER AU SITE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+email : william.nguyen@etu.imt-lille-douai.fr
+mot de passe : mot_de_passe
+
+
 Le Front end est l'interface utilisateur que les utilisateurs voient et avec laquelle ils interagissent directement. 
 
 ## Page de login

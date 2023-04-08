@@ -61,7 +61,7 @@
                     </div>
                     <div class="ps-3">
                       <h6><span class="poids"></span></h6>
-                      <span class="text-success small pt-1 fw-bold">Indiquer le nombre de kg à perdre</span> <span class="text-muted small pt-2 ps-1"></span>
+                    
 
                     </div>
                   </div>
@@ -125,17 +125,18 @@
   <div class="card info-card customers-card">
     <div class="card-body">
       <h5 class="card-title text-center">Pourcentage de nutriments consommés par rapport aux objectifs<span></span></h5>
+      <script>
+          drawDiagram();
+        </script>
       <div class="text-center">
-        <div class="diagram-container" style="margin-left: 50px;">
+        <div class="diagram-container" style="position: absolute; top: 50%; right: 0; transform: translate(-50%, -50%);">
   <!-- insérez ici le code de votre diagramme -->
         <script>
           drawDiagram();
         </script>
         </div>
           <!-- insérez ici le code de votre diagramme -->
-          <script>
-            drawDiagram();
-          </script>
+       
         </div>
       </div>
     </div>
