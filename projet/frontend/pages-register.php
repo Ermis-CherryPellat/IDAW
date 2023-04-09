@@ -36,19 +36,19 @@
                 <form id="addUserForm" method="POST" action=""  onsubmit="onFormSubmit();" class="row g-3 needs-validation" novalidate>
                   <div class="form-group">
                     <label for="yourName" class="form-label">Votre Nom</label>
-                    <input type="text" name="nom" class="form-control" id="inputName" required value="Fromage">
+                    <input type="text" name="nom" class="form-control" id="inputName" required>
                     <div class="invalid-feedback">Entrez votre nom!</div>
                   </div>
                   
                   <div class="col-12">
                     <label for="yourName" class="form-label">Votre Prénom</label>
-                    <input type="text" name="prenom" class="form-control" id="inputPrenom" required value="Paul">
+                    <input type="text" name="prenom" class="form-control" id="inputPrenom" required>
                     <div class="invalid-feedback">Entrez votre prénom!</div>
                   </div>
 
                   <div class="col-12">
                     <label for="yourEmail" class="form-label">Votre Email</label>
-                    <input type="email" name="email" class="form-control" id="inputEmail" required value="a@a.com">
+                    <input type="email" name="email" class="form-control" id="inputEmail" required>
                     <div class="invalid-feedback">Please enter a valid Email adddress!</div>
                   </div>
 
@@ -98,7 +98,7 @@
                     <label for="height" class="form-label">Taille</label>
                     <select class="form-select" name="id_taille" id="inputHeight" required>
                       <option value="">Choisissez votre taille</option>
-                      <option value="1"selected>1m50 - 1m60</option>
+                      <option value="1">1m50 - 1m60</option>
                       <option value="2">1m61 - 1m70</option>
                       <option value="3">1m71 - 1m80</option>
                       <option value="4">1m81 - 1m90</option>
@@ -112,7 +112,7 @@
                     <label for="pratique sportive" class="form-label">Pratique sportive</label>
                     <select class="form-select" name="id_pratique_sportive" id="inputPratique" required>
                       <option value="">Quelle est votre pratique sportive ? </option>
-                      <option value="1" selected>Souvent</option>
+                      <option value="1">Souvent</option>
                       <option value="2">Régulièremet</option>
                       <option value="3">Jamais</option>
                     </select>
@@ -123,7 +123,7 @@
                     <label for="objectifsportif" class="form-label">Pratique sprtive</label>
                     <select class="form-select" name="id_objectif" id="inputObjectif" required>
                       <option value="">Quelle est votre objectif ? </option>
-                      <option value="1" selected>Perte de poids</option>
+                      <option value="1">Perte de poids</option>
                       <option value="2">Prise de masse</option>
                       <option value="3">Maintien de la forme</option>
                     </select>
@@ -132,7 +132,7 @@
 
                   <div class="col-12">
                     <label for="yourPassword" class="form-label">Mot de passe</label>
-                    <input type="password" name="mot_de_passe" class="form-control" id="inputMotdePasse" required value="a">
+                    <input type="password" name="mot_de_passe" class="form-control" id="inputMotdePasse" required>
                     <div class="invalid-feedback">Please enter your password!</div>
                   </div>
 
