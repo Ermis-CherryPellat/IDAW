@@ -1,9 +1,5 @@
 <?php
 session_start();
-
-
-
-
 ?>
 <!DOCTYPE html>
 
@@ -100,73 +96,73 @@ session_start();
    
     <script>
 
-let RESTAPI_URL = "<?php 
-      require_once('config.php'); 
-      echo URL_API;
-  ?>";
+      let RESTAPI_URL = "<?php 
+            require_once('config.php'); 
+            echo URL_API;
+        ?>";
 
 
-function getID_UserByEmailAndPassword(email, mot_de_passe, users) {
-    for (let i = 0; i < users.length; i++) {
-        if (users[i].email === email && users[i].mot_de_passe === mot_de_passe) {
-            return users[i].id_utilisateur;
-        }
-    }
-    return null;
-}
+      function getID_UserByEmailAndPassword(email, mot_de_passe, users) {
+          for (let i = 0; i < users.length; i++) {
+              if (users[i].email === email && users[i].mot_de_passe === mot_de_passe) {
+                  return users[i].id_utilisateur;
+              }
+          }
+          return null;
+      }
 
-function validateUser(email, mot_de_passe, users) {
-    let user = getID_UserByEmailAndPassword(email, mot_de_passe, users);
-    if (user !== null) {
-        sessionStorage.setItem('id_utilisateur', user.id_utilisateur);
-        sessionStorage.setItem('email', email);
-        return true;
-    } else {
-        return false;
-    }
-}
-
-
+      function validateUser(email, mot_de_passe, users) {
+          let user = getID_UserByEmailAndPassword(email, mot_de_passe, users);
+          if (user !== null) {
+              sessionStorage.setItem('id_utilisateur', user.id_utilisateur);
+              sessionStorage.setItem('email', email);
+              return true;
+          } else {
+              return false;
+          }
+      }
 
 
-$(document).ready(function() {
-    // Écouteur d'événement pour le formulaire de connexion qaund on clique sur se connecter
-    $('#loginForm').submit(function(event) {
-        event.preventDefault();
 
-        // Récupérer les valeurs du formulaire
-        let email = $('#email').val();
-        let mot_de_passe = $('#mot_de_passe').val();
 
-        // Envoyer une requête AJAX GET pour récupérer les utilisateurs de la base de données
-        $.ajax({
-            type: 'GET',
-            url: RESTAPI_URL + '/users.php',
-            dataType: 'json',
-            success: function(users) {
-                // Vérifier si l'utilisateur est valide
-                if (validateUser(email, mot_de_passe, users)) {
-                    // Ouvrir une session et rediriger l'utilisateur vers une page de votre site
-                    alert('Connexion réussie !');
-                    sessionStorage.setItem('email', email);
-                    sessionStorage.setItem('mot_de_passe', mot_de_passe);
-                    sessionStorage.setItem('id_utilisateur',getID_UserByEmailAndPassword(email, mot_de_passe, users));
-                    // Mettre la variable de session utilisateur_connecte à true
-                    <?php $_SESSION["utilisateur_connecte"] = true; ?>
-                    // Exemple de redirection vers une page du site
-                    window.location.replace('pages-analyse.php');
-                    } else {
-                    
-                    alert('Email ou mot de passe incorrect !');
-                }
-            },
-            error: function() {
-                alert('Une erreur s\'est produite lors de la récupération des utilisateurs.');
-            }
-        });
-    });
-});
-       
+      $(document).ready(function() {
+          // Écouteur d'événement pour le formulaire de connexion qaund on clique sur se connecter
+          $('#loginForm').submit(function(event) {
+              event.preventDefault();
+
+              // Récupérer les valeurs du formulaire
+              let email = $('#email').val();
+              let mot_de_passe = $('#mot_de_passe').val();
+
+              // Envoyer une requête AJAX GET pour récupérer les utilisateurs de la base de données
+              $.ajax({
+                  type: 'GET',
+                  url: RESTAPI_URL + '/users.php',
+                  dataType: 'json',
+                  success: function(users) {
+                      // Vérifier si l'utilisateur est valide
+                      if (validateUser(email, mot_de_passe, users)) {
+                          // Ouvrir une session et rediriger l'utilisateur vers une page de votre site
+                          alert('Connexion réussie !');
+                          sessionStorage.setItem('email', email);
+                          sessionStorage.setItem('mot_de_passe', mot_de_passe);
+                          sessionStorage.setItem('id_utilisateur',getID_UserByEmailAndPassword(email, mot_de_passe, users));
+                          // Mettre la variable de session utilisateur_connecte à true
+                          <?php $_SESSION["utilisateur_connecte"] = true; ?>
+                          // Exemple de redirection vers une page du site
+                          window.location.replace('pages-analyse.php');
+                          } else {
+                          
+                          alert('Email ou mot de passe incorrect !');
+                      }
+                  },
+                  error: function() {
+                      alert('Une erreur s\'est produite lors de la récupération des utilisateurs.');
+                  }
+              });
+          });
+      });
+            
     </script>
 </body>
 </html>

@@ -18,7 +18,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         $request->execute();
         $repas = $request->fetchAll(PDO::FETCH_ASSOC);
 
-
         //------format de la réponse------
         // id_repas	
         // id_utilisateur	
@@ -42,9 +41,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 // Requête POST pour ajouter un repas à la base
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
-    //INSERT INTO REPAS  (id_repas,id_utilisateur,id_type_repas,date_consommation) VALUES (NULL, 2,  3 ,’2023-03-28 13:35:58 ’);
-
-
     $array = json_decode(file_get_contents("php://input"),true); 
 
     $id_utilisateur = $array['id_utilisateur'];
@@ -94,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
     }
 }
 
-// Requête DELETE pour supprimer un aliment
+// Requête DELETE pour supprimer un repas
 if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
 
     $array = json_decode(file_get_contents("php://input"), true);

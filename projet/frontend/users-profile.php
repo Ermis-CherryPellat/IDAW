@@ -85,44 +85,44 @@
                 
                   <h5 class="card-title">Détail du profil</h5>
                   
-    <div class="row">
-  <div class="col-lg-3 col-md-4 label">Age</div>
-  <div class="col-lg-9 col-md-8"><span class="age"></span></div>
-</div>
-<div class="row">
-  <div class="col-lg-3 col-md-4 label">Email</div>
-  <div class="col-lg-9 col-md-8"><span class="email"></span></div>
-</div>
-<div class="row">
-  <div class="col-lg-3 col-md-4 label">Sexe</div>
-  <div class="col-lg-9 col-md-8"><span class="sexe"></span></div>
-</div>
-<div class="row">
-  <div class="col-lg-3 col-md-4 label">Tranche de taille</div>
-  <div class="col-lg-9 col-md-8"><span class=taille></span></div>
-</div>
-<div class="row">
-  <div class="col-lg-3 col-md-4 label">Poids</div>
-  <div class="col-lg-9 col-md-8"><span class="poids"></span></div>
- 
-</div>
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Age</div>
+                    <div class="col-lg-9 col-md-8"><span class="age"></span></div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Email</div>
+                    <div class="col-lg-9 col-md-8"><span class="email"></span></div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Sexe</div>
+                    <div class="col-lg-9 col-md-8"><span class="sexe"></span></div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Tranche de taille</div>
+                    <div class="col-lg-9 col-md-8"><span class=taille></span></div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Poids</div>
+                    <div class="col-lg-9 col-md-8"><span class="poids"></span></div>
+                  
+                  </div>
 
-<div class="row">
-  <div class="col-lg-3 col-md-4 label">Objectif</div>
-  <div class="col-lg-9 col-md-8"><span class="nom_objectif"></span></div>
- 
-</div>
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Objectif</div>
+                    <div class="col-lg-9 col-md-8"><span class="nom_objectif"></span></div>
+                  
+                  </div>
 
-<div class="row">
-  <div class="col-lg-3 col-md-4 label">Pratique</div>
-  <div class="col-lg-9 col-md-8"><span class="frequence"></span></div>
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Pratique</div>
+                    <div class="col-lg-9 col-md-8"><span class="frequence"></span></div>
 
 
-</div>
+                  </div>
 
-  
+                    
 
-</div>
+                  </div>
                     
                 </div>
 

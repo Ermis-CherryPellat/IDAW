@@ -1,6 +1,3 @@
-
-
-
 <!-- ======= Header ======= -->
 <header id="header" class="header fixed-top d-flex align-items-center">
   <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
@@ -64,10 +61,10 @@
 
 <script>
   
-let RESTAPI_URL = "<?php 
-          require_once('config.php'); 
-          echo URL_API;
-      ?>";
+  let RESTAPI_URL = "<?php 
+            require_once('config.php'); 
+            echo URL_API;
+        ?>";
   // Appeler la fonction getUserInfo()
   getUserInfo();
 </script>
