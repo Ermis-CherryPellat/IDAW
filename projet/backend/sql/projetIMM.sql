@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:8889
--- Generation Time: Apr 07, 2023 at 06:09 PM
--- Server version: 5.7.39
--- PHP Version: 8.2.0
+-- Hôte : 127.0.0.1:3306
+-- Généré le : sam. 08 avr. 2023 à 20:23
+-- Version du serveur : 8.0.31
+-- Version de PHP : 8.0.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,29 +18,32 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `projetIMM`
+-- Base de données : `projetimm`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `aliment`
+-- Structure de la table `aliment`
 --
 
-CREATE TABLE `aliment` (
-  `id_aliment` int(11) NOT NULL,
-  `nom_aliment` varchar(200) COLLATE utf8_bin NOT NULL,
-  `id_type_aliment` int(11) NOT NULL,
-  `glucides` int(11) NOT NULL,
-  `lipides` int(11) NOT NULL,
-  `sucres` int(11) NOT NULL,
-  `proteines` int(11) NOT NULL,
-  `fibres` int(11) NOT NULL,
-  `energie` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+DROP TABLE IF EXISTS `aliment`;
+CREATE TABLE IF NOT EXISTS `aliment` (
+  `id_aliment` int NOT NULL AUTO_INCREMENT,
+  `nom_aliment` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
+  `id_type_aliment` int NOT NULL,
+  `glucides` int NOT NULL,
+  `lipides` int NOT NULL,
+  `sucres` int NOT NULL,
+  `proteines` int NOT NULL,
+  `fibres` int NOT NULL,
+  `energie` int NOT NULL,
+  PRIMARY KEY (`id_aliment`),
+  KEY `id_type_aliment` (`id_type_aliment`)
+) ENGINE=InnoDB AUTO_INCREMENT=5418 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 
 --
--- Dumping data for table `aliment`
+-- Déchargement des données de la table `aliment`
 --
 
 INSERT INTO `aliment` (`id_aliment`, `nom_aliment`, `id_type_aliment`, `glucides`, `lipides`, `sucres`, `proteines`, `fibres`, `energie`) VALUES
@@ -3641,33 +3644,56 @@ INSERT INTO `aliment` (`id_aliment`, `nom_aliment`, `id_type_aliment`, `glucides
 (5413, 'Céréales instantanées, poudre à reconstituer, dès 4/6 mois', 23, 88, 2, 13, 5, 2, 1670),
 (5414, 'Céréales instantanées, poudre à reconstituer, dès 6 mois', 23, 81, 2, 33, 10, 4, 1660),
 (5415, 'Biscuit pour bébé', 23, 73, 12, 25, 8, 2, 1850),
-(5416, 'Poudre cacaotée pour bébé', 23, 85, 2, 45, 9, 2, 1680);
+(5416, 'Poudre cacaotée pour bébé', 23, 85, 2, 45, 9, 2, 1680),
+(5417, 'Banane', 14, 20, 23, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `aliment_consomme`
+-- Structure de la table `aliment_consomme`
 --
 
-CREATE TABLE `aliment_consomme` (
-  `masse` int(11) NOT NULL,
-  `id_aliment` int(11) NOT NULL,
-  `id_repas` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+DROP TABLE IF EXISTS `aliment_consomme`;
+CREATE TABLE IF NOT EXISTS `aliment_consomme` (
+  `masse` int NOT NULL,
+  `id_aliment` int NOT NULL,
+  `id_repas` int NOT NULL,
+  PRIMARY KEY (`id_aliment`,`id_repas`),
+  KEY `id_repas` (`id_repas`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
+
+--
+-- Déchargement des données de la table `aliment_consomme`
+--
+
+INSERT INTO `aliment_consomme` (`masse`, `id_aliment`, `id_repas`) VALUES
+(6, 3006, 4),
+(6, 3103, 1),
+(10, 3103, 4),
+(10, 3103, 7),
+(50, 3446, 7),
+(8, 3504, 1),
+(50, 3504, 5),
+(20, 3504, 6),
+(10, 3599, 6),
+(30, 4090, 2),
+(20, 4090, 5);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `apport_nutritionnel`
+-- Structure de la table `apport_nutritionnel`
 --
 
-CREATE TABLE `apport_nutritionnel` (
-  `id_apport_nutritionnel` int(11) NOT NULL,
-  `nom_apport_nutritionnel` varchar(20) COLLATE utf8_bin NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+DROP TABLE IF EXISTS `apport_nutritionnel`;
+CREATE TABLE IF NOT EXISTS `apport_nutritionnel` (
+  `id_apport_nutritionnel` int NOT NULL AUTO_INCREMENT,
+  `nom_apport_nutritionnel` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
+  PRIMARY KEY (`id_apport_nutritionnel`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 
 --
--- Dumping data for table `apport_nutritionnel`
+-- Déchargement des données de la table `apport_nutritionnel`
 --
 
 INSERT INTO `apport_nutritionnel` (`id_apport_nutritionnel`, `nom_apport_nutritionnel`) VALUES
@@ -3679,28 +3705,33 @@ INSERT INTO `apport_nutritionnel` (`id_apport_nutritionnel`, `nom_apport_nutriti
 -- --------------------------------------------------------
 
 --
--- Table structure for table `besoin_apport_nutritionnel`
+-- Structure de la table `besoin_apport_nutritionnel`
 --
 
-CREATE TABLE `besoin_apport_nutritionnel` (
-  `quantite_nutritionnelle` int(11) NOT NULL,
-  `id_apport_nutritionnel` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+DROP TABLE IF EXISTS `besoin_apport_nutritionnel`;
+CREATE TABLE IF NOT EXISTS `besoin_apport_nutritionnel` (
+  `quantite_nutritionnelle` int NOT NULL,
+  `id_apport_nutritionnel` int NOT NULL,
+  `id_user` int NOT NULL,
+  KEY `id_user` (`id_user`),
+  KEY `id_apport_nutritionnel` (`id_apport_nutritionnel`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `objectif`
+-- Structure de la table `objectif`
 --
 
-CREATE TABLE `objectif` (
-  `id_objectif` int(11) NOT NULL,
-  `nom_objectif` varchar(40) COLLATE utf8_bin NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+DROP TABLE IF EXISTS `objectif`;
+CREATE TABLE IF NOT EXISTS `objectif` (
+  `id_objectif` int NOT NULL AUTO_INCREMENT,
+  `nom_objectif` varchar(40) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
+  PRIMARY KEY (`id_objectif`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 
 --
--- Dumping data for table `objectif`
+-- Déchargement des données de la table `objectif`
 --
 
 INSERT INTO `objectif` (`id_objectif`, `nom_objectif`) VALUES
@@ -3711,27 +3742,31 @@ INSERT INTO `objectif` (`id_objectif`, `nom_objectif`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pourcentage_sous_aliment`
+-- Structure de la table `pourcentage_sous_aliment`
 --
 
-CREATE TABLE `pourcentage_sous_aliment` (
-  `pourcentage_sous_aliment` int(11) NOT NULL,
-  `id_aliment` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+DROP TABLE IF EXISTS `pourcentage_sous_aliment`;
+CREATE TABLE IF NOT EXISTS `pourcentage_sous_aliment` (
+  `pourcentage_sous_aliment` int NOT NULL,
+  `id_aliment` int NOT NULL,
+  KEY `id_aliment` (`id_aliment`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pratique_sportive`
+-- Structure de la table `pratique_sportive`
 --
 
-CREATE TABLE `pratique_sportive` (
-  `id_pratique_sportive` int(11) NOT NULL,
-  `frequence_pratique_sportive` varchar(20) COLLATE utf8_bin NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+DROP TABLE IF EXISTS `pratique_sportive`;
+CREATE TABLE IF NOT EXISTS `pratique_sportive` (
+  `id_pratique_sportive` int NOT NULL AUTO_INCREMENT,
+  `frequence_pratique_sportive` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
+  PRIMARY KEY (`id_pratique_sportive`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 
 --
--- Dumping data for table `pratique_sportive`
+-- Déchargement des données de la table `pratique_sportive`
 --
 
 INSERT INTO `pratique_sportive` (`id_pratique_sportive`, `frequence_pratique_sportive`) VALUES
@@ -3742,29 +3777,48 @@ INSERT INTO `pratique_sportive` (`id_pratique_sportive`, `frequence_pratique_spo
 -- --------------------------------------------------------
 
 --
--- Table structure for table `repas`
+-- Structure de la table `repas`
 --
 
-CREATE TABLE `repas` (
-  `id_repas` int(11) NOT NULL,
-  `id_utilisateur` int(11) NOT NULL,
-  `id_type_repas` int(11) NOT NULL,
-  `date_consommation` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+DROP TABLE IF EXISTS `repas`;
+CREATE TABLE IF NOT EXISTS `repas` (
+  `id_repas` int NOT NULL AUTO_INCREMENT,
+  `id_utilisateur` int NOT NULL,
+  `id_type_repas` int NOT NULL,
+  `date_consommation` datetime NOT NULL,
+  PRIMARY KEY (`id_repas`),
+  KEY `id_utilisateur` (`id_utilisateur`),
+  KEY `id_type_repas` (`id_type_repas`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
+
+--
+-- Déchargement des données de la table `repas`
+--
+
+INSERT INTO `repas` (`id_repas`, `id_utilisateur`, `id_type_repas`, `date_consommation`) VALUES
+(1, 22, 0, '2023-04-13 00:34:00'),
+(2, 22, 3, '2023-04-04 23:34:00'),
+(3, 22, 0, '2023-04-14 09:19:00'),
+(4, 22, 0, '2023-04-14 09:20:00'),
+(5, 22, 1, '2023-04-12 23:21:00'),
+(6, 22, 1, '2023-04-06 23:38:00'),
+(7, 22, 3, '2023-03-30 22:45:00');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sexe`
+-- Structure de la table `sexe`
 --
 
-CREATE TABLE `sexe` (
-  `id_sexe` int(11) NOT NULL,
-  `nom_sexe` varchar(11) COLLATE utf8_bin NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+DROP TABLE IF EXISTS `sexe`;
+CREATE TABLE IF NOT EXISTS `sexe` (
+  `id_sexe` int NOT NULL,
+  `nom_sexe` varchar(11) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
+  PRIMARY KEY (`id_sexe`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 
 --
--- Dumping data for table `sexe`
+-- Déchargement des données de la table `sexe`
 --
 
 INSERT INTO `sexe` (`id_sexe`, `nom_sexe`) VALUES
@@ -3774,17 +3828,19 @@ INSERT INTO `sexe` (`id_sexe`, `nom_sexe`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tranche_age`
+-- Structure de la table `tranche_age`
 --
 
-CREATE TABLE `tranche_age` (
-  `id_tranche_age` int(11) NOT NULL,
-  `tranche_min` int(11) NOT NULL,
-  `tranche_max` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+DROP TABLE IF EXISTS `tranche_age`;
+CREATE TABLE IF NOT EXISTS `tranche_age` (
+  `id_tranche_age` int NOT NULL AUTO_INCREMENT,
+  `tranche_min` int NOT NULL,
+  `tranche_max` int NOT NULL,
+  PRIMARY KEY (`id_tranche_age`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 
 --
--- Dumping data for table `tranche_age`
+-- Déchargement des données de la table `tranche_age`
 --
 
 INSERT INTO `tranche_age` (`id_tranche_age`, `tranche_min`, `tranche_max`) VALUES
@@ -3799,17 +3855,19 @@ INSERT INTO `tranche_age` (`id_tranche_age`, `tranche_min`, `tranche_max`) VALUE
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tranche_poids`
+-- Structure de la table `tranche_poids`
 --
 
-CREATE TABLE `tranche_poids` (
-  `id_tranche_poids` int(11) NOT NULL,
-  `tranche_min` int(11) NOT NULL,
-  `tranche_max` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+DROP TABLE IF EXISTS `tranche_poids`;
+CREATE TABLE IF NOT EXISTS `tranche_poids` (
+  `id_tranche_poids` int NOT NULL AUTO_INCREMENT,
+  `tranche_min` int NOT NULL,
+  `tranche_max` int NOT NULL,
+  PRIMARY KEY (`id_tranche_poids`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 
 --
--- Dumping data for table `tranche_poids`
+-- Déchargement des données de la table `tranche_poids`
 --
 
 INSERT INTO `tranche_poids` (`id_tranche_poids`, `tranche_min`, `tranche_max`) VALUES
@@ -3826,17 +3884,19 @@ INSERT INTO `tranche_poids` (`id_tranche_poids`, `tranche_min`, `tranche_max`) V
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tranche_taille`
+-- Structure de la table `tranche_taille`
 --
 
-CREATE TABLE `tranche_taille` (
-  `id_tranche_taille` int(11) NOT NULL,
-  `tranche_min` int(11) NOT NULL,
-  `tranche_max` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+DROP TABLE IF EXISTS `tranche_taille`;
+CREATE TABLE IF NOT EXISTS `tranche_taille` (
+  `id_tranche_taille` int NOT NULL AUTO_INCREMENT,
+  `tranche_min` int NOT NULL,
+  `tranche_max` int NOT NULL,
+  PRIMARY KEY (`id_tranche_taille`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 
 --
--- Dumping data for table `tranche_taille`
+-- Déchargement des données de la table `tranche_taille`
 --
 
 INSERT INTO `tranche_taille` (`id_tranche_taille`, `tranche_min`, `tranche_max`) VALUES
@@ -3850,16 +3910,18 @@ INSERT INTO `tranche_taille` (`id_tranche_taille`, `tranche_min`, `tranche_max`)
 -- --------------------------------------------------------
 
 --
--- Table structure for table `type_aliment`
+-- Structure de la table `type_aliment`
 --
 
-CREATE TABLE `type_aliment` (
-  `id_type_aliment` int(11) NOT NULL,
-  `nom_type_aliment` varchar(150) COLLATE utf8_bin NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+DROP TABLE IF EXISTS `type_aliment`;
+CREATE TABLE IF NOT EXISTS `type_aliment` (
+  `id_type_aliment` int NOT NULL AUTO_INCREMENT,
+  `nom_type_aliment` varchar(150) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
+  PRIMARY KEY (`id_type_aliment`,`nom_type_aliment`)
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 
 --
--- Dumping data for table `type_aliment`
+-- Déchargement des données de la table `type_aliment`
 --
 
 INSERT INTO `type_aliment` (`id_type_aliment`, `nom_type_aliment`) VALUES
@@ -3879,16 +3941,18 @@ INSERT INTO `type_aliment` (`id_type_aliment`, `nom_type_aliment`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `type_de_repas`
+-- Structure de la table `type_de_repas`
 --
 
-CREATE TABLE `type_de_repas` (
-  `id_type_repas` int(11) NOT NULL,
-  `nom_type_repas` varchar(20) COLLATE utf8_bin NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+DROP TABLE IF EXISTS `type_de_repas`;
+CREATE TABLE IF NOT EXISTS `type_de_repas` (
+  `id_type_repas` int NOT NULL,
+  `nom_type_repas` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
+  PRIMARY KEY (`id_type_repas`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 
 --
--- Dumping data for table `type_de_repas`
+-- Déchargement des données de la table `type_de_repas`
 --
 
 INSERT INTO `type_de_repas` (`id_type_repas`, `nom_type_repas`) VALUES
@@ -3900,29 +3964,37 @@ INSERT INTO `type_de_repas` (`id_type_repas`, `nom_type_repas`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `utilisateur`
+-- Structure de la table `utilisateur`
 --
 
-CREATE TABLE `utilisateur` (
-  `id_utilisateur` int(11) NOT NULL,
-  `mot_de_passe` varchar(40) COLLATE utf8_bin NOT NULL,
-  `email` varchar(60) COLLATE utf8_bin NOT NULL,
-  `prenom` varchar(40) COLLATE utf8_bin NOT NULL,
-  `id_sexe` int(11) NOT NULL,
-  `id_poids` int(11) NOT NULL,
-  `id_taille` int(11) NOT NULL,
-  `id_objectif` int(11) NOT NULL,
-  `id_pratique_sportive` int(11) NOT NULL,
-  `id_tranche_age` int(11) NOT NULL,
-  `nom` varchar(40) COLLATE utf8_bin NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+DROP TABLE IF EXISTS `utilisateur`;
+CREATE TABLE IF NOT EXISTS `utilisateur` (
+  `id_utilisateur` int NOT NULL AUTO_INCREMENT,
+  `mot_de_passe` varchar(40) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
+  `email` varchar(60) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
+  `prenom` varchar(40) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
+  `id_sexe` int NOT NULL,
+  `id_poids` int NOT NULL,
+  `id_taille` int NOT NULL,
+  `id_objectif` int NOT NULL,
+  `id_pratique_sportive` int NOT NULL,
+  `id_tranche_age` int NOT NULL,
+  `nom` varchar(40) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
+  PRIMARY KEY (`id_utilisateur`),
+  KEY `id_sexe` (`id_sexe`),
+  KEY `id_tranche_age` (`id_tranche_age`),
+  KEY `id_taille` (`id_taille`),
+  KEY `id_poids` (`id_poids`),
+  KEY `id_pratique_sportive` (`id_pratique_sportive`),
+  KEY `id_objectif` (`id_objectif`)
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 
 --
--- Dumping data for table `utilisateur`
+-- Déchargement des données de la table `utilisateur`
 --
 
 INSERT INTO `utilisateur` (`id_utilisateur`, `mot_de_passe`, `email`, `prenom`, `id_sexe`, `id_poids`, `id_taille`, `id_objectif`, `id_pratique_sportive`, `id_tranche_age`, `nom`) VALUES
-(22, '', 'william.nguyen@etu.imt-lille-douai.fr', 'William', 0, 2, 3, 1, 1, 3, 'NGUYEN'),
+(22, 'mot_de_passe', 'william.nguyen@etu.imt-lille-douai.fr', 'William', 0, 2, 3, 1, 1, 3, 'NGUYEN'),
 (23, '', 'alexis.poirot@etu.imt-lille-douai.fr', 'Alexis', 0, 3, 2, 2, 1, 3, 'POIROT'),
 (24, '', 'antoine.lambert@etu.imt-lille-douai.fr', 'Antoine', 0, 4, 3, 1, 2, 3, 'LAMBERT'),
 (25, '', 'cedric.prast@etu.imt-lille-douai.fr', 'Cédric', 0, 2, 3, 3, 3, 3, 'PRAST'),
@@ -3952,186 +4024,17 @@ INSERT INTO `utilisateur` (`id_utilisateur`, `mot_de_passe`, `email`, `prenom`, 
 (49, 'max', 'max@max.com', 'max', 0, 2, 1, 1, 1, 1, 'Max');
 
 --
--- Indexes for dumped tables
+-- Contraintes pour les tables déchargées
 --
 
 --
--- Indexes for table `aliment`
---
-ALTER TABLE `aliment`
-  ADD PRIMARY KEY (`id_aliment`),
-  ADD KEY `id_type_aliment` (`id_type_aliment`);
-
---
--- Indexes for table `aliment_consomme`
---
-ALTER TABLE `aliment_consomme`
-  ADD PRIMARY KEY (`id_aliment`,`id_repas`),
-  ADD KEY `id_repas` (`id_repas`);
-
---
--- Indexes for table `apport_nutritionnel`
---
-ALTER TABLE `apport_nutritionnel`
-  ADD PRIMARY KEY (`id_apport_nutritionnel`);
-
---
--- Indexes for table `besoin_apport_nutritionnel`
---
-ALTER TABLE `besoin_apport_nutritionnel`
-  ADD KEY `id_user` (`id_user`),
-  ADD KEY `id_apport_nutritionnel` (`id_apport_nutritionnel`);
-
---
--- Indexes for table `objectif`
---
-ALTER TABLE `objectif`
-  ADD PRIMARY KEY (`id_objectif`);
-
---
--- Indexes for table `pourcentage_sous_aliment`
---
-ALTER TABLE `pourcentage_sous_aliment`
-  ADD KEY `id_aliment` (`id_aliment`);
-
---
--- Indexes for table `pratique_sportive`
---
-ALTER TABLE `pratique_sportive`
-  ADD PRIMARY KEY (`id_pratique_sportive`);
-
---
--- Indexes for table `repas`
---
-ALTER TABLE `repas`
-  ADD PRIMARY KEY (`id_repas`),
-  ADD KEY `id_utilisateur` (`id_utilisateur`),
-  ADD KEY `id_type_repas` (`id_type_repas`);
-
---
--- Indexes for table `sexe`
---
-ALTER TABLE `sexe`
-  ADD PRIMARY KEY (`id_sexe`);
-
---
--- Indexes for table `tranche_age`
---
-ALTER TABLE `tranche_age`
-  ADD PRIMARY KEY (`id_tranche_age`);
-
---
--- Indexes for table `tranche_poids`
---
-ALTER TABLE `tranche_poids`
-  ADD PRIMARY KEY (`id_tranche_poids`);
-
---
--- Indexes for table `tranche_taille`
---
-ALTER TABLE `tranche_taille`
-  ADD PRIMARY KEY (`id_tranche_taille`);
-
---
--- Indexes for table `type_aliment`
---
-ALTER TABLE `type_aliment`
-  ADD PRIMARY KEY (`id_type_aliment`,`nom_type_aliment`);
-
---
--- Indexes for table `type_de_repas`
---
-ALTER TABLE `type_de_repas`
-  ADD PRIMARY KEY (`id_type_repas`);
-
---
--- Indexes for table `utilisateur`
---
-ALTER TABLE `utilisateur`
-  ADD PRIMARY KEY (`id_utilisateur`),
-  ADD KEY `id_sexe` (`id_sexe`),
-  ADD KEY `id_tranche_age` (`id_tranche_age`),
-  ADD KEY `id_taille` (`id_taille`),
-  ADD KEY `id_poids` (`id_poids`),
-  ADD KEY `id_pratique_sportive` (`id_pratique_sportive`),
-  ADD KEY `id_objectif` (`id_objectif`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `aliment`
---
-ALTER TABLE `aliment`
-  MODIFY `id_aliment` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5417;
-
---
--- AUTO_INCREMENT for table `apport_nutritionnel`
---
-ALTER TABLE `apport_nutritionnel`
-  MODIFY `id_apport_nutritionnel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `objectif`
---
-ALTER TABLE `objectif`
-  MODIFY `id_objectif` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `pratique_sportive`
---
-ALTER TABLE `pratique_sportive`
-  MODIFY `id_pratique_sportive` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `repas`
---
-ALTER TABLE `repas`
-  MODIFY `id_repas` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `tranche_age`
---
-ALTER TABLE `tranche_age`
-  MODIFY `id_tranche_age` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT for table `tranche_poids`
---
-ALTER TABLE `tranche_poids`
-  MODIFY `id_tranche_poids` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
---
--- AUTO_INCREMENT for table `tranche_taille`
---
-ALTER TABLE `tranche_taille`
-  MODIFY `id_tranche_taille` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT for table `type_aliment`
---
-ALTER TABLE `type_aliment`
-  MODIFY `id_type_aliment` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
-
---
--- AUTO_INCREMENT for table `utilisateur`
---
-ALTER TABLE `utilisateur`
-  MODIFY `id_utilisateur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `aliment`
+-- Contraintes pour la table `aliment`
 --
 ALTER TABLE `aliment`
   ADD CONSTRAINT `aliment_ibfk_3` FOREIGN KEY (`id_type_aliment`) REFERENCES `type_aliment` (`id_type_aliment`) ON UPDATE CASCADE;
 
 --
--- Constraints for table `utilisateur`
+-- Contraintes pour la table `utilisateur`
 --
 ALTER TABLE `utilisateur`
   ADD CONSTRAINT `utilisateur_ibfk_1` FOREIGN KEY (`id_sexe`) REFERENCES `sexe` (`id_sexe`) ON UPDATE CASCADE,
