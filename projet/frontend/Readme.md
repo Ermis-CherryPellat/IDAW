@@ -1,5 +1,7 @@
 # Front-end 
 !!!!!!!!!!!!!!!! POUR SE CONNECTER AU SITE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+Pour se connecter à un utilisateur avec déjà un certain nombre de repas, veuillez vous connecter avec cet utilisateur:
 email : william.nguyen@etu.imt-lille-douai.fr
 mot de passe : mot_de_passe
 
@@ -10,7 +12,6 @@ Le Front end est l'interface utilisateur que les utilisateurs voient et avec laq
 
 Se connecter à un compte iMangerMieux . Il faut y entrer son email utilisateur et son mot de passe. En cliquant sur se connecter une nouvelle session est créée. Cette session  dure 1h. Et ensuite, l'utilsateur est déconnecté automatiquement.
 
-!!!Mettre un exemple de compte à utiliser (compte qui à déjà un historique de repas)!!!
 
 ## Page de création d'un compte
 
