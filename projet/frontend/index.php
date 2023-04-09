@@ -1,7 +1,7 @@
 <?php
 // Vérifier si l'utilisateur est déjà connecté
 session_start();
-if(isset($_SESSION["utilisateur_connecte"]) && $_SESSION["utilisateur_connecte"] === true){
+if (isset($_SESSION['ma_variable'])){
     header("Location: pages-analyse.php");
     exit;
 }
